@@ -3970,4 +3970,3976 @@
     });
   </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHS EduHub | Ghana Secondary Education & Learning Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER NAV -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
+            SHS EduHub <span class="bg-indigo-500/20 text-indigo-400 text-xs px-2 py-0.5 rounded-full border border-indigo-500/30 font-medium">GES / WASSCE</span>
+          </span>
+          <p class="text-[10px] text-slate-400 font-medium">Official Ghana SHS Syllabus & Study Portal</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800/80">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-indigo-400 bg-indigo-500/10 border border-indigo-500/20">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Dashboard</span>
+        </button>
+        
+        <button onclick="switchTab('subjects')" id="nav-subjects" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Subject Modules</span>
+        </button>
+
+        <button onclick="switchTab('curriculum')" id="nav-curriculum" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2 relative">
+          <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i>
+          <span>GES PDFs</span>
+          <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Official</span>
+        </button>
+        
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span>Practice Quizzes</span>
+        </button>
+
+        <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Flashcards</span>
+        </button>
+
+        <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Planner & Pomodoro</span>
+        </button>
+      </nav>
+
+      <!-- Right Action Badge -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+          <span>5 Day Streak!</span>
+        </div>
+        <div class="flex items-center space-x-2 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-indigo-400">
+            AM
+          </div>
+          <div class="hidden lg:block text-left">
+            <p class="text-xs font-semibold text-slate-200">Ama Mensah</p>
+            <p class="text-[10px] text-slate-400">SHS 3 • General Science</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile Nav Strip -->
+    <div class="md:hidden flex overflow-x-auto border-t border-slate-800 px-2 py-2 gap-1 no-scrollbar bg-slate-900">
+      <button onclick="switchTab('dashboard')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white whitespace-nowrap">Dashboard</button>
+      <button onclick="switchTab('subjects')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Subjects</button>
+      <button onclick="switchTab('curriculum')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950 text-emerald-300 border border-emerald-800/50 whitespace-nowrap">GES PDFs</button>
+      <button onclick="switchTab('quizzes')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Quizzes</button>
+      <button onclick="switchTab('flashcards')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Flashcards</button>
+      <button onclick="switchTab('planner')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Planner</button>
+    </div>
+  </header>
+
+  <!-- MAIN SPA CONTAINER -->
+  <main id="app" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- 1. DASHBOARD VIEW -->
+    <section id="view-dashboard" class="view-panel space-y-6">
+      
+      <!-- Target Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/90 via-indigo-800/60 to-purple-900/80 p-6 sm:p-8 border border-indigo-700/40 shadow-2xl">
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-semibold mb-3">
+            <i data-lucide="target" class="w-3.5 h-3.5 text-indigo-300"></i>
+            <span>TARGET: WASSCE EXAMS</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Welcome back, Ama! 👋</h1>
+          <p class="mt-2 text-slate-200 text-sm sm:text-base leading-relaxed">
+            You are on track! You've completed <span class="font-bold text-amber-300">82%</span> of your weekly study goals. Access official GES syllabi, revise core topics, or practice past exam questions.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button onclick="switchTab('quizzes')" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              Start Practice Quiz
+            </button>
+            <button onclick="switchTab('curriculum')" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+              Download GES Syllabi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Overall Progress</p>
+            <span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400"><i data-lucide="trending-up" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">76%</p>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 mt-3">
+            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 76%"></div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Quizzes Completed</p>
+            <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">24 / <span class="text-slate-500 text-lg">28</span></p>
+          <p class="text-[11px] text-emerald-400 mt-2 font-medium">↑ 4 completed this week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Study Hours</p>
+            <span class="p-2 rounded-lg bg-purple-500/10 text-purple-400"><i data-lucide="clock" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">18.5 hrs</p>
+          <p class="text-[11px] text-slate-400 mt-2 font-medium">Goal: 20 hrs/week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Flashcards Mastered</p>
+            <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400"><i data-lucide="award" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">142</p>
+          <p class="text-[11px] text-amber-400 mt-2 font-medium">68% retention rate</p>
+        </div>
+      </div>
+
+      <!-- Core Subjects Quick Grid & Today's Checklist -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Subject Quick Links -->
+        <div class="lg:col-span-2 bg-slate-900/80 rounded-2xl p-6 border border-slate-800">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-indigo-400"></i>
+              Core & Elective Subject Quick Access
+            </h2>
+            <button onclick="switchTab('subjects')" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View All Subjects &rarr;</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Math Card -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-base group-hover:scale-10 font-mono">
+                  &radic;x
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">Core Mathematics</h3>
+                  <p class="text-xs text-slate-400">12 Modules • 48 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Algebra & Trigonometry</span>
+                  <span class="font-bold text-indigo-400">85%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Integrated Science -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-emerald-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="atom" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">Integrated Science</h3>
+                  <p class="text-xs text-slate-400">10 Modules • 40 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Genetics & Physics</span>
+                  <span class="font-bold text-emerald-400">70%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 70%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- English -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-purple-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">English Language</h3>
+                  <p class="text-xs text-slate-400">8 Modules • 32 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Essays & Concord</span>
+                  <span class="font-bold text-purple-400">80%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-purple-500 h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Studies -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="globe" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">Social Studies</h3>
+                  <p class="text-xs text-slate-400">6 Modules • 26 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Governance & Dev</span>
+                  <span class="font-bold text-amber-400">62%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-amber-500 h-1.5 rounded-full" style="width: 62%"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Checklist & Tips -->
+        <div class="space-y-6">
+          <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
+              <i data-lucide="check-square" class="w-4 h-4 text-indigo-400"></i>
+              Today's Study Checklist
+            </h3>
+            <div class="space-y-2.5">
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" checked class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200 line-through">Review Quadratic Equations</p>
+                  <p class="text-slate-500">Core Maths • 30 mins</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Practice Integrated Science Quiz</p>
+                  <p class="text-slate-500">Genetics Section • Due 4:00 PM</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Memorize English Idioms</p>
+                  <p class="text-slate-500">20 Flashcards • Due 7:00 PM</p>
+                </div>
+              </label>
+            </div>
+            <button onclick="switchTab('planner')" class="mt-4 w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors">
+              + Add To Task List
+            </button>
+          </div>
+
+          <!-- WASSCE Success Tip Card -->
+          <div class="bg-gradient-to-br from-indigo-950/60 to-purple-950/60 rounded-2xl p-4 border border-indigo-800/40">
+            <div class="flex items-center space-x-2 text-indigo-400 mb-1.5">
+              <i data-lucide="lightbulb" class="w-4 h-4"></i>
+              <span class="text-xs font-bold uppercase tracking-wider">WASSCE Success Tip</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              In <strong>Section B Mathematics</strong>, always show full steps clearly. Method marks are awarded even if your final arithmetic answer contains a minor slip!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 2. SUBJECT MODULES VIEW -->
+    <section id="view-subjects" class="view-panel hidden space-y-6">
+      
+      <!-- Header & Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="book-open" class="w-6 h-6 text-indigo-400"></i>
+            SHS Subject Curriculum & Notes
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Select any subject to explore official GES topic outlines, revision notes, and formulas.</p>
+        </div>
+
+        <!-- Subject Track Filter Tabs -->
+        <div class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs">
+          <button onclick="filterSubjects('all')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium bg-indigo-600 text-white">All Tracks</button>
+          <button onclick="filterSubjects('core')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Core</button>
+          <button onclick="filterSubjects('science')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Science & Elect. Math</button>
+          <button onclick="filterSubjects('business')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Business</button>
+          <button onclick="filterSubjects('arts')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">General Arts</button>
+          <button onclick="filterSubjects('agric')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Agric & Home Econ</button>
+        </div>
+      </div>
+
+      <!-- Subjects Cards Grid -->
+      <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Javascript renders subject cards dynamically based on active filter -->
+      </div>
+
+    </section>
+
+
+    <!-- 3. GES CURRICULUM PDF EXPLORER VIEW -->
+    <section id="view-curriculum" class="view-panel hidden space-y-6">
+      
+      <!-- Top Banner -->
+      <div class="bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 p-6 sm:p-8 rounded-2xl border border-emerald-700/30">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-3 border border-emerald-500/30">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Official NaCCA & Ghana Education Service (GES) Repository</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white">SHS Syllabus & Curriculum PDF Library</h1>
+          <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+            Search, preview, and download official GES/NaCCA Senior High School curriculum guides for SHS 1, SHS 2, and SHS 3 across all academic tracks.
+          </p>
+        </div>
+
+        <!-- Search Bar & Filters -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-3 text-slate-400"></i>
+            <input type="text" id="pdf-search-input" onkeyup="filterPdfs()" placeholder="Search syllabus by title, subject, or code (e.g. Mathematics, Physics, Core, SHS 2)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+          </div>
+          <select id="pdf-track-filter" onchange="filterPdfs()" class="px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">All Tracks</option>
+            <option value="Core">Core Subjects</option>
+            <option value="Science">General Science & Elective Math</option>
+            <option value="Business">Business Studies</option>
+            <option value="Arts">General Arts</option>
+            <option value="Agric">Agricultural Science</option>
+            <option value="HomeEcon">Home Economics</option>
+            <option value="VisualArts">Visual Arts</option>
+            <option value="Tech">Technical / ICT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Syllabus PDF Grid -->
+      <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </section>
+
+
+    <!-- 4. PRACTICE QUIZZES VIEW -->
+    <section id="view-quizzes" class="view-panel hidden space-y-6">
+      
+      <!-- Quiz Header -->
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="help-circle" class="w-6 h-6 text-indigo-400"></i>
+            WASSCE Practice Quiz Engine
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Interactive past questions with instant explanation feedback & score tracking.</p>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <label class="text-xs text-slate-400">Select Topic Quiz:</label>
+          <select id="quiz-select" onchange="loadQuiz(this.value)" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
+            <option value="math">Core Mathematics: Quadratic & Linear Equations</option>
+            <option value="science">Integrated Science: Cell Biology & Genetics</option>
+            <option value="english">English Language: Concord & Idiomatic Expressions</option>
+            <option value="social">Social Studies: Governance & Constitution</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Interactive Quiz Container -->
+      <div id="quiz-container" class="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 sm:p-8 max-w-3xl mx-auto shadow-xl">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+    </section>
+
+
+    <!-- 5. FLASHCARDS VIEW -->
+    <section id="view-flashcards" class="view-panel hidden space-y-6">
+      
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-6 h-6 text-indigo-400"></i>
+            Revision Flashcard Hub
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Click or tap any card to flip and test your memory on key definitions and concepts.</p>
+        </div>
+
+        <!-- Subject Switcher for Flashcards -->
+        <div class="flex gap-2">
+          <button onclick="loadFlashcards('math')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Mathematics</button>
+          <button onclick="loadFlashcards('science')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Science</button>
+          <button onclick="loadFlashcards('english')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">English</button>
+          <button onclick="loadFlashcards('social')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Social Studies</button>
+        </div>
+      </div>
+
+      <!-- Flashcard Interactive Display Area -->
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <div id="flashcard-box" onclick="flipCard()" class="perspective-1000 h-72 cursor-pointer">
+          <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d bg-slate-900 border-2 border-indigo-500/40 rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+            
+            <!-- Front -->
+            <div class="absolute inset-0 backface-hidden p-6 flex flex-col items-center justify-center">
+              <span id="fc-category" class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 font-bold">CORE MATHEMATICS</span>
+              <p id="fc-front-text" class="text-lg sm:text-xl font-bold text-white leading-relaxed">
+                What is the quadratic formula used to find the roots of ax² + bx + c = 0?
+              </p>
+              <p class="text-xs text-slate-500 mt-6 flex items-center gap-1">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Tap card to flip answer
+              </p>
+            </div>
+
+            <!-- Back -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col items-center justify-center bg-slate-900 border-2 border-emerald-500/50 rounded-2xl">
+              <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3 font-bold">ANSWER</span>
+              <p id="fc-back-text" class="text-lg font-extrabold text-emerald-300 font-mono">
+                x = [ -b &plusmn; &radic;(b² - 4ac) ] / (2a)
+              </p>
+              <p id="fc-explanation" class="text-xs text-slate-300 mt-3 leading-relaxed">
+                Where b² - 4ac is the discriminant determining the nature of roots.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-between">
+          <button onclick="prevCard()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous
+          </button>
+          <span id="fc-counter" class="text-xs text-slate-400 font-mono font-medium">Card 1 of 5</span>
+          <button onclick="nextCard()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white flex items-center gap-1.5">
+            Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-center space-x-3 pt-2">
+          <button onclick="markCardMastered(false)" class="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="x-circle" class="w-4 h-4"></i> Need Review
+          </button>
+          <button onclick="markCardMastered(true)" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Mastered
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 6. PLANNER & POMODORO TIMER VIEW -->
+    <section id="view-planner" class="view-panel hidden space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Schedule & Task Manager -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="calendar" class="w-5 h-5 text-indigo-400"></i>
+                WASSCE Study Timetable
+              </h2>
+              <span class="text-xs text-indigo-400 font-medium">Week 4 • Revision Phase</span>
+            </div>
+
+            <!-- Weekly Schedule Grid -->
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">MON</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">Core Mathematics & Integrated Science</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Quadratic Equations & Cell Biology</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">TUE</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">English Essay Writing & Social Studies</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Formal Letters & Constitution</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/40 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-600 text-white font-bold text-xs">TODAY</span>
+                  <div>
+                    <p class="text-xs font-bold text-white">Elective Science / Business Revision</p>
+                    <p class="text-[11px] text-indigo-300">5:00 PM - 7:30 PM • Physics Mechanics & Accounting</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-semibold">Active</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-slate-800 text-slate-400 font-bold text-xs">THU</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-300">WASSCE Past Questions Drills</p>
+                    <p class="text-[11px] text-slate-400">4:30 PM - 7:00 PM • Speed Drills & Section B Strategy</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-semibold">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Pomodoro Focus Timer -->
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 text-center flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold mb-4">
+              <i data-lucide="timer" class="w-4 h-4"></i>
+              <span>Pomodoro Study Focus</span>
+            </div>
+
+            <!-- Timer Circle Display -->
+            <div class="my-6">
+              <div class="w-48 h-48 mx-auto rounded-full bg-slate-950 border-4 border-indigo-500/50 flex flex-col items-center justify-center shadow-inner relative">
+                <span id="pomo-display" class="text-4xl font-black text-white font-mono tracking-wider">25:00</span>
+                <span id="pomo-mode" class="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-1">Focus Session</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-center space-x-3">
+              <button id="pomo-start-btn" onclick="togglePomodoro()" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-600/30">
+                Start Timer
+              </button>
+              <button onclick="resetPomodoro()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-all">
+                Reset
+              </button>
+            </div>
+            <p class="text-[11px] text-slate-500 pt-2">25 min study • 5 min short break interval</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 w-full max-w-5xl h-[85vh] rounded-2xl border border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modal-pdf-title" class="text-sm font-bold text-white">Syllabus PDF Document</h3>
+            <p id="modal-pdf-subtitle" class="text-xs text-slate-400">GES Official Curriculum Reference</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <a id="modal-download-btn" href="#" download class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+          </a>
+          <button onclick="closePdfModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body - PDF Iframe Viewer -->
+      <div class="flex-1 bg-slate-950 p-2 relative">
+        <iframe id="pdf-frame" src="" class="w-full h-full rounded-xl border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- APP DATA STORES ---
+    
+    // Official GES Curriculum PDFs Repository Data
+    const pdfData = [
+      {
+        id: 'pdf-1',
+        title: 'Core Mathematics Curriculum (SHS 1 - 3)',
+        subject: 'Core Mathematics',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '2.4 MB',
+        publisher: 'NaCCA / Ministry of Education Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-2',
+        title: 'Integrated Science Curriculum (SHS 1 - 3)',
+        subject: 'Integrated Science',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '3.1 MB',
+        publisher: 'GES / NaCCA',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf',
+        previewUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-3',
+        title: 'Physics Elective Syllabus & Practical Guide',
+        subject: 'Physics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '4.2 MB',
+        publisher: 'NaCCA Ghana',
+        year: 'Standard WASSCE Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-4',
+        title: 'Elective Mathematics Curriculum',
+        subject: 'Elective Mathematics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '2.8 MB',
+        publisher: 'Ministry of Education',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-5',
+        title: 'Financial Accounting Syllabus',
+        subject: 'Financial Accounting',
+        track: 'Business',
+        grade: 'SHS 1-3',
+        size: '1.9 MB',
+        publisher: 'GES / NaCCA',
+        year: 'WASSCE Standard',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-6',
+        title: 'Government & Civic Education Curriculum',
+        subject: 'Government',
+        track: 'Arts',
+        grade: 'SHS 1-3',
+        size: '2.1 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-7',
+        title: 'General Agriculture Teaching Syllabus',
+        subject: 'General Agriculture',
+        track: 'Agric',
+        grade: 'SHS 1-3',
+        size: '3.5 MB',
+        publisher: 'GES / NaCCA',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-8',
+        title: 'Food & Nutrition Curriculum',
+        subject: 'Food & Nutrition',
+        track: 'HomeEcon',
+        grade: 'SHS 1-3',
+        size: '2.6 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-9',
+        title: 'Applied Computing & Core ICT Syllabus',
+        subject: 'Information & Comm. Tech',
+        track: 'Tech',
+        grade: 'SHS 1-3',
+        size: '3.8 MB',
+        publisher: 'Ministry of Education',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      }
+    ];
+
+    // Comprehensive SHS Subject Data Grid
+    const subjectsData = [
+      {
+        title: 'Core Mathematics',
+        track: 'core',
+        code: 'CORE-MTH',
+        desc: 'Algebra, Quadratic Functions, Trigonometrical Ratios, Circle Theorems, & Statistics.',
+        modulesCount: '12 Modules',
+        topicsCount: '48 Topics',
+        progress: 85,
+        icon: 'calculator'
+      },
+      {
+        title: 'Integrated Science',
+        track: 'core',
+        code: 'CORE-SCI',
+        desc: 'Cell Biology, Genetics, Acids & Bases, Work & Energy, Solar System, & Ecosystems.',
+        modulesCount: '10 Modules',
+        topicsCount: '40 Topics',
+        progress: 70,
+        icon: 'atom'
+      },
+      {
+        title: 'English Language',
+        track: 'core',
+        code: 'CORE-ENG',
+        desc: 'Essay Writing Formats, Grammar & Concord, Summary Writing, Comprehension & Idioms.',
+        modulesCount: '8 Modules',
+        topicsCount: '32 Topics',
+        progress: 80,
+        icon: 'pen-tool'
+      },
+      {
+        title: 'Social Studies',
+        track: 'core',
+        code: 'CORE-SOC',
+        desc: 'Governance, Constitution of Ghana, Socio-Economic Development, Culture & Identity.',
+        modulesCount: '6 Modules',
+        topicsCount: '26 Topics',
+        progress: 62,
+        icon: 'globe'
+      },
+      {
+        title: 'Physics Elective',
+        track: 'science',
+        code: 'ELEC-PHY',
+        desc: 'Mechanics, Wave Optics, Electricity & Magnetism, Atomic & Modern Physics.',
+        modulesCount: '14 Modules',
+        topicsCount: '52 Topics',
+        progress: 45,
+        icon: 'zap'
+      },
+      {
+        title: 'Chemistry Elective',
+        track: 'science',
+        code: 'ELEC-CHM',
+        desc: 'Atomic Structure, Chemical Bonding, Stoichiometry, Organic Chemistry, Thermochemistry.',
+        modulesCount: '12 Modules',
+        topicsCount: '46 Topics',
+        progress: 58,
+        icon: 'beaker'
+      },
+      {
+        title: 'Elective Mathematics',
+        track: 'science',
+        code: 'ELEC-MTH',
+        desc: 'Calculus (Differentiation & Integration), Coordinate Geometry, Vectors, Matrices & Mechanics.',
+        modulesCount: '15 Modules',
+        topicsCount: '60 Topics',
+        progress: 65,
+        icon: 'binary'
+      },
+      {
+        title: 'Financial Accounting',
+        track: 'business',
+        code: 'BUS-ACC',
+        desc: 'Double Entry System, Final Accounts, Control Accounts, Partnership & Company Accounts.',
+        modulesCount: '11 Modules',
+        topicsCount: '42 Topics',
+        progress: 50,
+        icon: 'bar-chart-3'
+      },
+      {
+        title: 'Economics',
+        track: 'business',
+        code: 'BUS-ECO',
+        desc: 'Demand & Supply Elasticity, Market Structures, National Income Accounting, Inflation.',
+        modulesCount: '10 Modules',
+        topicsCount: '38 Topics',
+        progress: 72,
+        icon: 'trending-up'
+      },
+      {
+        title: 'Government',
+        track: 'arts',
+        code: 'ARTS-GOV',
+        desc: 'Political Concepts, Organs of Government, Constitutional History of Ghana, International Bodies.',
+        modulesCount: '9 Modules',
+        topicsCount: '35 Topics',
+        progress: 60,
+        icon: 'landmark'
+      },
+      {
+        title: 'General Agriculture',
+        track: 'agric',
+        code: 'AGR-GEN',
+        desc: 'Soil Science, Crop Production, Farm Mechanization, Agricultural Economics & Extension.',
+        modulesCount: '8 Modules',
+        topicsCount: '30 Topics',
+        progress: 40,
+        icon: 'sprout'
+      }
+    ];
+
+    // Quiz Questions Dataset
+    const quizData = {
+      math: [
+        {
+          q: "Solve for x in the equation: x² - 5x + 6 = 0",
+          options: ["x = 2 or x = 3", "x = -2 or x = -3", "x = 1 or x = 6", "x = -1 or x = 5"],
+          correct: 0,
+          explanation: "Factorizing x² - 5x + 6 gives (x - 2)(x - 3) = 0. Therefore, x = 2 or x = 3."
+        },
+        {
+          q: "What is the discriminant of 2x² + 4x + 3 = 0?",
+          options: ["-8", "8", "-10", "16"],
+          correct: 0,
+          explanation: "Discriminant Δ = b² - 4ac = (4)² - 4(2)(3) = 16 - 24 = -8. Since Δ < 0, there are no real roots."
+        }
+      ],
+      science: [
+        {
+          q: "Which organelle is known as the powerhouse of the cell?",
+          options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+          correct: 1,
+          explanation: "Mitochondria generate most of the chemical energy (ATP) needed to power the cell's biochemical reactions."
+        }
+      ],
+      english: [
+        {
+          q: "Choose the correct sentence: 'Neither the teacher nor the students _____ present.'",
+          options: ["was", "were", "is", "are"],
+          correct: 1,
+          explanation: "In 'neither... nor' constructions, the verb agrees with the closer subject ('students', which is plural = 'were')."
+        }
+      ],
+      social: [
+        {
+          q: "In what year was the current 4th Republican Constitution of Ghana promulgated?",
+          options: ["1957", "1966", "1979", "1992"],
+          correct: 3,
+          explanation: "The 1992 Constitution was approved in a national referendum on April 28, 1992 and came into force on January 7, 1993."
+        }
+      ]
+    };
+
+    // Flashcard Dataset
+    const flashcardData = {
+      math: [
+        { category: "CORE MATHEMATICS", front: "What is the Quadratic Formula?", back: "x = [ -b ± √(b² - 4ac) ] / (2a)", exp: "Used to find roots of quadratic equation ax² + bx + c = 0." },
+        { category: "CORE MATHEMATICS", front: "What is the Sum of Interior Angles of an n-sided polygon?", back: "(n - 2) × 180°", exp: "Where 'n' is the number of sides." }
+      ],
+      science: [
+        { category: "INTEGRATED SCIENCE", front: "Define Photosynthesis equation in words.", back: "Carbon Dioxide + Water + Sunlight → Glucose + Oxygen", exp: "Process occurring in plant chloroplasts using chlorophyll." }
+      ],
+      english: [
+        { category: "ENGLISH LANGUAGE", front: "What does the idiom 'Burn the midnight oil' mean?", back: "To study or work late into the night.", exp: "Common phrase used for intensive exam preparation." }
+      ],
+      social: [
+        { category: "SOCIAL STUDIES", front: "Name the 3 arms of Government in Ghana.", back: "The Executive, The Legislature, and The Judiciary", exp: "Based on the principle of Separation of Powers." }
+      ]
+    };
+
+
+    // --- STATE MANAGEMENT ---
+    let currentQuizSubject = 'math';
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+
+    let currentFcSubject = 'math';
+    let currentFcIndex = 0;
+    let isFcFlipped = false;
+
+    let pomodoroInterval = null;
+    let pomodoroSeconds = 25 * 60;
+    let isPomodoroRunning = false;
+
+
+    // --- TAB SWITCHING LOGIC ---
+    function switchTab(tabId) {
+      // Hide all view panels
+      document.querySelectorAll('.view-panel').forEach(panel => panel.classList.add('hidden'));
+      
+      // Show selected view panel
+      const activePanel = document.getElementById(`view-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update Nav Buttons active state
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeNavBtn = document.getElementById(`nav-${tabId}`);
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove('text-slate-400');
+        activeNavBtn.classList.add('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+      }
+
+      // Re-initialize Lucide Icons on view switch
+      lucide.createIcons();
+    }
+
+
+    // --- SUBJECT MODULES FILTERING ---
+    function filterSubjects(track) {
+      const container = document.getElementById('subjects-grid');
+      container.innerHTML = '';
+
+      const filtered = track === 'all' 
+        ? subjectsData 
+        : subjectsData.filter(s => s.track === track);
+
+      filtered.forEach(s => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-indigo-500/40 transition-all shadow-lg flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-800 text-indigo-400 border border-slate-700">${s.code}</span>
+              <span class="text-xs text-slate-500 font-medium">${s.modulesCount}</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1.5">${s.title}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">${s.desc}</p>
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+              <span>Coverage Progress</span>
+              <span class="font-bold text-indigo-400">${s.progress}%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-4">
+              <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${s.progress}%"></div>
+            </div>
+            <button onclick="switchTab('curriculum')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> View Syllabus PDF
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update filter button styling
+      document.querySelectorAll('.subj-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      event.target.classList.add('bg-indigo-600', 'text-white');
+      event.target.classList.remove('text-slate-400');
+
+      lucide.createIcons();
+    }
+
+
+    // --- GES CURRICULUM PDF HUB ENGINE ---
+    function renderPdfGrid(list) {
+      const container = document.getElementById('pdf-grid');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i data-lucide="file-x" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
+            <p class="text-sm">No curriculum PDFs found matching your search term.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      list.forEach(pdf => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-lg";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${pdf.track} • ${pdf.grade}</span>
+              <span class="text-[11px] text-slate-500 font-mono">${pdf.size}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1 leading-snug">${pdf.title}</h3>
+            <p class="text-[11px] text-slate-400 mb-3">${pdf.publisher} (${pdf.year})</p>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 flex items-center space-x-2">
+            <button onclick="openPdfModal('${pdf.title}', '${pdf.previewUrl}')" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-indigo-400"></i> Preview
+            </button>
+            <a href="${pdf.downloadUrl}" target="_blank" download class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterPdfs() {
+      const searchTerm = document.getElementById('pdf-search-input').value.toLowerCase();
+      const trackVal = document.getElementById('pdf-track-filter').value;
+
+      const filtered = pdfData.filter(pdf => {
+        const matchesSearch = pdf.title.toLowerCase().includes(searchTerm) || 
+                              pdf.subject.toLowerCase().includes(searchTerm) ||
+                              pdf.grade.toLowerCase().includes(searchTerm);
+        const matchesTrack = trackVal === 'all' || pdf.track === trackVal;
+        return matchesSearch && matchesTrack;
+      });
+
+      renderPdfGrid(filtered);
+    }
+
+    function openPdfModal(title, url) {
+      document.getElementById('modal-pdf-title').innerText = title;
+      document.getElementById('pdf-frame').src = url;
+      document.getElementById('modal-download-btn').href = url;
+      document.getElementById('pdf-modal').classList.remove('hidden');
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdf-modal').classList.add('hidden');
+      document.getElementById('pdf-frame').src = '';
+    }
+
+
+    // --- QUIZ ENGINE LOGIC ---
+    function loadQuiz(subject) {
+      currentQuizSubject = subject;
+      currentQuizIndex = 0;
+      quizScore = 0;
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      const container = document.getElementById('quiz-container');
+      const questions = quizData[currentQuizSubject] || [];
+      const total = questions.length;
+
+      if (currentQuizIndex >= total) {
+        // Quiz Complete Screen
+        container.innerHTML = `
+          <div class="text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl font-black border border-emerald-500/30">
+              🎉
+            </div>
+            <h3 class="text-xl font-bold text-white">Quiz Completed!</h3>
+            <p class="text-sm text-slate-300">You scored <span class="font-extrabold text-indigo-400 text-lg">${quizScore}</span> out of <span class="font-bold">${total}</span></p>
+            <button onclick="loadQuiz('${currentQuizSubject}')" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg">
+              Retake Quiz
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const q = questions[currentQuizIndex];
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button onclick="checkAnswer(${idx})" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-indigo-500/50 text-xs text-slate-200 transition-all font-medium flex items-center justify-between group">
+            <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-600 group-hover:text-indigo-400"></i>
+          </button>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+            <span>Question ${currentQuizIndex + 1} of ${total}</span>
+            <span>Score: ${quizScore}</span>
+          </div>
+
+          <p class="text-base font-bold text-white leading-relaxed">${q.q}</p>
+
+          <div id="quiz-options" class="space-y-3">
+            ${optionsHtml}
+          </div>
+
+          <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs leading-relaxed border"></div>
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function checkAnswer(selectedIdx) {
+      const questions = quizData[currentQuizSubject];
+      const q = questions[currentQuizIndex];
+      const feedback = document.getElementById('quiz-feedback');
+
+      if (selectedIdx === q.correct) {
+        quizScore++;
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-emerald-500/10 border-emerald-500/30 text-emerald-300";
+        feedback.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+      } else {
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-rose-500/10 border-rose-500/30 text-rose-300";
+        feedback.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
+      }
+
+      feedback.classList.remove('hidden');
+
+      setTimeout(() => {
+        currentQuizIndex++;
+        renderQuizQuestion();
+      }, 2500);
+    }
+
+
+    // --- FLASHCARD LOGIC ---
+    function loadFlashcards(subj) {
+      currentFcSubject = subj;
+      currentFcIndex = 0;
+      isFcFlipped = false;
+      renderCard();
+    }
+
+    function renderCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      const card = cards[currentFcIndex];
+      
+      if (!card) return;
+
+      document.getElementById('fc-category').innerText = card.category;
+      document.getElementById('fc-front-text').innerText = card.front;
+      document.getElementById('fc-back-text').innerText = card.back;
+      document.getElementById('fc-explanation').innerText = card.exp;
+      document.getElementById('fc-counter').innerText = `Card ${currentFcIndex + 1} of ${cards.length}`;
+
+      // Reset flip
+      const inner = document.getElementById('flashcard-inner');
+      inner.classList.remove('rotate-y-180');
+      isFcFlipped = false;
+    }
+
+    function flipCard() {
+      const inner = document.getElementById('flashcard-inner');
+      isFcFlipped = !isFcFlipped;
+      if (isFcFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+    }
+
+    function nextCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      if (currentFcIndex < cards.length - 1) {
+        currentFcIndex++;
+        renderCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentFcIndex > 0) {
+        currentFcIndex--;
+        renderCard();
+      }
+    }
+
+    function markCardMastered(isMastered) {
+      nextCard();
+    }
+
+
+    // --- POMODORO TIMER LOGIC ---
+    function updatePomoDisplay() {
+      const mins = Math.floor(pomodoroSeconds / 60);
+      const secs = pomodoroSeconds % 60;
+      document.getElementById('pomo-display').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function togglePomodoro() {
+      const btn = document.getElementById('pomo-start-btn');
+      if (isPomodoroRunning) {
+        clearInterval(pomodoroInterval);
+        isPomodoroRunning = false;
+        btn.innerText = "Resume";
+      } else {
+        isPomodoroRunning = true;
+        btn.innerText = "Pause";
+        pomodoroInterval = setInterval(() => {
+          if (pomodoroSeconds > 0) {
+            pomodoroSeconds--;
+            updatePomoDisplay();
+          } else {
+            clearInterval(pomodoroInterval);
+            isPomodoroRunning = false;
+            alert("Pomodoro focus session completed! Take a 5 minute break.");
+            resetPomodoro();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoro() {
+      clearInterval(pomodoroInterval);
+      isPomodoroRunning = false;
+      pomodoroSeconds = 25 * 60;
+      updatePomoDisplay();
+      document.getElementById('pomo-start-btn').innerText = "Start Timer";
+    }
+
+
+    // --- INITIALIZATION ON PAGE LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Render default PDF list
+      renderPdfGrid(pdfData);
+
+      // Render default subjects grid
+      filterSubjects('all');
+
+      // Load initial Quiz & Flashcards
+      loadQuiz('math');
+      loadFlashcards('math');
+
+      // Set default Pomodoro time
+      updatePomoDisplay();
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHS EduHub | Ghana Secondary Education & Learning Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER NAV -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
+            SHS EduHub <span class="bg-indigo-500/20 text-indigo-400 text-xs px-2 py-0.5 rounded-full border border-indigo-500/30 font-medium">GES / WASSCE</span>
+          </span>
+          <p class="text-[10px] text-slate-400 font-medium">Official Ghana SHS Syllabus & Study Portal</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800/80">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-indigo-400 bg-indigo-500/10 border border-indigo-500/20">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Dashboard</span>
+        </button>
+        
+        <button onclick="switchTab('subjects')" id="nav-subjects" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Subject Modules</span>
+        </button>
+
+        <button onclick="switchTab('curriculum')" id="nav-curriculum" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2 relative">
+          <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i>
+          <span>GES PDFs</span>
+          <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Official</span>
+        </button>
+        
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span>Practice Quizzes</span>
+        </button>
+
+        <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Flashcards</span>
+        </button>
+
+        <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Planner & Pomodoro</span>
+        </button>
+      </nav>
+
+      <!-- Right Action Badge -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+          <span>5 Day Streak!</span>
+        </div>
+        <div class="flex items-center space-x-2 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-indigo-400">
+            AM
+          </div>
+          <div class="hidden lg:block text-left">
+            <p class="text-xs font-semibold text-slate-200">Ama Mensah</p>
+            <p class="text-[10px] text-slate-400">SHS 3 • General Science</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile Nav Strip -->
+    <div class="md:hidden flex overflow-x-auto border-t border-slate-800 px-2 py-2 gap-1 no-scrollbar bg-slate-900">
+      <button onclick="switchTab('dashboard')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white whitespace-nowrap">Dashboard</button>
+      <button onclick="switchTab('subjects')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Subjects</button>
+      <button onclick="switchTab('curriculum')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950 text-emerald-300 border border-emerald-800/50 whitespace-nowrap">GES PDFs</button>
+      <button onclick="switchTab('quizzes')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Quizzes</button>
+      <button onclick="switchTab('flashcards')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Flashcards</button>
+      <button onclick="switchTab('planner')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Planner</button>
+    </div>
+  </header>
+
+  <!-- MAIN SPA CONTAINER -->
+  <main id="app" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- 1. DASHBOARD VIEW -->
+    <section id="view-dashboard" class="view-panel space-y-6">
+      
+      <!-- Target Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/90 via-indigo-800/60 to-purple-900/80 p-6 sm:p-8 border border-indigo-700/40 shadow-2xl">
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-semibold mb-3">
+            <i data-lucide="target" class="w-3.5 h-3.5 text-indigo-300"></i>
+            <span>TARGET: WASSCE EXAMS</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Welcome back, Ama! 👋</h1>
+          <p class="mt-2 text-slate-200 text-sm sm:text-base leading-relaxed">
+            You are on track! You've completed <span class="font-bold text-amber-300">82%</span> of your weekly study goals. Access official GES syllabi, revise core topics, or practice past exam questions.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button onclick="switchTab('quizzes')" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              Start Practice Quiz
+            </button>
+            <button onclick="switchTab('curriculum')" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+              Download GES Syllabi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Overall Progress</p>
+            <span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400"><i data-lucide="trending-up" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">76%</p>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 mt-3">
+            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 76%"></div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Quizzes Completed</p>
+            <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">24 / <span class="text-slate-500 text-lg">28</span></p>
+          <p class="text-[11px] text-emerald-400 mt-2 font-medium">↑ 4 completed this week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Study Hours</p>
+            <span class="p-2 rounded-lg bg-purple-500/10 text-purple-400"><i data-lucide="clock" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">18.5 hrs</p>
+          <p class="text-[11px] text-slate-400 mt-2 font-medium">Goal: 20 hrs/week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Flashcards Mastered</p>
+            <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400"><i data-lucide="award" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">142</p>
+          <p class="text-[11px] text-amber-400 mt-2 font-medium">68% retention rate</p>
+        </div>
+      </div>
+
+      <!-- Core Subjects Quick Grid & Today's Checklist -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Subject Quick Links -->
+        <div class="lg:col-span-2 bg-slate-900/80 rounded-2xl p-6 border border-slate-800">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-indigo-400"></i>
+              Core & Elective Subject Quick Access
+            </h2>
+            <button onclick="switchTab('subjects')" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View All Subjects &rarr;</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Math Card -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-base group-hover:scale-10 font-mono">
+                  &radic;x
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">Core Mathematics</h3>
+                  <p class="text-xs text-slate-400">12 Modules • 48 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Algebra & Trigonometry</span>
+                  <span class="font-bold text-indigo-400">85%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Integrated Science -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-emerald-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="atom" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">Integrated Science</h3>
+                  <p class="text-xs text-slate-400">10 Modules • 40 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Genetics & Physics</span>
+                  <span class="font-bold text-emerald-400">70%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 70%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- English -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-purple-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">English Language</h3>
+                  <p class="text-xs text-slate-400">8 Modules • 32 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Essays & Concord</span>
+                  <span class="font-bold text-purple-400">80%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-purple-500 h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Studies -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="globe" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">Social Studies</h3>
+                  <p class="text-xs text-slate-400">6 Modules • 26 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Governance & Dev</span>
+                  <span class="font-bold text-amber-400">62%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-amber-500 h-1.5 rounded-full" style="width: 62%"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Checklist & Tips -->
+        <div class="space-y-6">
+          <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
+              <i data-lucide="check-square" class="w-4 h-4 text-indigo-400"></i>
+              Today's Study Checklist
+            </h3>
+            <div class="space-y-2.5">
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" checked class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200 line-through">Review Quadratic Equations</p>
+                  <p class="text-slate-500">Core Maths • 30 mins</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Practice Integrated Science Quiz</p>
+                  <p class="text-slate-500">Genetics Section • Due 4:00 PM</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Memorize English Idioms</p>
+                  <p class="text-slate-500">20 Flashcards • Due 7:00 PM</p>
+                </div>
+              </label>
+            </div>
+            <button onclick="switchTab('planner')" class="mt-4 w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors">
+              + Add To Task List
+            </button>
+          </div>
+
+          <!-- WASSCE Success Tip Card -->
+          <div class="bg-gradient-to-br from-indigo-950/60 to-purple-950/60 rounded-2xl p-4 border border-indigo-800/40">
+            <div class="flex items-center space-x-2 text-indigo-400 mb-1.5">
+              <i data-lucide="lightbulb" class="w-4 h-4"></i>
+              <span class="text-xs font-bold uppercase tracking-wider">WASSCE Success Tip</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              In <strong>Section B Mathematics</strong>, always show full steps clearly. Method marks are awarded even if your final arithmetic answer contains a minor slip!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 2. SUBJECT MODULES VIEW -->
+    <section id="view-subjects" class="view-panel hidden space-y-6">
+      
+      <!-- Header & Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="book-open" class="w-6 h-6 text-indigo-400"></i>
+            SHS Subject Curriculum & Notes
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Select any subject to explore official GES topic outlines, revision notes, and formulas.</p>
+        </div>
+
+        <!-- Subject Track Filter Tabs -->
+        <div class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs">
+          <button onclick="filterSubjects('all')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium bg-indigo-600 text-white">All Tracks</button>
+          <button onclick="filterSubjects('core')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Core</button>
+          <button onclick="filterSubjects('science')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Science & Elect. Math</button>
+          <button onclick="filterSubjects('business')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Business</button>
+          <button onclick="filterSubjects('arts')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">General Arts</button>
+          <button onclick="filterSubjects('agric')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Agric & Home Econ</button>
+        </div>
+      </div>
+
+      <!-- Subjects Cards Grid -->
+      <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Javascript renders subject cards dynamically based on active filter -->
+      </div>
+
+    </section>
+
+
+    <!-- 3. GES CURRICULUM PDF EXPLORER VIEW -->
+    <section id="view-curriculum" class="view-panel hidden space-y-6">
+      
+      <!-- Top Banner -->
+      <div class="bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 p-6 sm:p-8 rounded-2xl border border-emerald-700/30">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-3 border border-emerald-500/30">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Official NaCCA & Ghana Education Service (GES) Repository</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white">SHS Syllabus & Curriculum PDF Library</h1>
+          <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+            Search, preview, and download official GES/NaCCA Senior High School curriculum guides for SHS 1, SHS 2, and SHS 3 across all academic tracks.
+          </p>
+        </div>
+
+        <!-- Search Bar & Filters -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-3 text-slate-400"></i>
+            <input type="text" id="pdf-search-input" onkeyup="filterPdfs()" placeholder="Search syllabus by title, subject, or code (e.g. Mathematics, Physics, Core, SHS 2)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+          </div>
+          <select id="pdf-track-filter" onchange="filterPdfs()" class="px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">All Tracks</option>
+            <option value="Core">Core Subjects</option>
+            <option value="Science">General Science & Elective Math</option>
+            <option value="Business">Business Studies</option>
+            <option value="Arts">General Arts</option>
+            <option value="Agric">Agricultural Science</option>
+            <option value="HomeEcon">Home Economics</option>
+            <option value="VisualArts">Visual Arts</option>
+            <option value="Tech">Technical / ICT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Syllabus PDF Grid -->
+      <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </section>
+
+
+    <!-- 4. PRACTICE QUIZZES VIEW -->
+    <section id="view-quizzes" class="view-panel hidden space-y-6">
+      
+      <!-- Quiz Header -->
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="help-circle" class="w-6 h-6 text-indigo-400"></i>
+            WASSCE Practice Quiz Engine
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Interactive past questions with instant explanation feedback & score tracking.</p>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <label class="text-xs text-slate-400">Select Topic Quiz:</label>
+          <select id="quiz-select" onchange="loadQuiz(this.value)" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
+            <option value="math">Core Mathematics: Quadratic & Linear Equations</option>
+            <option value="science">Integrated Science: Cell Biology & Genetics</option>
+            <option value="english">English Language: Concord & Idiomatic Expressions</option>
+            <option value="social">Social Studies: Governance & Constitution</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Interactive Quiz Container -->
+      <div id="quiz-container" class="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 sm:p-8 max-w-3xl mx-auto shadow-xl">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+    </section>
+
+
+    <!-- 5. FLASHCARDS VIEW -->
+    <section id="view-flashcards" class="view-panel hidden space-y-6">
+      
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-6 h-6 text-indigo-400"></i>
+            Revision Flashcard Hub
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Click or tap any card to flip and test your memory on key definitions and concepts.</p>
+        </div>
+
+        <!-- Subject Switcher for Flashcards -->
+        <div class="flex gap-2">
+          <button onclick="loadFlashcards('math')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Mathematics</button>
+          <button onclick="loadFlashcards('science')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Science</button>
+          <button onclick="loadFlashcards('english')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">English</button>
+          <button onclick="loadFlashcards('social')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Social Studies</button>
+        </div>
+      </div>
+
+      <!-- Flashcard Interactive Display Area -->
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <div id="flashcard-box" onclick="flipCard()" class="perspective-1000 h-72 cursor-pointer">
+          <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d bg-slate-900 border-2 border-indigo-500/40 rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+            
+            <!-- Front -->
+            <div class="absolute inset-0 backface-hidden p-6 flex flex-col items-center justify-center">
+              <span id="fc-category" class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 font-bold">CORE MATHEMATICS</span>
+              <p id="fc-front-text" class="text-lg sm:text-xl font-bold text-white leading-relaxed">
+                What is the quadratic formula used to find the roots of ax² + bx + c = 0?
+              </p>
+              <p class="text-xs text-slate-500 mt-6 flex items-center gap-1">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Tap card to flip answer
+              </p>
+            </div>
+
+            <!-- Back -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col items-center justify-center bg-slate-900 border-2 border-emerald-500/50 rounded-2xl">
+              <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3 font-bold">ANSWER</span>
+              <p id="fc-back-text" class="text-lg font-extrabold text-emerald-300 font-mono">
+                x = [ -b &plusmn; &radic;(b² - 4ac) ] / (2a)
+              </p>
+              <p id="fc-explanation" class="text-xs text-slate-300 mt-3 leading-relaxed">
+                Where b² - 4ac is the discriminant determining the nature of roots.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-between">
+          <button onclick="prevCard()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous
+          </button>
+          <span id="fc-counter" class="text-xs text-slate-400 font-mono font-medium">Card 1 of 5</span>
+          <button onclick="nextCard()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white flex items-center gap-1.5">
+            Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-center space-x-3 pt-2">
+          <button onclick="markCardMastered(false)" class="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="x-circle" class="w-4 h-4"></i> Need Review
+          </button>
+          <button onclick="markCardMastered(true)" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Mastered
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 6. PLANNER & POMODORO TIMER VIEW -->
+    <section id="view-planner" class="view-panel hidden space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Schedule & Task Manager -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="calendar" class="w-5 h-5 text-indigo-400"></i>
+                WASSCE Study Timetable
+              </h2>
+              <span class="text-xs text-indigo-400 font-medium">Week 4 • Revision Phase</span>
+            </div>
+
+            <!-- Weekly Schedule Grid -->
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">MON</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">Core Mathematics & Integrated Science</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Quadratic Equations & Cell Biology</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">TUE</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">English Essay Writing & Social Studies</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Formal Letters & Constitution</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/40 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-600 text-white font-bold text-xs">TODAY</span>
+                  <div>
+                    <p class="text-xs font-bold text-white">Elective Science / Business Revision</p>
+                    <p class="text-[11px] text-indigo-300">5:00 PM - 7:30 PM • Physics Mechanics & Accounting</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-semibold">Active</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-slate-800 text-slate-400 font-bold text-xs">THU</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-300">WASSCE Past Questions Drills</p>
+                    <p class="text-[11px] text-slate-400">4:30 PM - 7:00 PM • Speed Drills & Section B Strategy</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-semibold">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Pomodoro Focus Timer -->
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 text-center flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold mb-4">
+              <i data-lucide="timer" class="w-4 h-4"></i>
+              <span>Pomodoro Study Focus</span>
+            </div>
+
+            <!-- Timer Circle Display -->
+            <div class="my-6">
+              <div class="w-48 h-48 mx-auto rounded-full bg-slate-950 border-4 border-indigo-500/50 flex flex-col items-center justify-center shadow-inner relative">
+                <span id="pomo-display" class="text-4xl font-black text-white font-mono tracking-wider">25:00</span>
+                <span id="pomo-mode" class="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-1">Focus Session</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-center space-x-3">
+              <button id="pomo-start-btn" onclick="togglePomodoro()" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-600/30">
+                Start Timer
+              </button>
+              <button onclick="resetPomodoro()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-all">
+                Reset
+              </button>
+            </div>
+            <p class="text-[11px] text-slate-500 pt-2">25 min study • 5 min short break interval</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 w-full max-w-5xl h-[85vh] rounded-2xl border border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modal-pdf-title" class="text-sm font-bold text-white">Syllabus PDF Document</h3>
+            <p id="modal-pdf-subtitle" class="text-xs text-slate-400">GES Official Curriculum Reference</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <a id="modal-download-btn" href="#" download class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+          </a>
+          <button onclick="closePdfModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body - PDF Iframe Viewer -->
+      <div class="flex-1 bg-slate-950 p-2 relative">
+        <iframe id="pdf-frame" src="" class="w-full h-full rounded-xl border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- APP DATA STORES ---
+    
+    // Official GES Curriculum PDFs Repository Data
+    const pdfData = [
+      {
+        id: 'pdf-1',
+        title: 'Core Mathematics Curriculum (SHS 1 - 3)',
+        subject: 'Core Mathematics',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '2.4 MB',
+        publisher: 'NaCCA / Ministry of Education Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-2',
+        title: 'Integrated Science Curriculum (SHS 1 - 3)',
+        subject: 'Integrated Science',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '3.1 MB',
+        publisher: 'GES / NaCCA',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf',
+        previewUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-3',
+        title: 'Physics Elective Syllabus & Practical Guide',
+        subject: 'Physics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '4.2 MB',
+        publisher: 'NaCCA Ghana',
+        year: 'Standard WASSCE Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-4',
+        title: 'Elective Mathematics Curriculum',
+        subject: 'Elective Mathematics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '2.8 MB',
+        publisher: 'Ministry of Education',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-5',
+        title: 'Financial Accounting Syllabus',
+        subject: 'Financial Accounting',
+        track: 'Business',
+        grade: 'SHS 1-3',
+        size: '1.9 MB',
+        publisher: 'GES / NaCCA',
+        year: 'WASSCE Standard',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-6',
+        title: 'Government & Civic Education Curriculum',
+        subject: 'Government',
+        track: 'Arts',
+        grade: 'SHS 1-3',
+        size: '2.1 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-7',
+        title: 'General Agriculture Teaching Syllabus',
+        subject: 'General Agriculture',
+        track: 'Agric',
+        grade: 'SHS 1-3',
+        size: '3.5 MB',
+        publisher: 'GES / NaCCA',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-8',
+        title: 'Food & Nutrition Curriculum',
+        subject: 'Food & Nutrition',
+        track: 'HomeEcon',
+        grade: 'SHS 1-3',
+        size: '2.6 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-9',
+        title: 'Applied Computing & Core ICT Syllabus',
+        subject: 'Information & Comm. Tech',
+        track: 'Tech',
+        grade: 'SHS 1-3',
+        size: '3.8 MB',
+        publisher: 'Ministry of Education',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      }
+    ];
+
+    // Comprehensive SHS Subject Data Grid
+    const subjectsData = [
+      {
+        title: 'Core Mathematics',
+        track: 'core',
+        code: 'CORE-MTH',
+        desc: 'Algebra, Quadratic Functions, Trigonometrical Ratios, Circle Theorems, & Statistics.',
+        modulesCount: '12 Modules',
+        topicsCount: '48 Topics',
+        progress: 85,
+        icon: 'calculator'
+      },
+      {
+        title: 'Integrated Science',
+        track: 'core',
+        code: 'CORE-SCI',
+        desc: 'Cell Biology, Genetics, Acids & Bases, Work & Energy, Solar System, & Ecosystems.',
+        modulesCount: '10 Modules',
+        topicsCount: '40 Topics',
+        progress: 70,
+        icon: 'atom'
+      },
+      {
+        title: 'English Language',
+        track: 'core',
+        code: 'CORE-ENG',
+        desc: 'Essay Writing Formats, Grammar & Concord, Summary Writing, Comprehension & Idioms.',
+        modulesCount: '8 Modules',
+        topicsCount: '32 Topics',
+        progress: 80,
+        icon: 'pen-tool'
+      },
+      {
+        title: 'Social Studies',
+        track: 'core',
+        code: 'CORE-SOC',
+        desc: 'Governance, Constitution of Ghana, Socio-Economic Development, Culture & Identity.',
+        modulesCount: '6 Modules',
+        topicsCount: '26 Topics',
+        progress: 62,
+        icon: 'globe'
+      },
+      {
+        title: 'Physics Elective',
+        track: 'science',
+        code: 'ELEC-PHY',
+        desc: 'Mechanics, Wave Optics, Electricity & Magnetism, Atomic & Modern Physics.',
+        modulesCount: '14 Modules',
+        topicsCount: '52 Topics',
+        progress: 45,
+        icon: 'zap'
+      },
+      {
+        title: 'Chemistry Elective',
+        track: 'science',
+        code: 'ELEC-CHM',
+        desc: 'Atomic Structure, Chemical Bonding, Stoichiometry, Organic Chemistry, Thermochemistry.',
+        modulesCount: '12 Modules',
+        topicsCount: '46 Topics',
+        progress: 58,
+        icon: 'beaker'
+      },
+      {
+        title: 'Elective Mathematics',
+        track: 'science',
+        code: 'ELEC-MTH',
+        desc: 'Calculus (Differentiation & Integration), Coordinate Geometry, Vectors, Matrices & Mechanics.',
+        modulesCount: '15 Modules',
+        topicsCount: '60 Topics',
+        progress: 65,
+        icon: 'binary'
+      },
+      {
+        title: 'Financial Accounting',
+        track: 'business',
+        code: 'BUS-ACC',
+        desc: 'Double Entry System, Final Accounts, Control Accounts, Partnership & Company Accounts.',
+        modulesCount: '11 Modules',
+        topicsCount: '42 Topics',
+        progress: 50,
+        icon: 'bar-chart-3'
+      },
+      {
+        title: 'Economics',
+        track: 'business',
+        code: 'BUS-ECO',
+        desc: 'Demand & Supply Elasticity, Market Structures, National Income Accounting, Inflation.',
+        modulesCount: '10 Modules',
+        topicsCount: '38 Topics',
+        progress: 72,
+        icon: 'trending-up'
+      },
+      {
+        title: 'Government',
+        track: 'arts',
+        code: 'ARTS-GOV',
+        desc: 'Political Concepts, Organs of Government, Constitutional History of Ghana, International Bodies.',
+        modulesCount: '9 Modules',
+        topicsCount: '35 Topics',
+        progress: 60,
+        icon: 'landmark'
+      },
+      {
+        title: 'General Agriculture',
+        track: 'agric',
+        code: 'AGR-GEN',
+        desc: 'Soil Science, Crop Production, Farm Mechanization, Agricultural Economics & Extension.',
+        modulesCount: '8 Modules',
+        topicsCount: '30 Topics',
+        progress: 40,
+        icon: 'sprout'
+      }
+    ];
+
+    // Quiz Questions Dataset
+    const quizData = {
+      math: [
+        {
+          q: "Solve for x in the equation: x² - 5x + 6 = 0",
+          options: ["x = 2 or x = 3", "x = -2 or x = -3", "x = 1 or x = 6", "x = -1 or x = 5"],
+          correct: 0,
+          explanation: "Factorizing x² - 5x + 6 gives (x - 2)(x - 3) = 0. Therefore, x = 2 or x = 3."
+        },
+        {
+          q: "What is the discriminant of 2x² + 4x + 3 = 0?",
+          options: ["-8", "8", "-10", "16"],
+          correct: 0,
+          explanation: "Discriminant Δ = b² - 4ac = (4)² - 4(2)(3) = 16 - 24 = -8. Since Δ < 0, there are no real roots."
+        }
+      ],
+      science: [
+        {
+          q: "Which organelle is known as the powerhouse of the cell?",
+          options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+          correct: 1,
+          explanation: "Mitochondria generate most of the chemical energy (ATP) needed to power the cell's biochemical reactions."
+        }
+      ],
+      english: [
+        {
+          q: "Choose the correct sentence: 'Neither the teacher nor the students _____ present.'",
+          options: ["was", "were", "is", "are"],
+          correct: 1,
+          explanation: "In 'neither... nor' constructions, the verb agrees with the closer subject ('students', which is plural = 'were')."
+        }
+      ],
+      social: [
+        {
+          q: "In what year was the current 4th Republican Constitution of Ghana promulgated?",
+          options: ["1957", "1966", "1979", "1992"],
+          correct: 3,
+          explanation: "The 1992 Constitution was approved in a national referendum on April 28, 1992 and came into force on January 7, 1993."
+        }
+      ]
+    };
+
+    // Flashcard Dataset
+    const flashcardData = {
+      math: [
+        { category: "CORE MATHEMATICS", front: "What is the Quadratic Formula?", back: "x = [ -b ± √(b² - 4ac) ] / (2a)", exp: "Used to find roots of quadratic equation ax² + bx + c = 0." },
+        { category: "CORE MATHEMATICS", front: "What is the Sum of Interior Angles of an n-sided polygon?", back: "(n - 2) × 180°", exp: "Where 'n' is the number of sides." }
+      ],
+      science: [
+        { category: "INTEGRATED SCIENCE", front: "Define Photosynthesis equation in words.", back: "Carbon Dioxide + Water + Sunlight → Glucose + Oxygen", exp: "Process occurring in plant chloroplasts using chlorophyll." }
+      ],
+      english: [
+        { category: "ENGLISH LANGUAGE", front: "What does the idiom 'Burn the midnight oil' mean?", back: "To study or work late into the night.", exp: "Common phrase used for intensive exam preparation." }
+      ],
+      social: [
+        { category: "SOCIAL STUDIES", front: "Name the 3 arms of Government in Ghana.", back: "The Executive, The Legislature, and The Judiciary", exp: "Based on the principle of Separation of Powers." }
+      ]
+    };
+
+
+    // --- STATE MANAGEMENT ---
+    let currentQuizSubject = 'math';
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+
+    let currentFcSubject = 'math';
+    let currentFcIndex = 0;
+    let isFcFlipped = false;
+
+    let pomodoroInterval = null;
+    let pomodoroSeconds = 25 * 60;
+    let isPomodoroRunning = false;
+
+
+    // --- TAB SWITCHING LOGIC ---
+    function switchTab(tabId) {
+      // Hide all view panels
+      document.querySelectorAll('.view-panel').forEach(panel => panel.classList.add('hidden'));
+      
+      // Show selected view panel
+      const activePanel = document.getElementById(`view-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update Nav Buttons active state
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeNavBtn = document.getElementById(`nav-${tabId}`);
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove('text-slate-400');
+        activeNavBtn.classList.add('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+      }
+
+      // Re-initialize Lucide Icons on view switch
+      lucide.createIcons();
+    }
+
+
+    // --- SUBJECT MODULES FILTERING ---
+    function filterSubjects(track) {
+      const container = document.getElementById('subjects-grid');
+      container.innerHTML = '';
+
+      const filtered = track === 'all' 
+        ? subjectsData 
+        : subjectsData.filter(s => s.track === track);
+
+      filtered.forEach(s => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-indigo-500/40 transition-all shadow-lg flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-800 text-indigo-400 border border-slate-700">${s.code}</span>
+              <span class="text-xs text-slate-500 font-medium">${s.modulesCount}</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1.5">${s.title}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">${s.desc}</p>
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+              <span>Coverage Progress</span>
+              <span class="font-bold text-indigo-400">${s.progress}%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-4">
+              <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${s.progress}%"></div>
+            </div>
+            <button onclick="switchTab('curriculum')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> View Syllabus PDF
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update filter button styling
+      document.querySelectorAll('.subj-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      event.target.classList.add('bg-indigo-600', 'text-white');
+      event.target.classList.remove('text-slate-400');
+
+      lucide.createIcons();
+    }
+
+
+    // --- GES CURRICULUM PDF HUB ENGINE ---
+    function renderPdfGrid(list) {
+      const container = document.getElementById('pdf-grid');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i data-lucide="file-x" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
+            <p class="text-sm">No curriculum PDFs found matching your search term.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      list.forEach(pdf => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-lg";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${pdf.track} • ${pdf.grade}</span>
+              <span class="text-[11px] text-slate-500 font-mono">${pdf.size}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1 leading-snug">${pdf.title}</h3>
+            <p class="text-[11px] text-slate-400 mb-3">${pdf.publisher} (${pdf.year})</p>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 flex items-center space-x-2">
+            <button onclick="openPdfModal('${pdf.title}', '${pdf.previewUrl}')" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-indigo-400"></i> Preview
+            </button>
+            <a href="${pdf.downloadUrl}" target="_blank" download class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterPdfs() {
+      const searchTerm = document.getElementById('pdf-search-input').value.toLowerCase();
+      const trackVal = document.getElementById('pdf-track-filter').value;
+
+      const filtered = pdfData.filter(pdf => {
+        const matchesSearch = pdf.title.toLowerCase().includes(searchTerm) || 
+                              pdf.subject.toLowerCase().includes(searchTerm) ||
+                              pdf.grade.toLowerCase().includes(searchTerm);
+        const matchesTrack = trackVal === 'all' || pdf.track === trackVal;
+        return matchesSearch && matchesTrack;
+      });
+
+      renderPdfGrid(filtered);
+    }
+
+    function openPdfModal(title, url) {
+      document.getElementById('modal-pdf-title').innerText = title;
+      document.getElementById('pdf-frame').src = url;
+      document.getElementById('modal-download-btn').href = url;
+      document.getElementById('pdf-modal').classList.remove('hidden');
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdf-modal').classList.add('hidden');
+      document.getElementById('pdf-frame').src = '';
+    }
+
+
+    // --- QUIZ ENGINE LOGIC ---
+    function loadQuiz(subject) {
+      currentQuizSubject = subject;
+      currentQuizIndex = 0;
+      quizScore = 0;
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      const container = document.getElementById('quiz-container');
+      const questions = quizData[currentQuizSubject] || [];
+      const total = questions.length;
+
+      if (currentQuizIndex >= total) {
+        // Quiz Complete Screen
+        container.innerHTML = `
+          <div class="text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl font-black border border-emerald-500/30">
+              🎉
+            </div>
+            <h3 class="text-xl font-bold text-white">Quiz Completed!</h3>
+            <p class="text-sm text-slate-300">You scored <span class="font-extrabold text-indigo-400 text-lg">${quizScore}</span> out of <span class="font-bold">${total}</span></p>
+            <button onclick="loadQuiz('${currentQuizSubject}')" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg">
+              Retake Quiz
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const q = questions[currentQuizIndex];
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button onclick="checkAnswer(${idx})" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-indigo-500/50 text-xs text-slate-200 transition-all font-medium flex items-center justify-between group">
+            <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-600 group-hover:text-indigo-400"></i>
+          </button>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+            <span>Question ${currentQuizIndex + 1} of ${total}</span>
+            <span>Score: ${quizScore}</span>
+          </div>
+
+          <p class="text-base font-bold text-white leading-relaxed">${q.q}</p>
+
+          <div id="quiz-options" class="space-y-3">
+            ${optionsHtml}
+          </div>
+
+          <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs leading-relaxed border"></div>
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function checkAnswer(selectedIdx) {
+      const questions = quizData[currentQuizSubject];
+      const q = questions[currentQuizIndex];
+      const feedback = document.getElementById('quiz-feedback');
+
+      if (selectedIdx === q.correct) {
+        quizScore++;
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-emerald-500/10 border-emerald-500/30 text-emerald-300";
+        feedback.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+      } else {
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-rose-500/10 border-rose-500/30 text-rose-300";
+        feedback.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
+      }
+
+      feedback.classList.remove('hidden');
+
+      setTimeout(() => {
+        currentQuizIndex++;
+        renderQuizQuestion();
+      }, 2500);
+    }
+
+
+    // --- FLASHCARD LOGIC ---
+    function loadFlashcards(subj) {
+      currentFcSubject = subj;
+      currentFcIndex = 0;
+      isFcFlipped = false;
+      renderCard();
+    }
+
+    function renderCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      const card = cards[currentFcIndex];
+      
+      if (!card) return;
+
+      document.getElementById('fc-category').innerText = card.category;
+      document.getElementById('fc-front-text').innerText = card.front;
+      document.getElementById('fc-back-text').innerText = card.back;
+      document.getElementById('fc-explanation').innerText = card.exp;
+      document.getElementById('fc-counter').innerText = `Card ${currentFcIndex + 1} of ${cards.length}`;
+
+      // Reset flip
+      const inner = document.getElementById('flashcard-inner');
+      inner.classList.remove('rotate-y-180');
+      isFcFlipped = false;
+    }
+
+    function flipCard() {
+      const inner = document.getElementById('flashcard-inner');
+      isFcFlipped = !isFcFlipped;
+      if (isFcFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+    }
+
+    function nextCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      if (currentFcIndex < cards.length - 1) {
+        currentFcIndex++;
+        renderCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentFcIndex > 0) {
+        currentFcIndex--;
+        renderCard();
+      }
+    }
+
+    function markCardMastered(isMastered) {
+      nextCard();
+    }
+
+
+    // --- POMODORO TIMER LOGIC ---
+    function updatePomoDisplay() {
+      const mins = Math.floor(pomodoroSeconds / 60);
+      const secs = pomodoroSeconds % 60;
+      document.getElementById('pomo-display').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function togglePomodoro() {
+      const btn = document.getElementById('pomo-start-btn');
+      if (isPomodoroRunning) {
+        clearInterval(pomodoroInterval);
+        isPomodoroRunning = false;
+        btn.innerText = "Resume";
+      } else {
+        isPomodoroRunning = true;
+        btn.innerText = "Pause";
+        pomodoroInterval = setInterval(() => {
+          if (pomodoroSeconds > 0) {
+            pomodoroSeconds--;
+            updatePomoDisplay();
+          } else {
+            clearInterval(pomodoroInterval);
+            isPomodoroRunning = false;
+            alert("Pomodoro focus session completed! Take a 5 minute break.");
+            resetPomodoro();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoro() {
+      clearInterval(pomodoroInterval);
+      isPomodoroRunning = false;
+      pomodoroSeconds = 25 * 60;
+      updatePomoDisplay();
+      document.getElementById('pomo-start-btn').innerText = "Start Timer";
+    }
+
+
+    // --- INITIALIZATION ON PAGE LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Render default PDF list
+      renderPdfGrid(pdfData);
+
+      // Render default subjects grid
+      filterSubjects('all');
+
+      // Load initial Quiz & Flashcards
+      loadQuiz('math');
+      loadFlashcards('math');
+
+      // Set default Pomodoro time
+      updatePomoDisplay();
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHS EduHub | Ghana Secondary Education & Learning Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER NAV -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
+            SHS EduHub <span class="bg-indigo-500/20 text-indigo-400 text-xs px-2 py-0.5 rounded-full border border-indigo-500/30 font-medium">GES / WASSCE</span>
+          </span>
+          <p class="text-[10px] text-slate-400 font-medium">Official Ghana SHS Syllabus & Study Portal</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800/80">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-indigo-400 bg-indigo-500/10 border border-indigo-500/20">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Dashboard</span>
+        </button>
+        
+        <button onclick="switchTab('subjects')" id="nav-subjects" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Subject Modules</span>
+        </button>
+
+        <button onclick="switchTab('curriculum')" id="nav-curriculum" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2 relative">
+          <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i>
+          <span>GES PDFs</span>
+          <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Official</span>
+        </button>
+        
+        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span>Practice Quizzes</span>
+        </button>
+
+        <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Flashcards</span>
+        </button>
+
+        <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Planner & Pomodoro</span>
+        </button>
+      </nav>
+
+      <!-- Right Action Badge -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+          <span>5 Day Streak!</span>
+        </div>
+        <div class="flex items-center space-x-2 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-indigo-400">
+            AM
+          </div>
+          <div class="hidden lg:block text-left">
+            <p class="text-xs font-semibold text-slate-200">Ama Mensah</p>
+            <p class="text-[10px] text-slate-400">SHS 3 • General Science</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile Nav Strip -->
+    <div class="md:hidden flex overflow-x-auto border-t border-slate-800 px-2 py-2 gap-1 no-scrollbar bg-slate-900">
+      <button onclick="switchTab('dashboard')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white whitespace-nowrap">Dashboard</button>
+      <button onclick="switchTab('subjects')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Subjects</button>
+      <button onclick="switchTab('curriculum')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950 text-emerald-300 border border-emerald-800/50 whitespace-nowrap">GES PDFs</button>
+      <button onclick="switchTab('quizzes')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Quizzes</button>
+      <button onclick="switchTab('flashcards')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Flashcards</button>
+      <button onclick="switchTab('planner')" class="mobile-nav-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap">Planner</button>
+    </div>
+  </header>
+
+  <!-- MAIN SPA CONTAINER -->
+  <main id="app" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- 1. DASHBOARD VIEW -->
+    <section id="view-dashboard" class="view-panel space-y-6">
+      
+      <!-- Target Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/90 via-indigo-800/60 to-purple-900/80 p-6 sm:p-8 border border-indigo-700/40 shadow-2xl">
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-semibold mb-3">
+            <i data-lucide="target" class="w-3.5 h-3.5 text-indigo-300"></i>
+            <span>TARGET: WASSCE EXAMS</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Welcome back, Ama! 👋</h1>
+          <p class="mt-2 text-slate-200 text-sm sm:text-base leading-relaxed">
+            You are on track! You've completed <span class="font-bold text-amber-300">82%</span> of your weekly study goals. Access official GES syllabi, revise core topics, or practice past exam questions.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button onclick="switchTab('quizzes')" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              Start Practice Quiz
+            </button>
+            <button onclick="switchTab('curriculum')" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+              Download GES Syllabi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Overall Progress</p>
+            <span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400"><i data-lucide="trending-up" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">76%</p>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 mt-3">
+            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 76%"></div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Quizzes Completed</p>
+            <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i data-lucide="check-circle-2" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">24 / <span class="text-slate-500 text-lg">28</span></p>
+          <p class="text-[11px] text-emerald-400 mt-2 font-medium">↑ 4 completed this week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Study Hours</p>
+            <span class="p-2 rounded-lg bg-purple-500/10 text-purple-400"><i data-lucide="clock" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">18.5 hrs</p>
+          <p class="text-[11px] text-slate-400 mt-2 font-medium">Goal: 20 hrs/week</p>
+        </div>
+
+        <div class="bg-slate-900/80 rounded-2xl p-4 border border-slate-800 shadow-lg">
+          <div class="flex justify-between items-start">
+            <p class="text-slate-400 text-xs font-medium">Flashcards Mastered</p>
+            <span class="p-2 rounded-lg bg-amber-500/10 text-amber-400"><i data-lucide="award" class="w-4 h-4"></i></span>
+          </div>
+          <p class="text-2xl font-black text-white mt-2">142</p>
+          <p class="text-[11px] text-amber-400 mt-2 font-medium">68% retention rate</p>
+        </div>
+      </div>
+
+      <!-- Core Subjects Quick Grid & Today's Checklist -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Subject Quick Links -->
+        <div class="lg:col-span-2 bg-slate-900/80 rounded-2xl p-6 border border-slate-800">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="book-open" class="w-5 h-5 text-indigo-400"></i>
+              Core & Elective Subject Quick Access
+            </h2>
+            <button onclick="switchTab('subjects')" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View All Subjects &rarr;</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Math Card -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-base group-hover:scale-10 font-mono">
+                  &radic;x
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">Core Mathematics</h3>
+                  <p class="text-xs text-slate-400">12 Modules • 48 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Algebra & Trigonometry</span>
+                  <span class="font-bold text-indigo-400">85%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Integrated Science -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-emerald-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="atom" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">Integrated Science</h3>
+                  <p class="text-xs text-slate-400">10 Modules • 40 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Genetics & Physics</span>
+                  <span class="font-bold text-emerald-400">70%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 70%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- English -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-purple-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">English Language</h3>
+                  <p class="text-xs text-slate-400">8 Modules • 32 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Essays & Concord</span>
+                  <span class="font-bold text-purple-400">80%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-purple-500 h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Studies -->
+            <div onclick="switchTab('subjects'); filterSubjects('core');" class="group cursor-pointer bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500/50 transition-all">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-base group-hover:scale-10">
+                  <i data-lucide="globe" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">Social Studies</h3>
+                  <p class="text-xs text-slate-400">6 Modules • 26 Topics</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                  <span>Governance & Dev</span>
+                  <span class="font-bold text-amber-400">62%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                  <div class="bg-amber-500 h-1.5 rounded-full" style="width: 62%"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Checklist & Tips -->
+        <div class="space-y-6">
+          <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
+              <i data-lucide="check-square" class="w-4 h-4 text-indigo-400"></i>
+              Today's Study Checklist
+            </h3>
+            <div class="space-y-2.5">
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" checked class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200 line-through">Review Quadratic Equations</p>
+                  <p class="text-slate-500">Core Maths • 30 mins</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Practice Integrated Science Quiz</p>
+                  <p class="text-slate-500">Genetics Section • Due 4:00 PM</p>
+                </div>
+              </label>
+
+              <label class="flex items-start space-x-3 p-2 rounded-lg hover:bg-slate-800/50 cursor-pointer">
+                <input type="checkbox" class="mt-1 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950">
+                <div class="text-xs">
+                  <p class="font-medium text-slate-200">Memorize English Idioms</p>
+                  <p class="text-slate-500">20 Flashcards • Due 7:00 PM</p>
+                </div>
+              </label>
+            </div>
+            <button onclick="switchTab('planner')" class="mt-4 w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors">
+              + Add To Task List
+            </button>
+          </div>
+
+          <!-- WASSCE Success Tip Card -->
+          <div class="bg-gradient-to-br from-indigo-950/60 to-purple-950/60 rounded-2xl p-4 border border-indigo-800/40">
+            <div class="flex items-center space-x-2 text-indigo-400 mb-1.5">
+              <i data-lucide="lightbulb" class="w-4 h-4"></i>
+              <span class="text-xs font-bold uppercase tracking-wider">WASSCE Success Tip</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              In <strong>Section B Mathematics</strong>, always show full steps clearly. Method marks are awarded even if your final arithmetic answer contains a minor slip!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 2. SUBJECT MODULES VIEW -->
+    <section id="view-subjects" class="view-panel hidden space-y-6">
+      
+      <!-- Header & Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="book-open" class="w-6 h-6 text-indigo-400"></i>
+            SHS Subject Curriculum & Notes
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Select any subject to explore official GES topic outlines, revision notes, and formulas.</p>
+        </div>
+
+        <!-- Subject Track Filter Tabs -->
+        <div class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs">
+          <button onclick="filterSubjects('all')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium bg-indigo-600 text-white">All Tracks</button>
+          <button onclick="filterSubjects('core')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Core</button>
+          <button onclick="filterSubjects('science')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Science & Elect. Math</button>
+          <button onclick="filterSubjects('business')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Business</button>
+          <button onclick="filterSubjects('arts')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">General Arts</button>
+          <button onclick="filterSubjects('agric')" class="subj-filter-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white">Agric & Home Econ</button>
+        </div>
+      </div>
+
+      <!-- Subjects Cards Grid -->
+      <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Javascript renders subject cards dynamically based on active filter -->
+      </div>
+
+    </section>
+
+
+    <!-- 3. GES CURRICULUM PDF EXPLORER VIEW -->
+    <section id="view-curriculum" class="view-panel hidden space-y-6">
+      
+      <!-- Top Banner -->
+      <div class="bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 p-6 sm:p-8 rounded-2xl border border-emerald-700/30">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold mb-3 border border-emerald-500/30">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Official NaCCA & Ghana Education Service (GES) Repository</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white">SHS Syllabus & Curriculum PDF Library</h1>
+          <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+            Search, preview, and download official GES/NaCCA Senior High School curriculum guides for SHS 1, SHS 2, and SHS 3 across all academic tracks.
+          </p>
+        </div>
+
+        <!-- Search Bar & Filters -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-3 text-slate-400"></i>
+            <input type="text" id="pdf-search-input" onkeyup="filterPdfs()" placeholder="Search syllabus by title, subject, or code (e.g. Mathematics, Physics, Core, SHS 2)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+          </div>
+          <select id="pdf-track-filter" onchange="filterPdfs()" class="px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="all">All Tracks</option>
+            <option value="Core">Core Subjects</option>
+            <option value="Science">General Science & Elective Math</option>
+            <option value="Business">Business Studies</option>
+            <option value="Arts">General Arts</option>
+            <option value="Agric">Agricultural Science</option>
+            <option value="HomeEcon">Home Economics</option>
+            <option value="VisualArts">Visual Arts</option>
+            <option value="Tech">Technical / ICT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Syllabus PDF Grid -->
+      <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </section>
+
+
+    <!-- 4. PRACTICE QUIZZES VIEW -->
+    <section id="view-quizzes" class="view-panel hidden space-y-6">
+      
+      <!-- Quiz Header -->
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="help-circle" class="w-6 h-6 text-indigo-400"></i>
+            WASSCE Practice Quiz Engine
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Interactive past questions with instant explanation feedback & score tracking.</p>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <label class="text-xs text-slate-400">Select Topic Quiz:</label>
+          <select id="quiz-select" onchange="loadQuiz(this.value)" class="bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
+            <option value="math">Core Mathematics: Quadratic & Linear Equations</option>
+            <option value="science">Integrated Science: Cell Biology & Genetics</option>
+            <option value="english">English Language: Concord & Idiomatic Expressions</option>
+            <option value="social">Social Studies: Governance & Constitution</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Interactive Quiz Container -->
+      <div id="quiz-container" class="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 sm:p-8 max-w-3xl mx-auto shadow-xl">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+    </section>
+
+
+    <!-- 5. FLASHCARDS VIEW -->
+    <section id="view-flashcards" class="view-panel hidden space-y-6">
+      
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-6 h-6 text-indigo-400"></i>
+            Revision Flashcard Hub
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">Click or tap any card to flip and test your memory on key definitions and concepts.</p>
+        </div>
+
+        <!-- Subject Switcher for Flashcards -->
+        <div class="flex gap-2">
+          <button onclick="loadFlashcards('math')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Mathematics</button>
+          <button onclick="loadFlashcards('science')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Science</button>
+          <button onclick="loadFlashcards('english')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">English</button>
+          <button onclick="loadFlashcards('social')" class="fc-subject-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Social Studies</button>
+        </div>
+      </div>
+
+      <!-- Flashcard Interactive Display Area -->
+      <div class="max-w-xl mx-auto space-y-6">
+        
+        <div id="flashcard-box" onclick="flipCard()" class="perspective-1000 h-72 cursor-pointer">
+          <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d bg-slate-900 border-2 border-indigo-500/40 rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+            
+            <!-- Front -->
+            <div class="absolute inset-0 backface-hidden p-6 flex flex-col items-center justify-center">
+              <span id="fc-category" class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 font-bold">CORE MATHEMATICS</span>
+              <p id="fc-front-text" class="text-lg sm:text-xl font-bold text-white leading-relaxed">
+                What is the quadratic formula used to find the roots of ax² + bx + c = 0?
+              </p>
+              <p class="text-xs text-slate-500 mt-6 flex items-center gap-1">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Tap card to flip answer
+              </p>
+            </div>
+
+            <!-- Back -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col items-center justify-center bg-slate-900 border-2 border-emerald-500/50 rounded-2xl">
+              <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3 font-bold">ANSWER</span>
+              <p id="fc-back-text" class="text-lg font-extrabold text-emerald-300 font-mono">
+                x = [ -b &plusmn; &radic;(b² - 4ac) ] / (2a)
+              </p>
+              <p id="fc-explanation" class="text-xs text-slate-300 mt-3 leading-relaxed">
+                Where b² - 4ac is the discriminant determining the nature of roots.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-between">
+          <button onclick="prevCard()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous
+          </button>
+          <span id="fc-counter" class="text-xs text-slate-400 font-mono font-medium">Card 1 of 5</span>
+          <button onclick="nextCard()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white flex items-center gap-1.5">
+            Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-center space-x-3 pt-2">
+          <button onclick="markCardMastered(false)" class="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="x-circle" class="w-4 h-4"></i> Need Review
+          </button>
+          <button onclick="markCardMastered(true)" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Mastered
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 6. PLANNER & POMODORO TIMER VIEW -->
+    <section id="view-planner" class="view-panel hidden space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left 2 Cols: Schedule & Task Manager -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="calendar" class="w-5 h-5 text-indigo-400"></i>
+                WASSCE Study Timetable
+              </h2>
+              <span class="text-xs text-indigo-400 font-medium">Week 4 • Revision Phase</span>
+            </div>
+
+            <!-- Weekly Schedule Grid -->
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">MON</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">Core Mathematics & Integrated Science</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Quadratic Equations & Cell Biology</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-500/20 text-indigo-300 font-bold text-xs">TUE</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-200">English Essay Writing & Social Studies</p>
+                    <p class="text-[11px] text-slate-400">4:00 PM - 6:30 PM • Formal Letters & Constitution</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold">Done</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/40 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-indigo-600 text-white font-bold text-xs">TODAY</span>
+                  <div>
+                    <p class="text-xs font-bold text-white">Elective Science / Business Revision</p>
+                    <p class="text-[11px] text-indigo-300">5:00 PM - 7:30 PM • Physics Mechanics & Accounting</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-semibold">Active</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="w-16 text-center py-1 rounded bg-slate-800 text-slate-400 font-bold text-xs">THU</span>
+                  <div>
+                    <p class="text-xs font-bold text-slate-300">WASSCE Past Questions Drills</p>
+                    <p class="text-[11px] text-slate-400">4:30 PM - 7:00 PM • Speed Drills & Section B Strategy</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-semibold">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 1 Col: Pomodoro Focus Timer -->
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 text-center flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold mb-4">
+              <i data-lucide="timer" class="w-4 h-4"></i>
+              <span>Pomodoro Study Focus</span>
+            </div>
+
+            <!-- Timer Circle Display -->
+            <div class="my-6">
+              <div class="w-48 h-48 mx-auto rounded-full bg-slate-950 border-4 border-indigo-500/50 flex flex-col items-center justify-center shadow-inner relative">
+                <span id="pomo-display" class="text-4xl font-black text-white font-mono tracking-wider">25:00</span>
+                <span id="pomo-mode" class="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-1">Focus Session</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-center space-x-3">
+              <button id="pomo-start-btn" onclick="togglePomodoro()" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-600/30">
+                Start Timer
+              </button>
+              <button onclick="resetPomodoro()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-all">
+                Reset
+              </button>
+            </div>
+            <p class="text-[11px] text-slate-500 pt-2">25 min study • 5 min short break interval</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 w-full max-w-5xl h-[85vh] rounded-2xl border border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modal-pdf-title" class="text-sm font-bold text-white">Syllabus PDF Document</h3>
+            <p id="modal-pdf-subtitle" class="text-xs text-slate-400">GES Official Curriculum Reference</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <a id="modal-download-btn" href="#" download class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+          </a>
+          <button onclick="closePdfModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body - PDF Iframe Viewer -->
+      <div class="flex-1 bg-slate-950 p-2 relative">
+        <iframe id="pdf-frame" src="" class="w-full h-full rounded-xl border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- APP DATA STORES ---
+    
+    // Official GES Curriculum PDFs Repository Data
+    const pdfData = [
+      {
+        id: 'pdf-1',
+        title: 'Core Mathematics Curriculum (SHS 1 - 3)',
+        subject: 'Core Mathematics',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '2.4 MB',
+        publisher: 'NaCCA / Ministry of Education Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-2',
+        title: 'Integrated Science Curriculum (SHS 1 - 3)',
+        subject: 'Integrated Science',
+        track: 'Core',
+        grade: 'SHS 1-3',
+        size: '3.1 MB',
+        publisher: 'GES / NaCCA',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf',
+        previewUrl: 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/GENERAL-SCIENCE-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-3',
+        title: 'Physics Elective Syllabus & Practical Guide',
+        subject: 'Physics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '4.2 MB',
+        publisher: 'NaCCA Ghana',
+        year: 'Standard WASSCE Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-4',
+        title: 'Elective Mathematics Curriculum',
+        subject: 'Elective Mathematics',
+        track: 'Science',
+        grade: 'SHS 1-3',
+        size: '2.8 MB',
+        publisher: 'Ministry of Education',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Physics-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-5',
+        title: 'Financial Accounting Syllabus',
+        subject: 'Financial Accounting',
+        track: 'Business',
+        grade: 'SHS 1-3',
+        size: '1.9 MB',
+        publisher: 'GES / NaCCA',
+        year: 'WASSCE Standard',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-6',
+        title: 'Government & Civic Education Curriculum',
+        subject: 'Government',
+        track: 'Arts',
+        grade: 'SHS 1-3',
+        size: '2.1 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Revision',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Arabic-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-7',
+        title: 'General Agriculture Teaching Syllabus',
+        subject: 'General Agriculture',
+        track: 'Agric',
+        grade: 'SHS 1-3',
+        size: '3.5 MB',
+        publisher: 'GES / NaCCA',
+        year: 'Official Release',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-8',
+        title: 'Food & Nutrition Curriculum',
+        subject: 'Food & Nutrition',
+        track: 'HomeEcon',
+        grade: 'SHS 1-3',
+        size: '2.6 MB',
+        publisher: 'NaCCA Ghana',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      },
+      {
+        id: 'pdf-9',
+        title: 'Applied Computing & Core ICT Syllabus',
+        subject: 'Information & Comm. Tech',
+        track: 'Tech',
+        grade: 'SHS 1-3',
+        size: '3.8 MB',
+        publisher: 'Ministry of Education',
+        year: '2023/2024 Edition',
+        downloadUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf',
+        previewUrl: 'https://nacca.gov.gh/wp-content/uploads/2025/04/Applied-Technology-Curriculum.pdf'
+      }
+    ];
+
+    // Comprehensive SHS Subject Data Grid
+    const subjectsData = [
+      {
+        title: 'Core Mathematics',
+        track: 'core',
+        code: 'CORE-MTH',
+        desc: 'Algebra, Quadratic Functions, Trigonometrical Ratios, Circle Theorems, & Statistics.',
+        modulesCount: '12 Modules',
+        topicsCount: '48 Topics',
+        progress: 85,
+        icon: 'calculator'
+      },
+      {
+        title: 'Integrated Science',
+        track: 'core',
+        code: 'CORE-SCI',
+        desc: 'Cell Biology, Genetics, Acids & Bases, Work & Energy, Solar System, & Ecosystems.',
+        modulesCount: '10 Modules',
+        topicsCount: '40 Topics',
+        progress: 70,
+        icon: 'atom'
+      },
+      {
+        title: 'English Language',
+        track: 'core',
+        code: 'CORE-ENG',
+        desc: 'Essay Writing Formats, Grammar & Concord, Summary Writing, Comprehension & Idioms.',
+        modulesCount: '8 Modules',
+        topicsCount: '32 Topics',
+        progress: 80,
+        icon: 'pen-tool'
+      },
+      {
+        title: 'Social Studies',
+        track: 'core',
+        code: 'CORE-SOC',
+        desc: 'Governance, Constitution of Ghana, Socio-Economic Development, Culture & Identity.',
+        modulesCount: '6 Modules',
+        topicsCount: '26 Topics',
+        progress: 62,
+        icon: 'globe'
+      },
+      {
+        title: 'Physics Elective',
+        track: 'science',
+        code: 'ELEC-PHY',
+        desc: 'Mechanics, Wave Optics, Electricity & Magnetism, Atomic & Modern Physics.',
+        modulesCount: '14 Modules',
+        topicsCount: '52 Topics',
+        progress: 45,
+        icon: 'zap'
+      },
+      {
+        title: 'Chemistry Elective',
+        track: 'science',
+        code: 'ELEC-CHM',
+        desc: 'Atomic Structure, Chemical Bonding, Stoichiometry, Organic Chemistry, Thermochemistry.',
+        modulesCount: '12 Modules',
+        topicsCount: '46 Topics',
+        progress: 58,
+        icon: 'beaker'
+      },
+      {
+        title: 'Elective Mathematics',
+        track: 'science',
+        code: 'ELEC-MTH',
+        desc: 'Calculus (Differentiation & Integration), Coordinate Geometry, Vectors, Matrices & Mechanics.',
+        modulesCount: '15 Modules',
+        topicsCount: '60 Topics',
+        progress: 65,
+        icon: 'binary'
+      },
+      {
+        title: 'Financial Accounting',
+        track: 'business',
+        code: 'BUS-ACC',
+        desc: 'Double Entry System, Final Accounts, Control Accounts, Partnership & Company Accounts.',
+        modulesCount: '11 Modules',
+        topicsCount: '42 Topics',
+        progress: 50,
+        icon: 'bar-chart-3'
+      },
+      {
+        title: 'Economics',
+        track: 'business',
+        code: 'BUS-ECO',
+        desc: 'Demand & Supply Elasticity, Market Structures, National Income Accounting, Inflation.',
+        modulesCount: '10 Modules',
+        topicsCount: '38 Topics',
+        progress: 72,
+        icon: 'trending-up'
+      },
+      {
+        title: 'Government',
+        track: 'arts',
+        code: 'ARTS-GOV',
+        desc: 'Political Concepts, Organs of Government, Constitutional History of Ghana, International Bodies.',
+        modulesCount: '9 Modules',
+        topicsCount: '35 Topics',
+        progress: 60,
+        icon: 'landmark'
+      },
+      {
+        title: 'General Agriculture',
+        track: 'agric',
+        code: 'AGR-GEN',
+        desc: 'Soil Science, Crop Production, Farm Mechanization, Agricultural Economics & Extension.',
+        modulesCount: '8 Modules',
+        topicsCount: '30 Topics',
+        progress: 40,
+        icon: 'sprout'
+      }
+    ];
+
+    // Quiz Questions Dataset
+    const quizData = {
+      math: [
+        {
+          q: "Solve for x in the equation: x² - 5x + 6 = 0",
+          options: ["x = 2 or x = 3", "x = -2 or x = -3", "x = 1 or x = 6", "x = -1 or x = 5"],
+          correct: 0,
+          explanation: "Factorizing x² - 5x + 6 gives (x - 2)(x - 3) = 0. Therefore, x = 2 or x = 3."
+        },
+        {
+          q: "What is the discriminant of 2x² + 4x + 3 = 0?",
+          options: ["-8", "8", "-10", "16"],
+          correct: 0,
+          explanation: "Discriminant Δ = b² - 4ac = (4)² - 4(2)(3) = 16 - 24 = -8. Since Δ < 0, there are no real roots."
+        }
+      ],
+      science: [
+        {
+          q: "Which organelle is known as the powerhouse of the cell?",
+          options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+          correct: 1,
+          explanation: "Mitochondria generate most of the chemical energy (ATP) needed to power the cell's biochemical reactions."
+        }
+      ],
+      english: [
+        {
+          q: "Choose the correct sentence: 'Neither the teacher nor the students _____ present.'",
+          options: ["was", "were", "is", "are"],
+          correct: 1,
+          explanation: "In 'neither... nor' constructions, the verb agrees with the closer subject ('students', which is plural = 'were')."
+        }
+      ],
+      social: [
+        {
+          q: "In what year was the current 4th Republican Constitution of Ghana promulgated?",
+          options: ["1957", "1966", "1979", "1992"],
+          correct: 3,
+          explanation: "The 1992 Constitution was approved in a national referendum on April 28, 1992 and came into force on January 7, 1993."
+        }
+      ]
+    };
+
+    // Flashcard Dataset
+    const flashcardData = {
+      math: [
+        { category: "CORE MATHEMATICS", front: "What is the Quadratic Formula?", back: "x = [ -b ± √(b² - 4ac) ] / (2a)", exp: "Used to find roots of quadratic equation ax² + bx + c = 0." },
+        { category: "CORE MATHEMATICS", front: "What is the Sum of Interior Angles of an n-sided polygon?", back: "(n - 2) × 180°", exp: "Where 'n' is the number of sides." }
+      ],
+      science: [
+        { category: "INTEGRATED SCIENCE", front: "Define Photosynthesis equation in words.", back: "Carbon Dioxide + Water + Sunlight → Glucose + Oxygen", exp: "Process occurring in plant chloroplasts using chlorophyll." }
+      ],
+      english: [
+        { category: "ENGLISH LANGUAGE", front: "What does the idiom 'Burn the midnight oil' mean?", back: "To study or work late into the night.", exp: "Common phrase used for intensive exam preparation." }
+      ],
+      social: [
+        { category: "SOCIAL STUDIES", front: "Name the 3 arms of Government in Ghana.", back: "The Executive, The Legislature, and The Judiciary", exp: "Based on the principle of Separation of Powers." }
+      ]
+    };
+
+
+    // --- STATE MANAGEMENT ---
+    let currentQuizSubject = 'math';
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+
+    let currentFcSubject = 'math';
+    let currentFcIndex = 0;
+    let isFcFlipped = false;
+
+    let pomodoroInterval = null;
+    let pomodoroSeconds = 25 * 60;
+    let isPomodoroRunning = false;
+
+
+    // --- TAB SWITCHING LOGIC ---
+    function switchTab(tabId) {
+      // Hide all view panels
+      document.querySelectorAll('.view-panel').forEach(panel => panel.classList.add('hidden'));
+      
+      // Show selected view panel
+      const activePanel = document.getElementById(`view-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update Nav Buttons active state
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeNavBtn = document.getElementById(`nav-${tabId}`);
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove('text-slate-400');
+        activeNavBtn.classList.add('text-indigo-400', 'bg-indigo-500/10', 'border', 'border-indigo-500/20');
+      }
+
+      // Re-initialize Lucide Icons on view switch
+      lucide.createIcons();
+    }
+
+
+    // --- SUBJECT MODULES FILTERING ---
+    function filterSubjects(track) {
+      const container = document.getElementById('subjects-grid');
+      container.innerHTML = '';
+
+      const filtered = track === 'all' 
+        ? subjectsData 
+        : subjectsData.filter(s => s.track === track);
+
+      filtered.forEach(s => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-indigo-500/40 transition-all shadow-lg flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-800 text-indigo-400 border border-slate-700">${s.code}</span>
+              <span class="text-xs text-slate-500 font-medium">${s.modulesCount}</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1.5">${s.title}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">${s.desc}</p>
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+              <span>Coverage Progress</span>
+              <span class="font-bold text-indigo-400">${s.progress}%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-4">
+              <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${s.progress}%"></div>
+            </div>
+            <button onclick="switchTab('curriculum')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> View Syllabus PDF
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update filter button styling
+      document.querySelectorAll('.subj-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      event.target.classList.add('bg-indigo-600', 'text-white');
+      event.target.classList.remove('text-slate-400');
+
+      lucide.createIcons();
+    }
+
+
+    // --- GES CURRICULUM PDF HUB ENGINE ---
+    function renderPdfGrid(list) {
+      const container = document.getElementById('pdf-grid');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 text-slate-500">
+            <i data-lucide="file-x" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
+            <p class="text-sm">No curriculum PDFs found matching your search term.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      list.forEach(pdf => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 rounded-2xl p-5 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-lg";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${pdf.track} • ${pdf.grade}</span>
+              <span class="text-[11px] text-slate-500 font-mono">${pdf.size}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1 leading-snug">${pdf.title}</h3>
+            <p class="text-[11px] text-slate-400 mb-3">${pdf.publisher} (${pdf.year})</p>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 flex items-center space-x-2">
+            <button onclick="openPdfModal('${pdf.title}', '${pdf.previewUrl}')" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-indigo-400"></i> Preview
+            </button>
+            <a href="${pdf.downloadUrl}" target="_blank" download class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterPdfs() {
+      const searchTerm = document.getElementById('pdf-search-input').value.toLowerCase();
+      const trackVal = document.getElementById('pdf-track-filter').value;
+
+      const filtered = pdfData.filter(pdf => {
+        const matchesSearch = pdf.title.toLowerCase().includes(searchTerm) || 
+                              pdf.subject.toLowerCase().includes(searchTerm) ||
+                              pdf.grade.toLowerCase().includes(searchTerm);
+        const matchesTrack = trackVal === 'all' || pdf.track === trackVal;
+        return matchesSearch && matchesTrack;
+      });
+
+      renderPdfGrid(filtered);
+    }
+
+    function openPdfModal(title, url) {
+      document.getElementById('modal-pdf-title').innerText = title;
+      document.getElementById('pdf-frame').src = url;
+      document.getElementById('modal-download-btn').href = url;
+      document.getElementById('pdf-modal').classList.remove('hidden');
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdf-modal').classList.add('hidden');
+      document.getElementById('pdf-frame').src = '';
+    }
+
+
+    // --- QUIZ ENGINE LOGIC ---
+    function loadQuiz(subject) {
+      currentQuizSubject = subject;
+      currentQuizIndex = 0;
+      quizScore = 0;
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      const container = document.getElementById('quiz-container');
+      const questions = quizData[currentQuizSubject] || [];
+      const total = questions.length;
+
+      if (currentQuizIndex >= total) {
+        // Quiz Complete Screen
+        container.innerHTML = `
+          <div class="text-center py-8 space-y-4">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl font-black border border-emerald-500/30">
+              🎉
+            </div>
+            <h3 class="text-xl font-bold text-white">Quiz Completed!</h3>
+            <p class="text-sm text-slate-300">You scored <span class="font-extrabold text-indigo-400 text-lg">${quizScore}</span> out of <span class="font-bold">${total}</span></p>
+            <button onclick="loadQuiz('${currentQuizSubject}')" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-lg">
+              Retake Quiz
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const q = questions[currentQuizIndex];
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button onclick="checkAnswer(${idx})" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-indigo-500/50 text-xs text-slate-200 transition-all font-medium flex items-center justify-between group">
+            <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+            <i data-lucide="circle" class="w-4 h-4 text-slate-600 group-hover:text-indigo-400"></i>
+          </button>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+            <span>Question ${currentQuizIndex + 1} of ${total}</span>
+            <span>Score: ${quizScore}</span>
+          </div>
+
+          <p class="text-base font-bold text-white leading-relaxed">${q.q}</p>
+
+          <div id="quiz-options" class="space-y-3">
+            ${optionsHtml}
+          </div>
+
+          <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs leading-relaxed border"></div>
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function checkAnswer(selectedIdx) {
+      const questions = quizData[currentQuizSubject];
+      const q = questions[currentQuizIndex];
+      const feedback = document.getElementById('quiz-feedback');
+
+      if (selectedIdx === q.correct) {
+        quizScore++;
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-emerald-500/10 border-emerald-500/30 text-emerald-300";
+        feedback.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+      } else {
+        feedback.className = "p-4 rounded-xl text-xs leading-relaxed border bg-rose-500/10 border-rose-500/30 text-rose-300";
+        feedback.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
+      }
+
+      feedback.classList.remove('hidden');
+
+      setTimeout(() => {
+        currentQuizIndex++;
+        renderQuizQuestion();
+      }, 2500);
+    }
+
+
+    // --- FLASHCARD LOGIC ---
+    function loadFlashcards(subj) {
+      currentFcSubject = subj;
+      currentFcIndex = 0;
+      isFcFlipped = false;
+      renderCard();
+    }
+
+    function renderCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      const card = cards[currentFcIndex];
+      
+      if (!card) return;
+
+      document.getElementById('fc-category').innerText = card.category;
+      document.getElementById('fc-front-text').innerText = card.front;
+      document.getElementById('fc-back-text').innerText = card.back;
+      document.getElementById('fc-explanation').innerText = card.exp;
+      document.getElementById('fc-counter').innerText = `Card ${currentFcIndex + 1} of ${cards.length}`;
+
+      // Reset flip
+      const inner = document.getElementById('flashcard-inner');
+      inner.classList.remove('rotate-y-180');
+      isFcFlipped = false;
+    }
+
+    function flipCard() {
+      const inner = document.getElementById('flashcard-inner');
+      isFcFlipped = !isFcFlipped;
+      if (isFcFlipped) {
+        inner.classList.add('rotate-y-180');
+      } else {
+        inner.classList.remove('rotate-y-180');
+      }
+    }
+
+    function nextCard() {
+      const cards = flashcardData[currentFcSubject] || [];
+      if (currentFcIndex < cards.length - 1) {
+        currentFcIndex++;
+        renderCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentFcIndex > 0) {
+        currentFcIndex--;
+        renderCard();
+      }
+    }
+
+    function markCardMastered(isMastered) {
+      nextCard();
+    }
+
+
+    // --- POMODORO TIMER LOGIC ---
+    function updatePomoDisplay() {
+      const mins = Math.floor(pomodoroSeconds / 60);
+      const secs = pomodoroSeconds % 60;
+      document.getElementById('pomo-display').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function togglePomodoro() {
+      const btn = document.getElementById('pomo-start-btn');
+      if (isPomodoroRunning) {
+        clearInterval(pomodoroInterval);
+        isPomodoroRunning = false;
+        btn.innerText = "Resume";
+      } else {
+        isPomodoroRunning = true;
+        btn.innerText = "Pause";
+        pomodoroInterval = setInterval(() => {
+          if (pomodoroSeconds > 0) {
+            pomodoroSeconds--;
+            updatePomoDisplay();
+          } else {
+            clearInterval(pomodoroInterval);
+            isPomodoroRunning = false;
+            alert("Pomodoro focus session completed! Take a 5 minute break.");
+            resetPomodoro();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoro() {
+      clearInterval(pomodoroInterval);
+      isPomodoroRunning = false;
+      pomodoroSeconds = 25 * 60;
+      updatePomoDisplay();
+      document.getElementById('pomo-start-btn').innerText = "Start Timer";
+    }
+
+
+    // --- INITIALIZATION ON PAGE LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Render default PDF list
+      renderPdfGrid(pdfData);
+
+      // Render default subjects grid
+      filterSubjects('all');
+
+      // Load initial Quiz & Flashcards
+      loadQuiz('math');
+      loadFlashcards('math');
+
+      // Set default Pomodoro time
+      updatePomoDisplay();
+    });
+  </script>
+</body>
 </html>
