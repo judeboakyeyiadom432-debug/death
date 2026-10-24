@@ -1,1031 +1,453 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-slate-950 text-slate-100">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHS EduHub - GES & WASSCE Learning Portal</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    /* Custom 3D Card Flip styling */
-    .perspective-1000 { perspective: 1000px; }
-    .transform-style-3d { transform-style: preserve-3d; }
-    .backface-hidden { backface-visibility: hidden; }
-    .rotate-y-180 { transform: rotateY(180deg); }
-    /* Smooth transitions */
-    .view-section { animation: fadeIn 0.25s ease-in-out; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHS EduHub – GES & WASSCE Learning Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+<style>
+.perspective-1000{perspective:1000px}
+.transform-style-3d{transform-style:preserve-3d}
+.backface-hidden{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.rotate-y-180{transform:rotateY(180deg)}
+.view-section{animation:fadeIn .25s ease-in-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.no-scrollbar{scrollbar-width:none}.no-scrollbar::-webkit-scrollbar{display:none}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+</style>
 </head>
 <body class="min-h-full flex flex-col bg-slate-950 font-sans text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- SINGLE GLOBAL TOP NAVIGATION BAR -->
-  <header class="sticky top-0 z-40 w-full border-b border-slate-800 bg-slate-900/90 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-      
-      <!-- Brand Logo -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-500 via-indigo-600 to-indigo-500 shadow-lg shadow-indigo-500/20">
-          <i data-lucide="graduation-cap" class="h-6 w-6 text-white"></i>
-        </div>
-        <div>
-          <span class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-            SHS EduHub
-            <span class="rounded bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-amber-400 border border-amber-500/30">GES/WASSCE</span>
-          </span>
-          <p class="text-xs text-slate-400 hidden sm:block">Ghana Senior High School Portal</p>
-        </div>
-      </div>
+<header class="sticky top-0 z-40 w-full border-b border-slate-800 bg-slate-900/90 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <button type="button" data-tab="dashboard" class="flex items-center gap-3 text-left">
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-500 via-indigo-600 to-indigo-500 shadow-lg shadow-indigo-500/20"><i data-lucide="graduation-cap" class="h-6 w-6 text-white"></i></span>
+      <span>
+        <span class="text-lg font-bold tracking-tight text-white flex items-center gap-2">SHS EduHub <span class="rounded bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-amber-400 border border-amber-500/30">GES/WASSCE</span></span>
+        <span class="text-xs text-slate-400 hidden sm:block">Ghana Senior High School Portal</span>
+      </span>
+    </button>
+    <nav id="nav-desktop" class="hidden md:flex items-center gap-1 rounded-xl bg-slate-950/60 p-1 border border-slate-800/80" aria-label="Main"></nav>
+  </div>
+  <div id="nav-mobile" class="flex md:hidden overflow-x-auto border-t border-slate-800/60 bg-slate-950 px-2 py-2 gap-1 no-scrollbar"></div>
+</header>
 
-      <!-- Desktop Navigation Tabs -->
-      <nav class="hidden md:flex items-center gap-1 rounded-xl bg-slate-950/60 p-1 border border-slate-800/80">
-        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-all text-white bg-indigo-600">
-          <i data-lucide="layout-dashboard" class="h-4 w-4"></i> Dashboard
-        </button>
-        <button onclick="switchTab('subjects')" id="nav-subjects" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-          <i data-lucide="book-open" class="h-4 w-4"></i> Subjects
-        </button>
-        <button onclick="switchTab('curriculum')" id="nav-curriculum" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-          <i data-lucide="file-text" class="h-4 w-4"></i> GES PDFs
-        </button>
-        <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-          <i data-lucide="help-circle" class="h-4 w-4"></i> Quizzes
-        </button>
-        <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-          <i data-lucide="layers" class="h-4 w-4"></i> Flashcards
-        </button>
-        <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-          <i data-lucide="clock" class="h-4 w-4"></i> Planner & Timer
-        </button>
-      </nav>
+<main class="flex-1 mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-      <!-- Student Profile Badge -->
-      <div class="flex items-center gap-3">
-        <div class="hidden lg:flex flex-col text-right">
-          <span class="text-sm font-semibold text-slate-200">Ama Mensah</span>
-          <span class="text-xs text-amber-400">SHS 3 • General Science</span>
-        </div>
-        <div class="relative">
-          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 ring-2 ring-amber-500/50 font-bold text-amber-400">
-            AM
-          </div>
-          <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-slate-900"></span>
-        </div>
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view-section space-y-6">
+    <div class="rounded-2xl bg-gradient-to-r from-indigo-900 via-slate-900 to-slate-900 p-6 md:p-8 border border-indigo-500/20 shadow-xl space-y-3 max-w-none">
+      <h1 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Akwaaba! Ready to study today?</h1>
+      <p class="text-sm text-slate-300 max-w-2xl">Practise past-question style quizzes, revise with flashcards, download study PDFs and keep focus with the timer.</p>
+      <div class="flex flex-wrap gap-3 pt-2">
+        <button type="button" data-tab="quizzes" class="rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500">Start practice quiz</button>
+        <button type="button" data-tab="curriculum" class="rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-200 border border-slate-700 hover:bg-slate-700">Browse PDFs</button>
       </div>
     </div>
 
-    <!-- Mobile Navigation Bar Bottom -->
-    <div class="flex md:hidden overflow-x-auto border-t border-slate-800/60 bg-slate-950 px-2 py-2 gap-1 no-scrollbar">
-      <button onclick="switchTab('dashboard')" id="mnav-dashboard" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-white bg-indigo-600">
-        <i data-lucide="layout-dashboard" class="h-3.5 w-3.5"></i> Dashboard
-      </button>
-      <button onclick="switchTab('subjects')" id="mnav-subjects" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-400 bg-slate-900">
-        <i data-lucide="book-open" class="h-3.5 w-3.5"></i> Subjects
-      </button>
-      <button onclick="switchTab('curriculum')" id="mnav-curriculum" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-400 bg-slate-900">
-        <i data-lucide="file-text" class="h-3.5 w-3.5"></i> GES PDFs
-      </button>
-      <button onclick="switchTab('quizzes')" id="mnav-quizzes" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-400 bg-slate-900">
-        <i data-lucide="help-circle" class="h-3.5 w-3.5"></i> Quizzes
-      </button>
-      <button onclick="switchTab('flashcards')" id="mnav-flashcards" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-400 bg-slate-900">
-        <i data-lucide="layers" class="h-3.5 w-3.5"></i> Flashcards
-      </button>
-      <button onclick="switchTab('planner')" id="mnav-planner" class="mnav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-400 bg-slate-900">
-        <i data-lucide="clock" class="h-3.5 w-3.5"></i> Planner
-      </button>
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"><span class="text-xs font-medium text-slate-400">Quizzes completed</span><div id="st-quizzes" class="mt-3 text-2xl font-bold text-white">0</div></div>
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"><span class="text-xs font-medium text-slate-400">Flashcards mastered</span><div id="st-cards" class="mt-3 text-2xl font-bold text-white">0</div></div>
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"><span class="text-xs font-medium text-slate-400">Focus minutes</span><div id="st-focus" class="mt-3 text-2xl font-bold text-white">0</div></div>
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"><span class="text-xs font-medium text-slate-400">PDFs available</span><div id="st-pdfs" class="mt-3 text-2xl font-bold text-white">0</div></div>
     </div>
-  </header>
 
-  <!-- SINGLE MAIN CONTAINER WRAPPER FOR ALL VIEWS -->
-  <main class="flex-1 mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-
-    <!-- 1. DASHBOARD VIEW SECTION -->
-    <section id="view-dashboard" class="view-section space-y-6">
-      
-      <!-- Target WASSCE Hero Banner -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900 via-slate-900 to-slate-900 p-6 md:p-8 border border-indigo-500/20 shadow-xl">
-        <div class="relative z-10 max-w-2xl space-y-3">
-          <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-400 border border-amber-500/20">
-            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i> WASSCE Prep Season 2026
-          </div>
-          <h1 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Akwaaba, Ama! Ready for today's goals?</h1>
-          <p class="text-sm text-slate-300">You have 4 study tasks pending for today. Your highest score this week is in <span class="text-indigo-400 font-semibold">Integrated Science (88%)</span>.</p>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button onclick="switchTab('quizzes')" class="flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 hover:bg-indigo-500 transition-all">
-              <i data-lucide="play-circle" class="h-4 w-4"></i> Start Practice Quiz
-            </button>
-            <button onclick="switchTab('curriculum')" class="flex items-center gap-2 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-200 border border-slate-700 hover:bg-slate-700 transition-all">
-              <i data-lucide="download" class="h-4 w-4"></i> GES Syllabus
-            </button>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 space-y-4">
+        <h2 class="text-lg font-bold text-white">Core subjects</h2>
+        <div id="core-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
       </div>
-
-      <!-- Key Statistics Grid -->
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 backdrop-blur-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-400">Overall Syllabus Progress</span>
-            <div class="rounded-lg bg-indigo-500/10 p-2 text-indigo-400"><i data-lucide="bar-chart-3" class="h-5 w-5"></i></div>
-          </div>
-          <div class="mt-3 text-2xl font-bold text-white">76%</div>
-          <div class="mt-2 w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 76%"></div>
-          </div>
+      <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5 space-y-4">
+        <h2 class="text-base font-bold text-white">My study tasks</h2>
+        <div class="flex gap-2">
+          <input id="task-input" type="text" maxlength="80" placeholder="Add a task…" class="min-w-0 flex-1 rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <button type="button" id="task-add" class="rounded-xl bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-500">Add</button>
         </div>
-
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 backdrop-blur-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-400">Quizzes Completed</span>
-            <div class="rounded-lg bg-emerald-500/10 p-2 text-emerald-400"><i data-lucide="check-circle-2" class="h-5 w-5"></i></div>
-          </div>
-          <div class="mt-3 text-2xl font-bold text-white">24 / 28</div>
-          <p class="mt-2 text-xs text-emerald-400 flex items-center gap-1"><i data-lucide="trending-up" class="h-3 w-3"></i> +3 completed this week</p>
-        </div>
-
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 backdrop-blur-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-400">Study Hours</span>
-            <div class="rounded-lg bg-amber-500/10 p-2 text-amber-400"><i data-lucide="clock" class="h-5 w-5"></i></div>
-          </div>
-          <div class="mt-3 text-2xl font-bold text-white">18.5 hrs</div>
-          <p class="mt-2 text-xs text-amber-400">Goal: 20 hrs/week</p>
-        </div>
-
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 backdrop-blur-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-400">Flashcards Mastered</span>
-            <div class="rounded-lg bg-purple-500/10 p-2 text-purple-400"><i data-lucide="award" class="h-5 w-5"></i></div>
-          </div>
-          <div class="mt-3 text-2xl font-bold text-white">142</div>
-          <p class="mt-2 text-xs text-purple-400">Across 6 Subjects</p>
-        </div>
+        <div id="task-list" class="space-y-2"></div>
       </div>
+    </div>
+  </section>
 
-      <!-- Main Dashboard Grid: Core Subjects Quick Access & Today's Checklist -->
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        
-        <!-- Core Subjects Quick Access (2 cols) -->
-        <div class="lg:col-span-2 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-lg font-bold text-white flex items-center gap-2">
-              <i data-lucide="book" class="h-5 w-5 text-indigo-400"></i> WASSCE Core Subjects
-            </h2>
-            <button onclick="switchTab('subjects')" class="text-xs font-semibold text-indigo-400 hover:text-indigo-300">View All Tracks →</button>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Core Maths Card -->
-            <div class="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700 hover:bg-slate-800/80">
-              <div class="flex justify-between items-start">
-                <span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">Core</span>
-                <span class="text-xs text-slate-400">8 Modules</span>
-              </div>
-              <h3 class="mt-3 text-base font-bold text-white group-hover:text-indigo-300">Core Mathematics</h3>
-              <p class="text-xs text-slate-400 mt-1">Algebra, Trigonometry, Vectors & Statistics</p>
-              <div class="mt-4 space-y-1.5">
-                <div class="flex justify-between text-xs font-medium">
-                  <span class="text-slate-400">Progress</span>
-                  <span class="text-indigo-400">82%</span>
-                </div>
-                <div class="w-full bg-slate-800 rounded-full h-1.5">
-                  <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 82%"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Integrated Science Card -->
-            <div class="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700 hover:bg-slate-800/80">
-              <div class="flex justify-between items-start">
-                <span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">Core</span>
-                <span class="text-xs text-slate-400">10 Modules</span>
-              </div>
-              <h3 class="mt-3 text-base font-bold text-white group-hover:text-indigo-300">Integrated Science</h3>
-              <p class="text-xs text-slate-400 mt-1">Biology, Chemistry, Physics & Agriculture</p>
-              <div class="mt-4 space-y-1.5">
-                <div class="flex justify-between text-xs font-medium">
-                  <span class="text-slate-400">Progress</span>
-                  <span class="text-emerald-400">88%</span>
-                </div>
-                <div class="w-full bg-slate-800 rounded-full h-1.5">
-                  <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 88%"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- English Language Card -->
-            <div class="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700 hover:bg-slate-800/80">
-              <div class="flex justify-between items-start">
-                <span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">Core</span>
-                <span class="text-xs text-slate-400">6 Modules</span>
-              </div>
-              <h3 class="mt-3 text-base font-bold text-white group-hover:text-indigo-300">English Language</h3>
-              <p class="text-xs text-slate-400 mt-1">Comprehension, Essay Writing & Grammar</p>
-              <div class="mt-4 space-y-1.5">
-                <div class="flex justify-between text-xs font-medium">
-                  <span class="text-slate-400">Progress</span>
-                  <span class="text-amber-400">65%</span>
-                </div>
-                <div class="w-full bg-slate-800 rounded-full h-1.5">
-                  <div class="bg-amber-500 h-1.5 rounded-full" style="width: 65%"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Social Studies Card -->
-            <div class="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition-all hover:border-slate-700 hover:bg-slate-800/80">
-              <div class="flex justify-between items-start">
-                <span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">Core</span>
-                <span class="text-xs text-slate-400">7 Modules</span>
-              </div>
-              <h3 class="mt-3 text-base font-bold text-white group-hover:text-indigo-300">Social Studies</h3>
-              <p class="text-xs text-slate-400 mt-1">Governance, Culture & Socio-Economic Dev</p>
-              <div class="mt-4 space-y-1.5">
-                <div class="flex justify-between text-xs font-medium">
-                  <span class="text-slate-400">Progress</span>
-                  <span class="text-purple-400">70%</span>
-                </div>
-                <div class="w-full bg-slate-800 rounded-full h-1.5">
-                  <div class="bg-purple-500 h-1.5 rounded-full" style="width: 70%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Today's Study Checklist (1 col) -->
-        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 class="text-base font-bold text-white flex items-center gap-2">
-              <i data-lucide="check-square" class="h-5 w-5 text-amber-400"></i> Today's Study Tasks
-            </h2>
-            <span class="text-xs rounded bg-slate-800 px-2 py-0.5 text-slate-400">Oct 2026</span>
-          </div>
-
-          <div id="checklist-container" class="space-y-2.5">
-            <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/50 border border-slate-800/60 cursor-pointer hover:border-slate-700">
-              <input type="checkbox" checked onchange="this.nextElementSibling.classList.toggle('line-through')" class="mt-1 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500">
-              <div class="text-xs">
-                <p class="font-medium text-slate-200 line-through">Review Core Maths: Quadratic Equations</p>
-                <p class="text-slate-400 text-[10px]">30 min • Completed</p>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/50 border border-slate-800/60 cursor-pointer hover:border-slate-700">
-              <input type="checkbox" onchange="this.nextElementSibling.classList.toggle('line-through')" class="mt-1 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500">
-              <div class="text-xs">
-                <p class="font-medium text-slate-200">Integrated Science Quiz 3 (Chemistry)</p>
-                <p class="text-slate-400 text-[10px]">15 Questions • High Priority</p>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/50 border border-slate-800/60 cursor-pointer hover:border-slate-700">
-              <input type="checkbox" onchange="this.nextElementSibling.classList.toggle('line-through')" class="mt-1 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500">
-              <div class="text-xs">
-                <p class="font-medium text-slate-200">Elective Physics: Circuit Theory Flashcards</p>
-                <p class="text-slate-400 text-[10px]">20 Flashcards</p>
-              </div>
-            </label>
-
-            <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/50 border border-slate-800/60 cursor-pointer hover:border-slate-700">
-              <input type="checkbox" onchange="this.nextElementSibling.classList.toggle('line-through')" class="mt-1 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500">
-              <div class="text-xs">
-                <p class="font-medium text-slate-200">Read GES NaCCA Syllabus on Economics</p>
-                <p class="text-slate-400 text-[10px]">PDF Section 4</p>
-              </div>
-            </label>
-          </div>
-
-          <div class="pt-2">
-            <button onclick="switchTab('planner')" class="w-full text-center rounded-xl bg-slate-800 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-all">
-              + Manage Study Schedule
-            </button>
-          </div>
-        </div>
+  <!-- SUBJECTS -->
+  <section id="view-subjects" class="view-section hidden space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div>
+        <h1 class="text-2xl font-bold text-white">Subjects</h1>
+        <p class="text-sm text-slate-400 mt-1">Explore SHS subjects by track.</p>
       </div>
-    </section>
+      <div id="track-filter" class="flex flex-wrap gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800"></div>
+    </div>
+    <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </section>
 
+  <!-- PDF LIBRARY -->
+  <section id="view-curriculum" class="view-section hidden space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div>
+        <h1 class="text-2xl font-bold text-white">WAEC &amp; GES study PDFs</h1>
+        <p class="text-sm text-slate-400 mt-1">Preview and download study PDFs. Official curriculum documents open on the NaCCA website.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input type="text" id="pdf-search" placeholder="Search PDFs…" class="w-full sm:w-64 rounded-xl bg-slate-900 border border-slate-800 px-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+        <select id="pdf-track" class="rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" aria-label="Filter by track">
+          <option value="all">All subjects</option><option value="core">Core</option><option value="science">Science &amp; Maths</option>
+          <option value="business">Business</option><option value="arts">General Arts</option><option value="agric">Agriculture</option>
+        </select>
+      </div>
+    </div>
+    <p id="pdf-status" class="text-xs text-slate-400" role="status"></p>
+    <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </section>
 
-    <!-- 2. SUBJECT MODULES VIEW SECTION -->
-    <section id="view-subjects" class="view-section hidden space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+  <!-- QUIZZES -->
+  <section id="view-quizzes" class="view-section hidden space-y-6">
+    <div class="border-b border-slate-800 pb-5">
+      <h1 class="text-2xl font-bold text-white">Practice quizzes</h1>
+      <p class="text-sm text-slate-400 mt-1">Test yourself and read the explanation after every answer.</p>
+    </div>
+    <div class="max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900 p-6 md:p-8 shadow-xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
         <div>
-          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="book-open" class="h-6 w-6 text-indigo-400"></i> Subject Modules Curriculum
-          </h1>
-          <p class="text-sm text-slate-400 mt-1">Explore all SHS tracks and core WASSCE course modules.</p>
+          <span id="quiz-subject" class="rounded-md bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400"></span>
+          <h2 id="quiz-counter" class="text-sm font-semibold text-slate-400 mt-1"></h2>
         </div>
-
-        <!-- Filter Buttons for Tracks -->
-        <div class="flex flex-wrap gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800" id="track-filter-container">
-          <button onclick="filterSubjects('all')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white transition-all" data-track="all">All Tracks</button>
-          <button onclick="filterSubjects('core')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-all" data-track="core">Core Subjects</button>
-          <button onclick="filterSubjects('science')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-all" data-track="science">Science & Math</button>
-          <button onclick="filterSubjects('business')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-all" data-track="business">Business</button>
-          <button onclick="filterSubjects('arts')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-all" data-track="arts">General Arts</button>
-          <button onclick="filterSubjects('agric')" class="track-btn rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 transition-all" data-track="agric">Agric & Home Econ</button>
+        <div class="text-right"><span class="text-xs text-slate-400">Score</span><p id="quiz-score" class="text-lg font-bold text-emerald-400">0 pts</p></div>
+      </div>
+      <div id="quiz-box" class="space-y-6">
+        <h3 id="quiz-question" class="text-lg font-semibold text-slate-100"></h3>
+        <div id="quiz-options" class="space-y-3"></div>
+        <div id="quiz-explanation" class="hidden rounded-xl bg-slate-950 p-4 border border-slate-800 space-y-1">
+          <p class="text-xs font-bold uppercase tracking-wider text-emerald-400">Explanation</p>
+          <p id="quiz-explanation-text" class="text-xs text-slate-300"></p>
+        </div>
+        <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+          <button type="button" id="quiz-restart" class="text-xs font-semibold text-slate-400 hover:text-slate-200">Restart quiz</button>
+          <button type="button" id="quiz-next" class="hidden rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500">Next question →</button>
         </div>
       </div>
-
-      <!-- Grid of Subjects -->
-      <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Subjects rendered dynamically via JS -->
+      <div id="quiz-summary" class="hidden text-center py-8 space-y-4">
+        <h2 class="text-2xl font-bold text-white">Quiz completed!</h2>
+        <p id="quiz-final" class="text-slate-300"></p>
+        <button type="button" id="quiz-again" class="mt-2 rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500">Try again</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-
-    <!-- 3. GES / NACCA CURRICULUM PDF LIBRARY VIEW -->
-    <section id="view-curriculum" class="view-section hidden space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-        <div>
-          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="file-text" class="h-6 w-6 text-indigo-400"></i> GES / NaCCA Curriculum PDFs
-          </h1>
-          <p class="text-sm text-slate-400 mt-1">Official Ghana Education Service syllabus & WASSCE resource documents.</p>
-        </div>
-
-        <!-- Search and Filter Bar -->
-        <div class="flex flex-col sm:flex-row gap-3">
-          <div class="relative">
-            <i data-lucide="search" class="absolute left-3 top-3 h-4 w-4 text-slate-400"></i>
-            <input type="text" id="pdf-search-input" onkeyup="filterPDFs()" placeholder="Search syllabus title..." class="w-full sm:w-64 rounded-xl bg-slate-900 border border-slate-800 pl-9 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+  <!-- FLASHCARDS -->
+  <section id="view-flashcards" class="view-section hidden space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div>
+        <h1 class="text-2xl font-bold text-white">Flashcards</h1>
+        <p class="text-sm text-slate-400 mt-1">Click the card to flip it.</p>
+      </div>
+      <label class="flex items-center gap-3 text-xs font-semibold text-slate-400">Deck
+        <select id="fc-deck" class="rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+          <option value="math">Core Mathematics</option><option value="science">Integrated Science</option>
+          <option value="english">English Language</option><option value="social">Social Studies</option>
+        </select>
+      </label>
+    </div>
+    <div class="max-w-xl mx-auto space-y-6">
+      <div id="fc-card" role="button" tabindex="0" aria-label="Flip card" class="perspective-1000 cursor-pointer h-72 w-full">
+        <div id="fc-inner" class="relative h-full w-full rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl transition-all duration-500 transform-style-3d">
+          <div class="absolute inset-0 flex flex-col justify-between p-8 backface-hidden rounded-2xl bg-gradient-to-b from-slate-900 to-slate-950">
+            <span id="fc-label" class="text-xs font-semibold text-indigo-400 uppercase tracking-wider"></span>
+            <p id="fc-question" class="my-auto text-center text-xl font-bold text-white"></p>
+            <span class="text-center text-[11px] text-slate-500">Question · click to flip</span>
           </div>
-          <select id="pdf-track-select" onchange="filterPDFs()" class="rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
-            <option value="all">All Disciplines</option>
-            <option value="core">Core Subjects</option>
-            <option value="science">Elective Science</option>
-            <option value="business">Business</option>
-            <option value="arts">General Arts</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- PDF List Grid -->
-      <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- PDF cards populated dynamically by JavaScript -->
-      </div>
-    </section>
-
-
-    <!-- 4. INTERACTIVE PRACTICE QUIZZES VIEW SECTION -->
-    <section id="view-quizzes" class="view-section hidden space-y-6">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-5">
-        <div>
-          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="help-circle" class="h-6 w-6 text-indigo-400"></i> WASSCE Practice Quizzes
-          </h1>
-          <p class="text-sm text-slate-400 mt-1">Test your knowledge with real past questions & explanations.</p>
+          <div class="absolute inset-0 flex flex-col justify-between p-8 backface-hidden rotate-y-180 rounded-2xl bg-slate-900 border border-indigo-500/30">
+            <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Answer</span>
+            <p id="fc-answer" class="my-auto text-center text-lg font-bold text-indigo-200"></p>
+            <span class="text-center text-[11px] text-slate-500">Click to flip back</span>
+          </div>
         </div>
       </div>
-
-      <div class="max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900 p-6 md:p-8 shadow-xl">
-        <!-- Quiz Header Progress -->
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
-          <div>
-            <span id="quiz-subject-badge" class="rounded-md bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">Integrated Science</span>
-            <h2 id="quiz-question-counter" class="text-sm font-semibold text-slate-400 mt-1">Question 1 of 4</h2>
-          </div>
-          <div class="text-right">
-            <span class="text-xs text-slate-400">Score</span>
-            <p id="quiz-score" class="text-lg font-bold text-emerald-400">0 pts</p>
-          </div>
-        </div>
-
-        <!-- Quiz Question Box -->
-        <div id="quiz-box" class="space-y-6">
-          <h3 id="quiz-question-text" class="text-lg font-semibold text-slate-100">
-            Which of the following processes is primarily responsible for the transfer of energy through solids?
-          </h3>
-
-          <!-- Options Grid -->
-          <div id="quiz-options-container" class="space-y-3">
-            <!-- Dynamic option buttons -->
-          </div>
-
-          <!-- Real-time Explanation Box -->
-          <div id="quiz-explanation" class="hidden rounded-xl bg-slate-950 p-4 border border-slate-800 space-y-1">
-            <p id="quiz-explanation-title" class="text-xs font-bold uppercase tracking-wider text-emerald-400">Explanation</p>
-            <p id="quiz-explanation-text" class="text-xs text-slate-300">Conduction is the primary mode of heat transfer in solids because particles are closely packed.</p>
-          </div>
-
-          <!-- Action Control Buttons -->
-          <div class="flex justify-between items-center pt-4 border-t border-slate-800">
-            <button onclick="resetCurrentQuiz()" class="text-xs font-semibold text-slate-400 hover:text-slate-200">Restart Quiz</button>
-            <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-all">
-              Next Question →
-            </button>
-          </div>
-        </div>
-
-        <!-- Completion Summary Screen (Hidden by default) -->
-        <div id="quiz-summary" class="hidden text-center py-8 space-y-4">
-          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30">
-            <i data-lucide="award" class="h-8 w-8"></i>
-          </div>
-          <h2 class="text-2xl font-bold text-white">Quiz Completed!</h2>
-          <p id="quiz-final-score" class="text-slate-300 text-base">You scored 4 out of 4 (100%)</p>
-          <button onclick="resetCurrentQuiz()" class="mt-4 rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-all">
-            Try Quiz Again
-          </button>
-        </div>
+      <div class="flex items-center justify-between bg-slate-900 p-4 rounded-xl border border-slate-800">
+        <button type="button" id="fc-prev" class="rounded-lg bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700">← Previous</button>
+        <span id="fc-tracker" class="text-xs font-semibold text-slate-400"></span>
+        <button type="button" id="fc-next" class="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-500">Next →</button>
       </div>
-    </section>
-
-
-    <!-- 5. INTERACTIVE FLASHCARDS ENGINE VIEW SECTION -->
-    <section id="view-flashcards" class="view-section hidden space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-        <div>
-          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="layers" class="h-6 w-6 text-indigo-400"></i> Smart WASSCE Flashcards
-          </h1>
-          <p class="text-sm text-slate-400 mt-1">Click the card to flip between Question and Answer.</p>
-        </div>
-
-        <!-- Subject Deck Selector -->
-        <div class="flex items-center gap-3">
-          <label for="flashcard-deck" class="text-xs font-semibold text-slate-400">Select Subject Deck:</label>
-          <select id="flashcard-deck" onchange="loadFlashcardDeck()" class="rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
-            <option value="math">Core Mathematics</option>
-            <option value="science">Integrated Science</option>
-            <option value="english">English Language</option>
-            <option value="social">Social Studies</option>
-          </select>
-        </div>
+      <div class="flex gap-3">
+        <button type="button" id="fc-review" class="flex-1 rounded-xl bg-slate-900 border border-amber-500/30 py-3 text-xs font-semibold text-amber-400 hover:bg-amber-500/10">Need review</button>
+        <button type="button" id="fc-master" class="flex-1 rounded-xl bg-slate-900 border border-emerald-500/30 py-3 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/10">Mastered</button>
       </div>
+    </div>
+  </section>
 
-      <div class="max-w-xl mx-auto space-y-6">
-        <!-- 3D Flip Card Container -->
-        <div onclick="flipFlashcard()" class="group perspective-1000 cursor-pointer h-72 w-full">
-          <div id="flashcard-inner" class="relative h-full w-full rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl transition-all duration-500 transform-style-3d">
-            
-            <!-- Front Face -->
-            <div class="absolute inset-0 flex flex-col justify-between p-8 backface-hidden rounded-2xl bg-gradient-to-b from-slate-900 to-slate-950">
-              <div class="flex justify-between items-center">
-                <span id="fc-subject-label" class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Core Math</span>
-                <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="rotate-cw" class="h-3 w-3"></i> Click to flip</span>
-              </div>
-              <div class="my-auto text-center">
-                <p id="fc-question" class="text-xl font-bold text-white">What is the quadratic formula?</p>
-              </div>
-              <div class="text-center text-[11px] text-slate-500">Question Side</div>
-            </div>
-
-            <!-- Back Face -->
-            <div class="absolute inset-0 flex flex-col justify-between p-8 backface-hidden rotate-y-180 rounded-2xl bg-slate-900 border border-indigo-500/30">
-              <div class="flex justify-between items-center">
-                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Answer / Solution</span>
-                <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="rotate-cw" class="h-3 w-3"></i> Click to flip back</span>
-              </div>
-              <div class="my-auto text-center">
-                <p id="fc-answer" class="text-lg font-bold text-indigo-200">x = [-b ± √(b² - 4ac)] / 2a</p>
-              </div>
-              <div class="text-center text-[11px] text-slate-500">Solution Side</div>
-            </div>
-
-          </div>
+  <!-- PLANNER -->
+  <section id="view-planner" class="view-section hidden space-y-6">
+    <div class="border-b border-slate-800 pb-5">
+      <h1 class="text-2xl font-bold text-white">Study planner &amp; timer</h1>
+      <p class="text-sm text-slate-400 mt-1">Structure your revision and stay focused.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 flex flex-col items-center text-center space-y-5">
+        <span class="rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/20">Focus mode</span>
+        <div class="flex h-48 w-48 items-center justify-center rounded-full border-4 border-indigo-600/30 bg-slate-950"><span id="pomo-display" class="text-4xl font-extrabold text-white">25:00</span></div>
+        <div class="flex gap-2 w-full">
+          <button type="button" id="pomo-start" class="flex-1 rounded-xl bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500">Start focus</button>
+          <button type="button" id="pomo-reset" class="rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-700">Reset</button>
         </div>
-
-        <!-- Controls & Deck Tracker -->
-        <div class="flex items-center justify-between bg-slate-900 p-4 rounded-xl border border-slate-800">
-          <button onclick="prevFlashcard()" class="flex items-center gap-1 rounded-lg bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700">
-            <i data-lucide="chevron-left" class="h-4 w-4"></i> Previous
-          </button>
-          <span id="fc-tracker" class="text-xs font-semibold text-slate-400">Card 1 of 4</span>
-          <button onclick="nextFlashcard()" class="flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-500">
-            Next <i data-lucide="chevron-right" class="h-4 w-4"></i>
-          </button>
-        </div>
-
-        <!-- Mastery Buttons -->
-        <div class="flex gap-3">
-          <button onclick="markFlashcardMastered(false)" class="flex-1 flex items-center justify-center gap-2 rounded-xl bg-slate-900 border border-amber-500/30 py-3 text-xs font-semibold text-amber-400 hover:bg-amber-500/10 transition-all">
-            <i data-lucide="alert-circle" class="h-4 w-4"></i> Need Review
-          </button>
-          <button onclick="markFlashcardMastered(true)" class="flex-1 flex items-center justify-center gap-2 rounded-xl bg-slate-900 border border-emerald-500/30 py-3 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/10 transition-all">
-            <i data-lucide="check-circle" class="h-4 w-4"></i> Mastered
-          </button>
-        </div>
+        <p id="pomo-status" class="text-xs text-slate-400" role="status">Focus for 25 minutes, then take a 5-minute break.</p>
       </div>
-    </section>
-
-
-    <!-- 6. STUDY PLANNER & POMODORO FOCUS TIMER VIEW SECTION -->
-    <section id="view-planner" class="view-section hidden space-y-6">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-5">
-        <div>
-          <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="clock" class="h-6 w-6 text-indigo-400"></i> Study Planner & Pomodoro Timer
-          </h1>
-          <p class="text-sm text-slate-400 mt-1">Structure your revision time and improve focus with timeblocking.</p>
-        </div>
+      <div class="lg:col-span-2 rounded-2xl border border-slate-800 bg-slate-900 p-6 space-y-4">
+        <h2 class="text-lg font-bold text-white">Sample weekly revision plan</h2>
+        <div id="plan-rows" class="space-y-3"></div>
       </div>
+    </div>
+  </section>
+</main>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- Pomodoro Focus Timer Card (1 col) -->
-        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 flex flex-col items-center text-center space-y-5">
-          <div class="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/20">
-            <i data-lucide="zap" class="h-3.5 w-3.5"></i> Focus Mode
-          </div>
-
-          <!-- Timer Clock Display -->
-          <div class="relative flex h-48 w-48 items-center justify-center rounded-full border-4 border-indigo-600/30 bg-slate-950 shadow-inner">
-            <span id="pomo-display" class="text-4xl font-extrabold tracking-tight text-white">25:00</span>
-          </div>
-
-          <!-- Timer Controls -->
-          <div class="flex gap-2 w-full">
-            <button id="pomo-start-btn" onclick="togglePomodoro()" class="flex-1 rounded-xl bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-all">
-              Start Focus
-            </button>
-            <button onclick="resetPomodoro()" class="rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-700 transition-all">
-              Reset
-            </button>
-          </div>
-
-          <p id="pomo-status" class="text-xs text-slate-400">Stay focused for 25 minutes before taking a 5-minute break.</p>
-        </div>
-
-        <!-- Weekly Timetable Schedule (2 cols) -->
-        <div class="lg:col-span-2 rounded-2xl border border-slate-800 bg-slate-900 p-6 space-y-4">
-          <h2 class="text-lg font-bold text-white flex items-center gap-2">
-            <i data-lucide="calendar" class="h-5 w-5 text-amber-400"></i> Weekly WASSCE Revision Plan
-          </h2>
-
-          <div class="space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2">
-              <span class="w-24 text-xs font-bold text-amber-400 uppercase tracking-wider">Monday</span>
-              <div class="flex-1 text-xs text-slate-200">Core Mathematics (Quadratics & Algebra)</div>
-              <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">4:00 PM - 5:30 PM</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2">
-              <span class="w-24 text-xs font-bold text-indigo-400 uppercase tracking-wider">Tuesday</span>
-              <div class="flex-1 text-xs text-slate-200">Integrated Science (Chemistry & Acids)</div>
-              <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">4:00 PM - 5:30 PM</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2">
-              <span class="w-24 text-xs font-bold text-emerald-400 uppercase tracking-wider">Wednesday</span>
-              <div class="flex-1 text-xs text-slate-200">English Language (Essay & Essay Structure)</div>
-              <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">5:00 PM - 6:30 PM</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2">
-              <span class="w-24 text-xs font-bold text-purple-400 uppercase tracking-wider">Thursday</span>
-              <div class="flex-1 text-xs text-slate-200">Social Studies & Elective Practice</div>
-              <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">4:00 PM - 5:30 PM</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2">
-              <span class="w-24 text-xs font-bold text-rose-400 uppercase tracking-wider">Friday</span>
-              <div class="flex-1 text-xs text-slate-200">Full Practice Mock Quizzes & Flashcards</div>
-              <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">3:30 PM - 6:00 PM</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- IN-APP PDF VIEWER MODAL -->
-  <div id="pdf-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
-    <div class="relative flex h-full max-h-[90vh] w-full max-w-5xl flex-col rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl overflow-hidden">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-800 px-6 py-4">
-        <div class="flex items-center gap-3">
-          <i data-lucide="file-text" class="h-5 w-5 text-indigo-400"></i>
-          <div>
-            <h3 id="pdf-modal-title" class="text-base font-bold text-white">GES Syllabus Preview</h3>
-            <p id="pdf-modal-subtitle" class="text-xs text-slate-400">Official Curriculum Viewer</p>
-          </div>
-        </div>
-        <button onclick="closePdfModal()" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white">
-          <i data-lucide="x" class="h-5 w-5"></i>
-        </button>
-      </div>
-
-      <!-- Iframe Frame for PDF -->
-      <div class="flex-1 bg-slate-950 p-2">
-        <iframe id="pdf-frame" class="h-full w-full rounded-xl border-0" src="about:blank"></iframe>
-      </div>
-      
-      <div class="flex justify-end border-t border-slate-800 px-6 py-3">
-        <button onclick="closePdfModal()" class="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700">Close Viewer</button>
+<!-- PDF PREVIEW MODAL -->
+<div id="pdf-modal" role="dialog" aria-modal="true" aria-labelledby="pdf-title" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
+  <div class="flex h-full max-h-[90vh] w-full max-w-5xl flex-col rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl overflow-hidden">
+    <div class="flex items-center justify-between border-b border-slate-800 px-6 py-4">
+      <h3 id="pdf-title" class="text-base font-bold text-white"></h3>
+      <button type="button" id="pdf-x" aria-label="Close" class="rounded-lg px-2 py-1 text-slate-400 hover:bg-slate-800 hover:text-white">✕</button>
+    </div>
+    <div class="flex-1 bg-slate-950 p-2"><iframe id="pdf-frame" title="PDF preview" class="h-full w-full rounded-xl border-0" src="about:blank"></iframe></div>
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 px-6 py-3">
+      <p class="text-[11px] text-slate-500">If the preview stays blank, use the button on the right.</p>
+      <div class="flex gap-2">
+        <a id="pdf-link" target="_blank" rel="noopener noreferrer" class="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-500"></a>
+        <button type="button" id="pdf-close" class="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700">Close</button>
       </div>
     </div>
   </div>
+</div>
 
+<script>
+/* ============ CONFIG ============ */
+const SB_URL = 'https://gxlivdcyqlncdcjvxfga.supabase.co';
+const SB_KEY = 'sb_publishable__3nuuhqXEGjllnEwb5rOEA_Fr3ZSIEW';   // publishable key: safe to be public
+const SB_BUCKET = 'pdfs';                                            // public bucket; table 'resources' lists the files
 
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-    // Initialize Lucide Icons on load
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      renderSubjects();
-      renderPDFs();
-      loadQuizQuestion();
-      loadFlashcardDeck();
-    });
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const icons = () => { if (window.lucide) lucide.createIcons(); };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('eduhub:' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('eduhub:' + k, JSON.stringify(v)); } catch (e) {} }
+};
 
-    // --- 1. TAB SWITCHING LOGIC (STRICT SPA SINGLE-VIEW ENFORCEMENT) ---
-    function switchTab(targetViewId) {
-      // Hide all view sections strictly
-      const views = document.querySelectorAll('.view-section');
-      views.forEach(v => v.classList.add('hidden'));
+/* ============ NAVIGATION ============ */
+const tabs = [['dashboard','Dashboard','layout-dashboard'],['subjects','Subjects','book-open'],['curriculum','PDFs','file-text'],
+              ['quizzes','Quizzes','help-circle'],['flashcards','Flashcards','layers'],['planner','Planner & Timer','clock']];
+function buildNav() {
+  $('nav-desktop').innerHTML = tabs.map(([id,l,ic]) => `<button type="button" data-tab="${id}" class="nav-btn flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-slate-800/50"><i data-lucide="${ic}" class="h-4 w-4"></i> ${l}</button>`).join('');
+  $('nav-mobile').innerHTML = tabs.map(([id,l,ic]) => `<button type="button" data-tab="${id}" class="nav-btn flex whitespace-nowrap items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"><i data-lucide="${ic}" class="h-3.5 w-3.5"></i> ${l.split(' ')[0]}</button>`).join('');
+}
+function switchTab(id) {
+  document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
+  $('view-' + id).classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    const on = b.dataset.tab === id;
+    b.classList.toggle('bg-indigo-600', on); b.classList.toggle('text-white', on); b.classList.toggle('text-slate-400', !on);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-      // Show targeted view section
-      const targetView = document.getElementById(`view-${targetViewId}`);
-      if (targetView) {
-        targetView.classList.remove('hidden');
-      }
+/* ============ SUBJECTS ============ */
+const subjectsData = [
+  { title:'Core Mathematics', track:'core', name:'Core', desc:'Algebra, geometry, trigonometry, vectors, statistics and probability.' },
+  { title:'Integrated Science', track:'core', name:'Core', desc:'Foundations of Physics, Chemistry, Biology and Agriculture.' },
+  { title:'English Language', track:'core', name:'Core', desc:'Comprehension, summary, essay writing, grammar and oral English.' },
+  { title:'Social Studies', track:'core', name:'Core', desc:'Governance, culture, citizenship and socio-economic development.' },
+  { title:'Elective Mathematics', track:'science', name:'Science', desc:'Calculus, vectors, mechanics, matrices and probability.' },
+  { title:'Physics', track:'science', name:'Science', desc:'Mechanics, waves, optics, electricity, magnetism and atomic physics.' },
+  { title:'Chemistry', track:'science', name:'Science', desc:'Organic chemistry, stoichiometry, energetics and electrochemistry.' },
+  { title:'Financial Accounting', track:'business', name:'Business', desc:'Double entry, trial balance, final accounts and partnerships.' },
+  { title:'Economics', track:'business', name:'Business', desc:'Demand and supply, macroeconomics and West African trade.' },
+  { title:'Government', track:'arts', name:'Arts', desc:'Political concepts, constitutions and international relations.' },
+  { title:'General Agriculture', track:'agric', name:'Agric', desc:'Crop production, soil science, animal husbandry and mechanisation.' }
+];
+const trackBySubject = Object.fromEntries(subjectsData.map(s => [s.title, s.track]));
+const subjectCard = s => `<div class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">${esc(s.name)}</span><h3 class="mt-3 text-base font-bold text-white">${esc(s.title)}</h3><p class="text-xs text-slate-400 mt-1">${esc(s.desc)}</p></div>`;
+const trackFilters = [['all','All'],['core','Core'],['science','Science & Maths'],['business','Business'],['arts','General Arts'],['agric','Agric']];
+function renderSubjects(f = 'all') {
+  $('track-filter').innerHTML = trackFilters.map(([k,l]) => `<button type="button" data-track="${k}" class="rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${k === f ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-slate-800'}">${l}</button>`).join('');
+  $('subjects-grid').innerHTML = subjectsData.filter(s => f === 'all' || s.track === f).map(subjectCard).join('');
+}
 
-      // Update Desktop Nav styles
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('text-slate-400');
-      });
-      const activeNav = document.getElementById(`nav-${targetViewId}`);
-      if (activeNav) {
-        activeNav.classList.add('bg-indigo-600', 'text-white');
-        activeNav.classList.remove('text-slate-400');
-      }
+/* ============ PDF LIBRARY ============ */
+const OFFICIAL = 'https://curriculumresources.edu.gh/wp-content/uploads/2024/11/';
+const official = [   // hosted by NaCCA; they open on the official site (browsers do not allow forcing a download from another site)
+  { title:'Core Mathematics Curriculum', subject:'Core Mathematics', track:'core', url:OFFICIAL + 'Mathematics-Curriculum.pdf' },
+  { title:'Integrated (General) Science Curriculum', subject:'Integrated Science', track:'core', url:OFFICIAL + 'GENERAL-SCIENCE-Curriculum.pdf' },
+  { title:'English Language Curriculum', subject:'English Language', track:'core', url:OFFICIAL + 'English-Language-Curriculum.pdf' },
+  { title:'Social Studies Curriculum', subject:'Social Studies', track:'core', url:OFFICIAL + 'Social-Studies-Curriculum.pdf' },
+  { title:'Additional (Elective) Mathematics Curriculum', subject:'Elective Mathematics', track:'science', url:OFFICIAL + 'Additional-Mathematics-Curriculum.pdf' }
+].map(o => ({ ...o, kind:'official' }));
+let hosted = [], shown = [];
+const fileUrl = (p, dl) => `${SB_URL}/storage/v1/object/public/${SB_BUCKET}/${encodeURI(p.file_path)}` + (dl ? `?download=${encodeURIComponent(p.title + '.pdf')}` : '');
 
-      // Update Mobile Nav styles
-      document.querySelectorAll('.mnav-btn').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('text-slate-400', 'bg-slate-900');
-      });
-      const activeMNav = document.getElementById(`mnav-${targetViewId}`);
-      if (activeMNav) {
-        activeMNav.classList.add('bg-indigo-600', 'text-white');
-        activeMNav.classList.remove('text-slate-400', 'bg-slate-900');
-      }
+async function loadHosted() {
+  $('pdf-status').textContent = 'Loading PDFs…';
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/resources?select=title,subject,form,file_path&order=subject,form,title`, { headers: { apikey: SB_KEY } });
+    if (!r.ok) throw new Error(r.status);
+    hosted = (await r.json()).map(h => ({ ...h, kind:'hosted', track: trackBySubject[h.subject] || 'all' }));
+    $('pdf-status').textContent = hosted.length ? '' : 'No PDFs have been uploaded yet. The official curriculum documents are listed below.';
+  } catch (e) {
+    $('pdf-status').textContent = 'Could not load uploaded PDFs right now. The official curriculum documents are listed below.';
+  }
+  $('st-pdfs').textContent = official.length + hosted.length;
+  renderPDFs();
+}
+function renderPDFs() {
+  const q = $('pdf-search').value.toLowerCase(), t = $('pdf-track').value;
+  shown = [...hosted, ...official].filter(p => (t === 'all' || p.track === t || p.track === 'all') && (p.title + ' ' + (p.subject || '')).toLowerCase().includes(q));
+  if (!shown.length) { $('pdf-grid').innerHTML = '<p class="text-sm text-slate-400">No PDFs match your search.</p>'; return; }
+  $('pdf-grid').innerHTML = shown.map((p, i) => `
+    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-5 flex flex-col justify-between">
+      <div class="space-y-3">
+        <div class="flex items-center justify-between"><span class="rounded-md bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold text-amber-400 uppercase">${p.kind === 'hosted' ? 'Study PDF' : 'Official'}</span>${p.form ? `<span class="text-xs text-slate-500">Form ${esc(p.form)}</span>` : ''}</div>
+        <h3 class="text-base font-bold text-white line-clamp-2">${esc(p.title)}</h3>
+        <p class="text-xs text-slate-400">${esc(p.subject || '')}${p.kind === 'official' ? ' · NaCCA / Ministry of Education' : ''}</p>
+      </div>
+      <div class="mt-6 flex gap-2 pt-3 border-t border-slate-800/80">
+        ${p.kind === 'hosted'
+          ? `<button type="button" data-open="${i}" class="flex-1 rounded-xl bg-indigo-600/20 border border-indigo-500/30 py-2 text-xs font-semibold text-indigo-300 hover:bg-indigo-600/30">Preview</button>
+             <a href="${esc(fileUrl(p, true))}" rel="noopener noreferrer" class="flex-1 text-center rounded-xl bg-emerald-600 py-2 text-xs font-semibold text-white hover:bg-emerald-500">Download</a>`
+          : `<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center rounded-xl bg-slate-800 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700">Open official PDF</a>`}
+      </div>
+    </div>`).join('');
+}
+function openPdf(p) {
+  $('pdf-title').textContent = p.title;
+  $('pdf-frame').src = fileUrl(p, false);
+  $('pdf-link').href = fileUrl(p, true); $('pdf-link').textContent = 'Download PDF';
+  $('pdf-modal').classList.remove('hidden'); $('pdf-modal').classList.add('flex');
+}
+function closePdf() { $('pdf-modal').classList.add('hidden'); $('pdf-modal').classList.remove('flex'); $('pdf-frame').src = 'about:blank'; }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+/* ============ QUIZ ============ */
+const quizQuestions = [
+  { subject:'Integrated Science', question:'Which process is mainly responsible for heat transfer through a solid metal rod?', options:['Radiation','Conduction','Convection','Evaporation'], correct:1, explanation:'In solids, vibrating particles pass energy to their neighbours directly. This is conduction.' },
+  { subject:'Core Mathematics', question:'Solve for x: 2x + 5 = 15', options:['x = 3','x = 5','x = 7','x = 10'], correct:1, explanation:'Subtract 5 from both sides to get 2x = 10, then divide by 2 to get x = 5.' },
+  { subject:'Social Studies', question:'In which year did Ghana gain independence?', options:['1951','1957','1960','1966'], correct:1, explanation:'Ghana became independent on 6 March 1957.' },
+  { subject:'Integrated Science', question:'Which organelle is called the powerhouse of the cell?', options:['Nucleus','Mitochondrion','Ribosome','Golgi apparatus'], correct:1, explanation:'Mitochondria release energy from food during respiration.' }
+];
+let qi = 0, qScore = 0;
+function loadQuestion() {
+  const q = quizQuestions[qi];
+  $('quiz-subject').textContent = q.subject;
+  $('quiz-counter').textContent = `Question ${qi + 1} of ${quizQuestions.length}`;
+  $('quiz-question').textContent = q.question;
+  $('quiz-explanation').classList.add('hidden'); $('quiz-next').classList.add('hidden');
+  $('quiz-options').innerHTML = q.options.map((o, i) => `<button type="button" data-opt="${i}" class="w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-950/60 text-sm font-medium text-slate-200 hover:border-indigo-500/50 transition-all">${esc(o)}</button>`).join('');
+}
+function pickOption(i) {
+  const q = quizQuestions[qi], btns = document.querySelectorAll('#quiz-options button');
+  if (btns[0].disabled) return;
+  btns.forEach(b => { b.disabled = true; });
+  const good = ['border-emerald-500','bg-emerald-500/10','text-emerald-300'], bad = ['border-rose-500','bg-rose-500/10','text-rose-300'];
+  if (i === q.correct) { btns[i].classList.add(...good); qScore += 10; $('quiz-score').textContent = qScore + ' pts'; }
+  else { btns[i].classList.add(...bad); btns[q.correct].classList.add(...good); }
+  $('quiz-explanation-text').textContent = q.explanation;
+  $('quiz-explanation').classList.remove('hidden'); $('quiz-next').classList.remove('hidden');
+}
+function nextQuestion() {
+  qi++;
+  if (qi < quizQuestions.length) return loadQuestion();
+  $('quiz-box').classList.add('hidden'); $('quiz-summary').classList.remove('hidden');
+  $('quiz-final').textContent = `You scored ${qScore / 10} out of ${quizQuestions.length} (${Math.round(qScore / 10 / quizQuestions.length * 100)}%).`;
+  store.set('quizzes', store.get('quizzes', 0) + 1); updateStats();
+}
+function resetQuiz() { qi = 0; qScore = 0; $('quiz-score').textContent = '0 pts'; $('quiz-box').classList.remove('hidden'); $('quiz-summary').classList.add('hidden'); loadQuestion(); }
+
+/* ============ FLASHCARDS ============ */
+const decks = {
+  math: [['What is the quadratic formula?','x = [−b ± √(b² − 4ac)] ÷ 2a'],['What is a Pythagorean triple?','Three positive integers a, b, c with a² + b² = c²'],['Sum of interior angles of an n-sided polygon?','(n − 2) × 180°']],
+  science: [['State Hooke’s law.','The extension of a spring is proportional to the force applied (F = ke), within the elastic limit.'],['What is the word equation for photosynthesis?','Carbon dioxide + water → glucose + oxygen (light and chlorophyll needed)']],
+  english: [['Define a simile.','A comparison of two things using “like” or “as”.'],['What is an antonym?','A word opposite in meaning to another word.']],
+  social: [['In what year did Ghana become independent?','1957 (6 March)'],['Who was Ghana’s first President?','Dr Kwame Nkrumah']]
+};
+let deckKey = 'math', fi = 0, flipped = false, fcTimer;
+let mastered = store.get('mastered', {});
+function showCard() {
+  const deck = decks[deckKey], c = deck[fi], inner = $('fc-inner');
+  const setText = () => { $('fc-question').textContent = c[0]; $('fc-answer').textContent = c[1]; };
+  clearTimeout(fcTimer);
+  if (flipped) { inner.classList.remove('rotate-y-180'); flipped = false; fcTimer = setTimeout(setText, 250); } else setText();
+  $('fc-label').textContent = $('fc-deck').selectedOptions[0].text;
+  const done = deck.filter((_, i) => mastered[deckKey + ':' + i]).length;
+  $('fc-tracker').textContent = `Card ${fi + 1} of ${deck.length} · ${done} mastered`;
+}
+function flip() { flipped = !flipped; $('fc-inner').classList.toggle('rotate-y-180', flipped); }
+function stepCard(d) { const n = decks[deckKey].length; fi = (fi + d + n) % n; showCard(); }
+function markCard(ok) {
+  const k = deckKey + ':' + fi;
+  if (ok) mastered[k] = true; else delete mastered[k];
+  store.set('mastered', mastered); updateStats(); stepCard(1);
+}
+
+/* ============ POMODORO ============ */
+let pomoSeconds = 1500, pomoEnd = 0, pomoTimer = null, pomoOn = false;
+const pomoShow = () => { $('pomo-display').textContent = String(Math.floor(pomoSeconds / 60)).padStart(2, '0') + ':' + String(pomoSeconds % 60).padStart(2, '0'); };
+function togglePomo() {
+  if (pomoOn) {
+    clearInterval(pomoTimer); pomoOn = false;
+    pomoSeconds = Math.max(0, Math.round((pomoEnd - Date.now()) / 1000));
+    $('pomo-start').textContent = 'Resume focus'; $('pomo-status').textContent = 'Timer paused.'; return;
+  }
+  pomoOn = true; pomoEnd = Date.now() + pomoSeconds * 1000;
+  $('pomo-start').textContent = 'Pause focus'; $('pomo-status').textContent = 'Focus session active. Keep going!';
+  pomoTimer = setInterval(() => {
+    pomoSeconds = Math.max(0, Math.round((pomoEnd - Date.now()) / 1000)); pomoShow();
+    if (pomoSeconds === 0) {
+      clearInterval(pomoTimer); pomoOn = false; pomoSeconds = 1500; pomoShow();
+      $('pomo-start').textContent = 'Start focus'; $('pomo-status').textContent = 'Session complete! Take a 5-minute break.';
+      store.set('focus', store.get('focus', 0) + 25); updateStats();
     }
+  }, 250);
+}
+function resetPomo() { clearInterval(pomoTimer); pomoOn = false; pomoSeconds = 1500; pomoShow(); $('pomo-start').textContent = 'Start focus'; $('pomo-status').textContent = 'Focus for 25 minutes, then take a 5-minute break.'; }
 
+/* ============ TASKS, PLAN, STATS ============ */
+let tasks = store.get('tasks', []);
+function renderTasks() {
+  $('task-list').innerHTML = tasks.length ? tasks.map((t, i) => `<label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/50 border border-slate-800/60 cursor-pointer"><input type="checkbox" data-task="${i}" ${t.done ? 'checked' : ''} class="mt-1"><span class="text-xs text-slate-200 ${t.done ? 'line-through' : ''}">${esc(t.text)}</span></label>`).join('') : '<p class="text-xs text-slate-500">No tasks yet. Add your first one above.</p>';
+}
+const plan = [['Monday','Core Mathematics: algebra and quadratics','4:00 – 5:30 PM'],['Tuesday','Integrated Science: chemistry basics','4:00 – 5:30 PM'],['Wednesday','English Language: essay structure','5:00 – 6:30 PM'],['Thursday','Social Studies and elective practice','4:00 – 5:30 PM'],['Friday','Mixed quizzes and flashcards','3:30 – 6:00 PM']];
+function updateStats() {
+  $('st-quizzes').textContent = store.get('quizzes', 0);
+  $('st-cards').textContent = Object.keys(mastered).length;
+  $('st-focus').textContent = store.get('focus', 0);
+}
 
-    // --- 2. SUBJECT MODULES DATA & FILTERING ---
-    const subjectsData = [
-      { title: "Core Mathematics", track: "core", trackName: "Core", modules: 8, progress: 82, desc: "Real numbers, algebra, coordinate geometry, trigonometry, and statistics." },
-      { title: "Integrated Science", track: "core", trackName: "Core", modules: 10, progress: 88, desc: "Fundamental principles of Physics, Chemistry, Biology, and Agriculture." },
-      { title: "English Language", track: "core", trackName: "Core", modules: 6, progress: 65, desc: "Essay writing, comprehension, summary, and oral English drills." },
-      { title: "Social Studies", track: "core", trackName: "Core", modules: 7, progress: 70, desc: "Self-identity, governance, socio-economic development, and culture." },
-      { title: "Elective Mathematics", track: "science", trackName: "Science", modules: 12, progress: 45, desc: "Calculus, vectors, mechanics, matrices, and probability theory." },
-      { title: "Physics", track: "science", trackName: "Science", modules: 10, progress: 50, desc: "Mechanics, waves, optics, electricity, magnetism, and atomic physics." },
-      { title: "Chemistry", track: "science", trackName: "Science", modules: 11, progress: 60, desc: "Organic chemistry, stoichiometry, thermodynamics, and electrochemistry." },
-      { title: "Financial Accounting", track: "business", trackName: "Business", modules: 9, progress: 30, desc: "Double entry systems, trial balances, final accounts, and partnerships." },
-      { title: "Economics", track: "business", trackName: "Business", modules: 8, progress: 75, desc: "Microeconomics, supply & demand, macroeconomics, and West African trade." },
-      { title: "Government", track: "arts", trackName: "Arts", modules: 7, progress: 40, desc: "Political concepts, constitutional developments, and international relations." },
-      { title: "General Agriculture", track: "agric", trackName: "Agric", modules: 8, progress: 85, desc: "Crop production, soil science, animal husbandry, and farm mechanization." }
-    ];
-
-    function renderSubjects(filter = 'all') {
-      const grid = document.getElementById('subjects-grid');
-      grid.innerHTML = '';
-
-      const filtered = filter === 'all' ? subjectsData : subjectsData.filter(s => s.track === filter);
-
-      filtered.forEach(sub => {
-        const card = document.createElement('div');
-        card.className = "rounded-2xl border border-slate-800 bg-slate-900 p-5 flex flex-col justify-between hover:border-slate-700 transition-all";
-        card.innerHTML = `
-          <div>
-            <div class="flex justify-between items-start">
-              <span class="rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">${sub.trackName} Track</span>
-              <span class="text-xs text-slate-400">${sub.modules} Modules</span>
-            </div>
-            <h3 class="mt-3 text-lg font-bold text-white">${sub.title}</h3>
-            <p class="text-xs text-slate-400 mt-2 line-clamp-2">${sub.desc}</p>
-          </div>
-          <div class="mt-5 space-y-2">
-            <div class="flex justify-between text-xs font-medium">
-              <span class="text-slate-400">Coverage Progress</span>
-              <span class="text-indigo-400">${sub.progress}%</span>
-            </div>
-            <div class="w-full bg-slate-800 rounded-full h-1.5">
-              <div class="bg-indigo-500 h-1.5 rounded-full" style="width: ${sub.progress}%"></div>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function filterSubjects(trackKey) {
-      document.querySelectorAll('.track-btn').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('text-slate-400');
-      });
-      const activeBtn = document.querySelector(`.track-btn[data-track="${trackKey}"]`);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-indigo-600', 'text-white');
-        activeBtn.classList.remove('text-slate-400');
-      }
-      renderSubjects(trackKey);
-    }
-
-
-    // --- 3. GES / NACCA PDF LIBRARY DATA & MODAL ---
-    const pdfData = [
-      { title: "GES Core Mathematics Syllabus (SHS 1-3)", track: "core", size: "2.4 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "NaCCA / Ministry of Education" },
-      { title: "Integrated Science Curriculum Standards", track: "core", size: "3.1 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "NaCCA / Ministry of Education" },
-      { title: "Elective Physics WASSCE Practical Manual", track: "science", size: "4.8 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "GES Science Division" },
-      { title: "Financial Accounting Teaching Guide", track: "business", size: "1.9 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "NaCCA Ghana" },
-      { title: "English Language Literature & Comprehension", track: "core", size: "2.8 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "NaCCA / Ministry of Education" },
-      { title: "General Arts Government Syllabus", track: "arts", size: "2.1 MB", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", publisher: "Ministry of Education Ghana" }
-    ];
-
-    function renderPDFs(items = pdfData) {
-      const grid = document.getElementById('pdf-grid');
-      grid.innerHTML = '';
-
-      items.forEach(pdf => {
-        const card = document.createElement('div');
-        card.className = "rounded-2xl border border-slate-800 bg-slate-900 p-5 flex flex-col justify-between";
-        card.innerHTML = `
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="rounded-md bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold text-amber-400 uppercase">${pdf.track}</span>
-              <span class="text-xs text-slate-500">${pdf.size}</span>
-            </div>
-            <h3 class="text-base font-bold text-white line-clamp-2">${pdf.title}</h3>
-            <p class="text-xs text-slate-400">${pdf.publisher}</p>
-          </div>
-          <div class="mt-6 flex gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('${pdf.title}', '${pdf.url}')" class="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/30 py-2 text-xs font-semibold text-indigo-300 hover:bg-indigo-600/30">
-              <i data-lucide="eye" class="h-3.5 w-3.5"></i> Preview
-            </button>
-            <a href="${pdf.url}" target="_blank" download class="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-slate-800 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700">
-              <i data-lucide="download" class="h-3.5 w-3.5"></i> Download
-            </a>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-      lucide.createIcons();
-    }
-
-    function filterPDFs() {
-      const search = document.getElementById('pdf-search-input').value.toLowerCase();
-      const track = document.getElementById('pdf-track-select').value;
-
-      const filtered = pdfData.filter(pdf => {
-        const matchesSearch = pdf.title.toLowerCase().includes(search);
-        const matchesTrack = track === 'all' || pdf.track === track;
-        return matchesSearch && matchesTrack;
-      });
-
-      renderPDFs(filtered);
-    }
-
-    function openPdfModal(title, url) {
-      document.getElementById('pdf-modal-title').innerText = title;
-      document.getElementById('pdf-frame').src = url;
-      document.getElementById('pdf-modal').classList.remove('hidden');
-    }
-
-    function closePdfModal() {
-      document.getElementById('pdf-modal').classList.add('hidden');
-      document.getElementById('pdf-frame').src = 'about:blank';
-    }
-
-
-    // --- 4. PRACTICE QUIZZES ENGINE ---
-    const quizQuestions = [
-      {
-        question: "Which of the following processes is primarily responsible for heat transfer through solid metal rods?",
-        options: ["Radiation", "Conduction", "Convection", "Evaporation"],
-        correct: 1,
-        explanation: "Conduction occurs in solids when vibrating particles pass energy to adjacent particles directly."
-      },
-      {
-        question: "Solve for x in the equation: 2x + 5 = 15",
-        options: ["x = 3", "x = 5", "x = 7", "x = 10"],
-        correct: 1,
-        explanation: "Subtract 5 from both sides (2x = 10), then divide by 2 to get x = 5."
-      },
-      {
-        question: "What is the capital city of Ghana?",
-        options: ["Kumasi", "Tamale", "Accra", "Cape Coast"],
-        correct: 2,
-        explanation: "Accra has been the capital city of Ghana since 1877."
-      },
-      {
-        question: "Which organelle is referred to as the powerhouse of the cell in Biology?",
-        options: ["Nucleus", "Mitochondrion", "Ribosome", "Golgi Apparatus"],
-        correct: 1,
-        explanation: "Mitochondria generate most of the chemical energy needed to power the cell's biochemical reactions."
-      }
-    ];
-
-    let currentQuizIndex = 0;
-    let quizScore = 0;
-
-    function loadQuizQuestion() {
-      const q = quizQuestions[currentQuizIndex];
-      document.getElementById('quiz-question-counter').innerText = `Question ${currentQuizIndex + 1} of ${quizQuestions.length}`;
-      document.getElementById('quiz-question-text').innerText = q.question;
-      document.getElementById('quiz-explanation').classList.add('hidden');
-      document.getElementById('quiz-next-btn').classList.add('hidden');
-
-      const container = document.getElementById('quiz-options-container');
-      container.innerHTML = '';
-
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-950/60 text-xs font-medium text-slate-200 hover:border-indigo-500/50 transition-all flex items-center justify-between";
-        btn.innerHTML = `<span>${opt}</span> <i data-lucide="circle" class="h-4 w-4 text-slate-600"></i>`;
-        btn.onclick = () => selectQuizOption(idx, btn);
-        container.appendChild(btn);
-      });
-      lucide.createIcons();
-    }
-
-    function selectQuizOption(selectedIdx, btnElement) {
-      const q = quizQuestions[currentQuizIndex];
-      const buttons = document.querySelectorAll('#quiz-options-container button');
-      
-      // Disable further clicks
-      buttons.forEach(b => b.onclick = null);
-
-      if (selectedIdx === q.correct) {
-        btnElement.classList.add('border-emerald-500', 'bg-emerald-500/10', 'text-emerald-300');
-        quizScore += 10;
-        document.getElementById('quiz-score').innerText = `${quizScore} pts`;
-      } else {
-        btnElement.classList.add('border-rose-500', 'bg-rose-500/10', 'text-rose-300');
-        // Highlight correct answer
-        buttons[q.correct].classList.add('border-emerald-500', 'bg-emerald-500/10', 'text-emerald-300');
-      }
-
-      // Show Explanation
-      const expBox = document.getElementById('quiz-explanation');
-      document.getElementById('quiz-explanation-text').innerText = q.explanation;
-      expBox.classList.remove('hidden');
-
-      document.getElementById('quiz-next-btn').classList.remove('hidden');
-    }
-
-    function nextQuizQuestion() {
-      currentQuizIndex++;
-      if (currentQuizIndex < quizQuestions.length) {
-        loadQuizQuestion();
-      } else {
-        document.getElementById('quiz-box').classList.add('hidden');
-        document.getElementById('quiz-summary').classList.remove('hidden');
-        document.getElementById('quiz-final-score').innerText = `You earned ${quizScore} points across ${quizQuestions.length} questions!`;
-      }
-    }
-
-    function resetCurrentQuiz() {
-      currentQuizIndex = 0;
-      quizScore = 0;
-      document.getElementById('quiz-score').innerText = `0 pts`;
-      document.getElementById('quiz-box').classList.remove('hidden');
-      document.getElementById('quiz-summary').classList.add('hidden');
-      loadQuizQuestion();
-    }
-
-
-    // --- 5. FLASHCARDS ENGINE LOGIC ---
-    const flashcardDecks = {
-      math: [
-        { q: "What is the quadratic formula?", a: "x = [-b ± √(b² - 4ac)] / 2a" },
-        { q: "Define a Pythagorean Triple.", a: "Three positive integers a, b, c such that a² + b² = c²." },
-        { q: "What is the sum of interior angles of a polygon with n sides?", a: "(n - 2) × 180°" }
-      ],
-      science: [
-        { q: "What is Hooke's Law?", a: "Force exerted by a spring is proportional to extension (F = kx)." },
-        { q: "What is the chemical formula of Rust?", a: "Hydrated Iron(III) Oxide: Fe₂O₃·nH₂O" }
-      ],
-      english: [
-        { q: "Define a Simile.", a: "A figure of speech comparing two things using 'like' or 'as'." },
-        { q: "What is an Antonym?", a: "A word opposite in meaning to another word." }
-      ],
-      social: [
-        { q: "In what year did Ghana achieve independence?", a: "March 6, 1957" },
-        { q: "Who was Ghana's first President?", a: "Dr. Kwame Nkrumah" }
-      ]
-    };
-
-    let currentDeckKey = 'math';
-    let currentFcIndex = 0;
-    let isFlipped = false;
-
-    function loadFlashcardDeck() {
-      currentDeckKey = document.getElementById('flashcard-deck').value;
-      currentFcIndex = 0;
-      isFlipped = false;
-      updateFlashcardUI();
-    }
-
-    function updateFlashcardUI() {
-      const deck = flashcardDecks[currentDeckKey];
-      const card = deck[currentFcIndex];
-
-      const inner = document.getElementById('flashcard-inner');
-      if (isFlipped) {
-        inner.classList.remove('rotate-y-180');
-        isFlipped = false;
-      }
-
-      document.getElementById('fc-question').innerText = card.q;
-      document.getElementById('fc-answer').innerText = card.a;
-      document.getElementById('fc-tracker').innerText = `Card ${currentFcIndex + 1} of ${deck.length}`;
-    }
-
-    function flipFlashcard() {
-      const inner = document.getElementById('flashcard-inner');
-      isFlipped = !isFlipped;
-      if (isFlipped) {
-        inner.classList.add('rotate-y-180');
-      } else {
-        inner.classList.remove('rotate-y-180');
-      }
-    }
-
-    function nextFlashcard() {
-      const deck = flashcardDecks[currentDeckKey];
-      currentFcIndex = (currentFcIndex + 1) % deck.length;
-      updateFlashcardUI();
-    }
-
-    function prevFlashcard() {
-      const deck = flashcardDecks[currentDeckKey];
-      currentFcIndex = (currentFcIndex - 1 + deck.length) % deck.length;
-      updateFlashcardUI();
-    }
-
-    function markFlashcardMastered(mastered) {
-      nextFlashcard();
-    }
-
-
-    // --- 6. POMODORO TIMER LOGIC ---
-    let pomoSeconds = 25 * 60;
-    let pomoInterval = null;
-    let isPomoRunning = false;
-
-    function updatePomoDisplay() {
-      const mins = Math.floor(pomoSeconds / 60);
-      const secs = pomoSeconds % 60;
-      document.getElementById('pomo-display').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-
-    function togglePomodoro() {
-      const btn = document.getElementById('pomo-start-btn');
-      const status = document.getElementById('pomo-status');
-
-      if (isPomoRunning) {
-        clearInterval(pomoInterval);
-        isPomoRunning = false;
-        btn.innerText = "Resume Focus";
-        status.innerText = "Timer paused.";
-      } else {
-        isPomoRunning = true;
-        btn.innerText = "Pause Focus";
-        status.innerText = "Focus session active! Keep studying.";
-
-        pomoInterval = setInterval(() => {
-          if (pomoSeconds > 0) {
-            pomoSeconds--;
-            updatePomoDisplay();
-          } else {
-            clearInterval(pomoInterval);
-            isPomoRunning = false;
-            btn.innerText = "Start Focus";
-            status.innerText = "Session complete! Take a 5-minute break.";
-            alert("Pomodoro Focus Session Finished!");
-          }
-        }, 1000);
-      }
-    }
-
-    function resetPomodoro() {
-      clearInterval(pomoInterval);
-      isPomoRunning = false;
-      pomoSeconds = 25 * 60;
-      updatePomoDisplay();
-      document.getElementById('pomo-start-btn').innerText = "Start Focus";
-      document.getElementById('pomo-status').innerText = "Stay focused for 25 minutes before taking a 5-minute break.";
-    }
-  </script>
+/* ============ EVENTS & START ============ */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-tab],[data-track],[data-open],[data-opt]');
+  if (!t) return;
+  if (t.dataset.tab) switchTab(t.dataset.tab);
+  else if (t.dataset.track) renderSubjects(t.dataset.track);
+  else if (t.dataset.open) openPdf(shown[+t.dataset.open]);
+  else if (t.dataset.opt) pickOption(+t.dataset.opt);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdf(); });
+document.addEventListener('DOMContentLoaded', () => {
+  buildNav();
+  $('core-cards').innerHTML = subjectsData.filter(s => s.track === 'core').map(subjectCard).join('');
+  $('plan-rows').innerHTML = plan.map(([d, w, t]) => `<div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800 gap-2"><span class="w-24 text-xs font-bold text-amber-400 uppercase tracking-wider">${d}</span><span class="flex-1 text-xs text-slate-200">${w}</span><span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-1 rounded">${t}</span></div>`).join('');
+  renderSubjects(); renderTasks(); loadQuestion(); showCard(); updateStats(); renderPDFs(); pomoShow();
+  $('st-pdfs').textContent = official.length;
+  $('pdf-search').addEventListener('input', renderPDFs); $('pdf-track').addEventListener('change', renderPDFs);
+  $('pdf-x').addEventListener('click', closePdf); $('pdf-close').addEventListener('click', closePdf);
+  $('quiz-next').addEventListener('click', nextQuestion); $('quiz-restart').addEventListener('click', resetQuiz); $('quiz-again').addEventListener('click', resetQuiz);
+  $('fc-card').addEventListener('click', flip); $('fc-card').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+  $('fc-deck').addEventListener('change', () => { deckKey = $('fc-deck').value; fi = 0; showCard(); });
+  $('fc-prev').addEventListener('click', () => stepCard(-1)); $('fc-next').addEventListener('click', () => stepCard(1));
+  $('fc-master').addEventListener('click', () => markCard(true)); $('fc-review').addEventListener('click', () => markCard(false));
+  $('pomo-start').addEventListener('click', togglePomo); $('pomo-reset').addEventListener('click', resetPomo);
+  $('task-add').addEventListener('click', () => { const v = $('task-input').value.trim(); if (!v) return; tasks.push({ text: v, done: false }); store.set('tasks', tasks); $('task-input').value = ''; renderTasks(); });
+  $('task-input').addEventListener('keydown', e => { if (e.key === 'Enter') $('task-add').click(); });
+  $('task-list').addEventListener('change', e => { const i = e.target.dataset.task; if (i === undefined) return; tasks[i].done = e.target.checked; store.set('tasks', tasks); renderTasks(); });
+  switchTab('dashboard'); icons();
+  loadHosted().then(icons);
+});
+</script>
 </body>
 </html>
