@@ -107,18 +107,68 @@ a.btn{display:inline-block;text-decoration:none}
 .rstat{display:none;text-align:center;color:var(--muted);padding:60px 16px}
 [hidden]{display:none!important}
 @media(max-width:640px){.rpage{display:none}.zoom{display:none}.rbar{gap:8px;padding-left:12px;padding-right:12px}}
+.nav{overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.logo{flex:none;white-space:nowrap}.nav a.link{white-space:nowrap;padding:6px 0}
+.nav a.link.on{color:var(--text);box-shadow:0 2px 0 var(--cyan)}
+.st{padding-bottom:70px}.st-head{padding:44px 0 20px}.st-head h1{font-size:clamp(30px,4.4vw,44px)}.st-head p{color:var(--muted);margin:0;max-width:56ch}
+.st-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:18px}
+.st-card h2{font-size:20px;margin-bottom:12px}
+.st-row,.st-split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.st-k{color:var(--muted);font-size:14px;margin-bottom:6px}
+.st-big{font:700 26px var(--head);margin-bottom:10px}
+.st input,.st select{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font:inherit;color:inherit;outline:0;max-width:100%}
+.st input:focus,.st select:focus{border-color:var(--cyan)}
+.st label{display:block;font-weight:600;font-size:14px}.st label input,.st label select{display:block;width:100%;margin-top:6px;font-weight:400}
+.st-split label{margin-bottom:12px}
+.st-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden}.st-bar i{display:block;height:100%;width:0;background:var(--cyan);transition:width .3s}
+.st-add{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.st-add label{flex:0 1 150px}.st-add .grow{flex:1 1 240px}
+.st-weeknav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 16px}.st-weeknav b{font-family:var(--head);flex:1;text-align:center;min-width:180px}
+.st-week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.st-day{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:150px;min-width:0}
+.st-day.today{border-color:var(--cyan)}
+.st-day h3{font:700 14px var(--head);margin:0 0 10px;color:var(--muted)}.st-day h3 span{color:var(--text);font-size:18px;margin-left:4px}
+.st-task{border-left:3px solid var(--c);background:rgba(255,255,255,.03);border-radius:0 6px 6px 0;padding:8px;margin-bottom:8px;font-size:14px}
+.st .st-task label{display:flex;gap:8px;font-weight:400;font-size:14px;cursor:pointer}
+.st .st-task label input{width:auto;display:inline-block;margin:4px 0 0;padding:0;flex:none;accent-color:var(--cyan)}
+.st-task b{display:block;font-weight:600;overflow-wrap:anywhere}.st-task small{color:var(--muted)}
+.st-task.done b{text-decoration:line-through;color:var(--muted)}
+.st-tact{display:flex;gap:6px;margin:6px 0 0 24px}
+.st-tact button,.st-s button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;font-size:12px;padding:3px 9px;cursor:pointer}
+.st-tact button:hover,.st-s button:hover{color:var(--text);border-color:var(--cyan)}
+.st-none{color:#6a7aa3;font-size:13px;margin:0}
+.st-clock{font:700 clamp(46px,9vw,72px)/1 var(--head);text-align:center;margin:22px 0 8px;font-variant-numeric:tabular-nums}
+.st-note{text-align:center;color:var(--muted);min-height:26px;margin-bottom:16px}
+.st-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.st-man{margin-top:18px;color:var(--muted);font-size:14px}.st-man summary{cursor:pointer}.st-manrow{display:flex;gap:10px;margin-top:10px}
+.st-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.st-stats div{background:var(--bg);border-radius:8px;padding:10px}.st-stats b{display:block;font:700 20px var(--head)}.st-stats small{color:var(--muted);font-size:13px}
+.st-chart{display:flex;gap:8px;align-items:end;height:170px}
+.st-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;min-width:0}
+.st-col .v{font-size:11px;color:var(--muted);height:14px;white-space:nowrap}
+.st-barv{flex:1;width:100%;display:flex;align-items:end;background:var(--bg);border-radius:6px;overflow:hidden}
+.st-barv i{display:block;width:100%;background:var(--cyan);border-radius:6px 6px 0 0}
+.st-col small{color:var(--muted);font-size:12px}
+.st-sub{display:grid;grid-template-columns:170px 1fr 64px;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+.st-sub .t{height:10px;background:var(--bg);border-radius:5px;overflow:hidden}.st-sub .t i{display:block;height:100%;border-radius:5px}
+.st-sub span:last-child{text-align:right;color:var(--muted)}
+.st-s{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}.st-s div{flex:1;min-width:0}.st-s small{color:var(--muted)}
+.st-empty{color:var(--muted);margin:0}
+@media(max-width:980px){.st-week{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.st-row,.st-split{grid-template-columns:1fr}.st-stats{grid-template-columns:repeat(2,1fr)}.st-sub{grid-template-columns:110px 1fr 54px}}
+@media(max-width:480px){.st-week{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
 <nav><div class="wrap nav">
   <a class="logo" href="#top"><svg viewBox="0 0 28 28" fill="none" stroke="#6fd8f5" stroke-width="1.8"><circle cx="14" cy="14" r="7" fill="#a498ff" stroke="none"/><ellipse cx="14" cy="14" rx="13" ry="4.5" transform="rotate(-22 14 14)"/></svg>Lumen Library</a>
-  <a class="link" href="#browse">Browse PDFs</a>
+  <a class="link" id="n-browse" href="#browse">Browse PDFs</a>
+  <a class="link" id="n-planner" href="#planner">Study planner</a>
+  <a class="link" id="n-monitor" href="#monitor">Study monitor</a>
   <span class="sp"></span>
   
 </div></nav>
 
-<main class="wrap" id="top">
+<main class="wrap" id="top" data-view="browse">
   <section class="hero">
     <div>
       <h1>Free study PDFs, ready when you are.</h1>
@@ -150,6 +200,43 @@ a.btn{display:inline-block;text-decoration:none}
 <footer><div class="wrap">Lumen Library · free study PDFs for WASSCE students</div></footer>
 
 
+
+<main class="wrap st" id="v-planner" data-view="planner" hidden>
+  <div class="st-head"><h1>Study planner</h1><p>Plan what to study each day of the week. Your plan is saved in this browser on this device.</p></div>
+  <div class="st-row">
+    <div class="st-card"><div class="st-k">Exam countdown</div><div class="st-big" id="pl-days">Set your exam date</div><input type="date" id="pl-exam" aria-label="Exam date"></div>
+    <div class="st-card"><div class="st-k">This week</div><div class="st-big" id="pl-prog">0 of 0 done</div><div class="st-bar"><i id="pl-bar"></i></div></div>
+  </div>
+  <div class="st-card st-add">
+    <label>Day<input type="date" id="pl-date"></label>
+    <label>Subject<select id="pl-sub"></select></label>
+    <label class="grow">What will you study?<input id="pl-text" maxlength="100" placeholder="e.g. Waves and optics, past questions"></label>
+    <label>Minutes<input type="number" id="pl-min" min="5" max="600" step="5" value="45"></label>
+    <button class="btn" id="pl-add">Add to plan</button>
+  </div>
+  <div class="st-weeknav"><button class="btn alt" id="pl-prev">‹ Previous</button><b id="pl-range"></b><button class="btn alt" id="pl-next">Next ›</button><button class="btn alt" id="pl-today">This week</button></div>
+  <div class="st-week" id="pl-week"></div>
+</main>
+
+<main class="wrap st" id="v-monitor" data-view="monitor" hidden>
+  <div class="st-head"><h1>Study monitor</h1><p>Time your study sessions and see how your week is going. Sessions are saved in this browser on this device.</p></div>
+  <div class="st-split">
+    <section class="st-card">
+      <label>Subject<select id="mo-sub"></select></label>
+      <label>Timer<select id="mo-mode"><option value="0">Stopwatch</option><option value="25">25 minute focus</option><option value="45">45 minute focus</option><option value="60">60 minute focus</option><option value="90">90 minute focus</option></select></label>
+      <div class="st-clock" id="mo-clock">00:00</div>
+      <div class="st-note" id="mo-note"></div>
+      <div class="st-btns"><button class="btn" id="mo-go">Start</button><button class="btn alt" id="mo-save">Finish and save</button><button class="btn alt" id="mo-reset">Reset</button></div>
+      <details class="st-man"><summary>Add time you studied earlier</summary><div class="st-manrow"><input type="number" id="mo-mm" min="1" max="600" placeholder="Minutes"><button class="btn alt" id="mo-madd">Add to today</button></div></details>
+    </section>
+    <section class="st-card">
+      <div class="st-stats"><div><b id="mo-today">0m</b><small>Today</small></div><div><b id="mo-week">0m</b><small>This week</small></div><div><b id="mo-streak">0</b><small>Day streak</small></div><div><b id="mo-count">0</b><small>Sessions this week</small></div></div>
+      <div class="st-k">Last 7 days</div><div class="st-chart" id="mo-chart"></div>
+    </section>
+  </div>
+  <section class="st-card"><h2>This week by subject</h2><div id="mo-subj"></div></section>
+  <section class="st-card"><h2>Recent sessions</h2><div id="mo-list"></div></section>
+</main>
 
 <div class="reader" id="rd" role="dialog" aria-modal="true" aria-labelledby="rt" hidden>
   <div class="rbar">
@@ -303,6 +390,101 @@ $('grid').addEventListener('click',e=>{
   if(r)openReader(DATA[+r.dataset.read]);
   if(dl){e.preventDefault();saveFile(DATA[+dl.dataset.dl],dl)}
 });
+/* ===== Study planner and study monitor (saved in this browser only) ===== */
+const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parseD=s=>{const p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2])};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const monday=d=>{const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x};
+const hm=m=>m>=60?Math.floor(m/60)+'h'+(m%60?' '+m%60+'m':''):m+'m';
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const sc=n=>{const a=ALL.find(x=>x.name===n);return a?a.col:'#97a5c9'};
+const BASETITLE=document.title;
+['pl-sub','mo-sub'].forEach(id=>Object.entries(G).forEach(([g,v])=>{const og=document.createElement('optgroup');og.label=g;v[1].forEach(x=>{const n=x.split('|')[0];og.appendChild(new Option(n,n))});$(id).appendChild(og)}));
+
+/* planner */
+let PLAN=LS.get('lumen-plan',[]),weekStart=monday(new Date());
+$('pl-date').value=ymd(new Date());
+function renderPlanner(){
+  const days=[...Array(7)].map((_,i)=>addDays(weekStart,i)),keys=days.map(ymd),today=ymd(new Date());
+  $('pl-range').textContent=days[0].toLocaleDateString(undefined,{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+  const wk=PLAN.filter(t=>keys.includes(t.date)),done=wk.filter(t=>t.done).length;
+  $('pl-prog').textContent=done+' of '+wk.length+' done';$('pl-bar').style.width=(wk.length?done/wk.length*100:0)+'%';
+  $('pl-week').innerHTML=days.map((d,i)=>{const ts=wk.filter(t=>t.date===keys[i]);
+    return '<div class="st-day'+(keys[i]===today?' today':'')+'"><h3>'+d.toLocaleDateString(undefined,{weekday:'short'})+'<span>'+d.getDate()+'</span></h3>'+
+    (ts.length?ts.map(t=>'<div class="st-task'+(t.done?' done':'')+'" style="--c:'+sc(t.subject)+'"><label><input type="checkbox" data-done="'+t.id+'"'+(t.done?' checked':'')+'><span><b>'+esc(t.text)+'</b><small>'+esc(t.subject)+' · '+hm(t.minutes)+'</small></span></label><div class="st-tact"><button data-start="'+t.id+'">Start timer</button><button data-del="'+t.id+'" aria-label="Remove task">✕</button></div></div>').join(''):'<p class="st-none">Nothing planned</p>')+'</div>'}).join('');
+  const ex=LS.get('lumen-exam','');$('pl-exam').value=ex;
+  if(ex){const n=Math.round((parseD(ex)-parseD(today))/864e5);$('pl-days').textContent=n>0?n+(n===1?' day to go':' days to go'):n===0?'Exam day. Good luck!':'Exam date has passed'}else $('pl-days').textContent='Set your exam date';
+}
+$('pl-exam').onchange=e=>{LS.set('lumen-exam',e.target.value);renderPlanner()};
+$('pl-add').onclick=()=>{
+  const text=$('pl-text').value.trim(),date=$('pl-date').value;
+  if(!text||!date){$('pl-text').focus();return}
+  PLAN.push({id:uid(),date,subject:$('pl-sub').value,text,minutes:Math.max(5,+$('pl-min').value||45),done:false});LS.set('lumen-plan',PLAN);
+  weekStart=monday(parseD(date));$('pl-text').value='';renderPlanner();
+};
+$('pl-text').onkeydown=e=>{if(e.key==='Enter')$('pl-add').click()};
+$('pl-prev').onclick=()=>{weekStart=addDays(weekStart,-7);renderPlanner()};
+$('pl-next').onclick=()=>{weekStart=addDays(weekStart,7);renderPlanner()};
+$('pl-today').onclick=()=>{weekStart=monday(new Date());renderPlanner()};
+let pendingSub=null;
+$('pl-week').addEventListener('change',e=>{const c=e.target.closest('[data-done]');if(!c)return;const t=PLAN.find(x=>x.id===c.dataset.done);t.done=c.checked;LS.set('lumen-plan',PLAN);renderPlanner()});
+$('pl-week').addEventListener('click',e=>{
+  const d=e.target.closest('[data-del]'),st=e.target.closest('[data-start]');
+  if(d){PLAN=PLAN.filter(x=>x.id!==d.dataset.del);LS.set('lumen-plan',PLAN);renderPlanner()}
+  if(st){const t=PLAN.find(x=>x.id===st.dataset.start);pendingSub=t.subject;location.hash='monitor'}
+});
+
+/* monitor */
+let T=LS.get('lumen-timer',null)||{running:false,acc:0,at:0,mode:0,subject:''},SES=LS.get('lumen-sessions',[]);
+const elapsed=()=>T.acc+(T.running?Date.now()-T.at:0);
+function clockText(){const tg=T.mode*60000,e=elapsed(),s=Math.floor((tg?Math.max(0,tg-e):e)/1000);return(s>=3600?pad(Math.floor(s/3600))+':':'')+pad(Math.floor(s/60)%60)+':'+pad(s%60)}
+function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.15;o.start();o.stop(c.currentTime+.6)}catch(e){}try{navigator.vibrate&&navigator.vibrate(300)}catch(e){}}
+function paintTimer(){
+  const tg=T.mode*60000,over=tg&&elapsed()>=tg;
+  $('mo-clock').textContent=clockText();
+  $('mo-go').textContent=T.running?'Pause':elapsed()>0?'Resume':'Start';$('mo-go').disabled=!!over;
+  $('mo-note').textContent=over?'Time is up. Save this session.':T.running?'Studying '+T.subject+'…':elapsed()>0?'Paused.':'Pick a subject and press Start.';
+  $('mo-save').disabled=elapsed()<30000;$('mo-sub').disabled=$('mo-mode').disabled=elapsed()>0;
+  document.title=T.running?clockText()+' · Studying':BASETITLE;
+}
+function timerTick(){const tg=T.mode*60000;if(T.running&&tg&&elapsed()>=tg){T.acc=tg;T.running=false;LS.set('lumen-timer',T);beep()}paintTimer()}
+setInterval(()=>{if(T.running)timerTick()},500);
+$('mo-go').onclick=()=>{
+  if(T.running){T.acc+=Date.now()-T.at;T.running=false}
+  else{if(elapsed()===0){T.subject=$('mo-sub').value;T.mode=+$('mo-mode').value}T.at=Date.now();T.running=true}
+  LS.set('lumen-timer',T);paintTimer();
+};
+function resetTimer(){T={running:false,acc:0,at:0,mode:+$('mo-mode').value,subject:''};LS.set('lumen-timer',T)}
+$('mo-reset').onclick=()=>{if(elapsed()>=60000&&!confirm('Discard this session without saving?'))return;resetTimer();renderMonitor()};
+$('mo-save').onclick=()=>{const m=Math.round(elapsed()/60000);if(m<1)return;SES.push({id:uid(),subject:T.subject||$('mo-sub').value,minutes:m,date:ymd(new Date()),ts:Date.now()});LS.set('lumen-sessions',SES);resetTimer();renderMonitor()};
+$('mo-madd').onclick=()=>{const m=Math.round(+$('mo-mm').value);if(!(m>=1&&m<=600)){$('mo-mm').focus();return}SES.push({id:uid(),subject:$('mo-sub').value,minutes:m,date:ymd(new Date()),ts:Date.now()});LS.set('lumen-sessions',SES);$('mo-mm').value='';renderMonitor()};
+$('mo-mode').onchange=e=>{if(elapsed()===0){T.mode=+e.target.value;LS.set('lumen-timer',T);paintTimer()}};
+$('mo-list').addEventListener('click',e=>{const b=e.target.closest('[data-sdel]');if(!b)return;SES=SES.filter(x=>x.id!==b.dataset.sdel);LS.set('lumen-sessions',SES);renderMonitor()});
+function renderMonitor(){
+  if(elapsed()>0)$('mo-sub').value=T.subject;else if(pendingSub){$('mo-sub').value=pendingSub}
+  pendingSub=null;$('mo-mode').value=String(T.mode);paintTimer();
+  const now=new Date(),today=ymd(now),wk=[...Array(7)].map((_,i)=>ymd(addDays(monday(now),i))),sum=a=>a.reduce((n,x)=>n+x.minutes,0),wks=SES.filter(x=>wk.includes(x.date));
+  const have=new Set(SES.map(x=>x.date));let streak=0,d=new Date();if(!have.has(ymd(d)))d=addDays(d,-1);while(have.has(ymd(d))){streak++;d=addDays(d,-1)}
+  $('mo-today').textContent=hm(sum(SES.filter(x=>x.date===today)));$('mo-week').textContent=hm(sum(wks));$('mo-streak').textContent=streak;$('mo-count').textContent=wks.length;
+  const last=[...Array(7)].map((_,i)=>addDays(now,i-6)),mins=last.map(x=>sum(SES.filter(s=>s.date===ymd(x)))),mx=Math.max(60,...mins);
+  $('mo-chart').innerHTML=last.map((x,i)=>'<div class="st-col"><span class="v">'+(mins[i]?hm(mins[i]):'')+'</span><div class="st-barv"><i style="height:'+(mins[i]/mx*100)+'%"></i></div><small>'+x.toLocaleDateString(undefined,{weekday:'short'})+'</small></div>').join('');
+  const by={};wks.forEach(x=>by[x.subject]=(by[x.subject]||0)+x.minutes);const rows=Object.entries(by).sort((a,b)=>b[1]-a[1]);
+  $('mo-subj').innerHTML=rows.length?rows.map(([n,m])=>'<div class="st-sub"><span>'+esc(n)+'</span><div class="t"><i style="width:'+(m/rows[0][1]*100)+'%;background:'+sc(n)+'"></i></div><span>'+hm(m)+'</span></div>').join(''):'<p class="st-empty">No sessions yet this week. Start the timer to log your first one.</p>';
+  const rec=[...SES].sort((a,b)=>b.ts-a.ts).slice(0,12);
+  $('mo-list').innerHTML=rec.length?rec.map(x=>'<div class="st-s"><div><b>'+esc(x.subject)+'</b><br><small>'+parseD(x.date).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})+' · '+hm(x.minutes)+'</small></div><button data-sdel="'+x.id+'" aria-label="Delete session">Delete</button></div>').join(''):'<p class="st-empty">Saved sessions will show up here.</p>';
+}
+
+/* switching between the three views */
+function route(){
+  const h=location.hash.slice(1),v=h==='planner'||h==='monitor'?h:'browse';
+  document.querySelectorAll('[data-view]').forEach(m=>m.hidden=m.dataset.view!==v);
+  ['browse','planner','monitor'].forEach(n=>$('n-'+n).classList.toggle('on',n===v));
+  if(v==='planner')renderPlanner();if(v==='monitor')renderMonitor();
+  if(v==='browse'&&h==='browse')$('browse').scrollIntoView();else scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
 load();
 </script>
 </body>
