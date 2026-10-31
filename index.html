@@ -155,13 +155,41 @@ a.btn{display:inline-block;text-decoration:none}
 @media(max-width:980px){.st-week{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.st-row,.st-split{grid-template-columns:1fr}.st-stats{grid-template-columns:repeat(2,1fr)}.st-sub{grid-template-columns:110px 1fr 54px}}
 @media(max-width:480px){.st-week{grid-template-columns:1fr}}
+.pr-filters{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:16px}
+.pr-filters label{flex:0 1 250px;font-weight:600;font-size:14px;display:block}
+.pr-filters select{display:block;width:100%;margin-top:6px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font:inherit;color:inherit;outline:0}
+.pr-filters select:focus{border-color:var(--cyan)}
+.pr-count{margin-left:auto;color:var(--muted);align-self:center}
+.pq{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:8px;padding:14px 16px;margin-bottom:10px;cursor:pointer;color:var(--text);font:inherit}
+.pq:hover{border-color:var(--c)}
+.pq-top{display:flex;gap:12px;align-items:center;margin-bottom:6px;font-size:14px;flex-wrap:wrap}.pq-sub{color:var(--c);font-weight:600}.pq-dif{color:var(--muted)}.pq-ok{color:#6ee0a8;margin-left:auto}
+.pq-text{display:block;overflow-wrap:anywhere}
+.sv-in{max-width:760px;margin:0 auto}
+.sv-q{font-size:19px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:18px}
+.sv-opt{display:flex;gap:10px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.sv-opt:hover{border-color:var(--violet)}.sv-opt input{margin-top:5px;accent-color:var(--cyan)}
+.sv-opt.good{border-color:#6ee0a8;background:rgba(110,224,168,.08)}.sv-opt.bad{border-color:#ff8f9a;background:rgba(255,143,154,.08)}
+.sv-w{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:inherit;color:inherit;min-height:90px;resize:vertical;outline:0;margin-bottom:6px}.sv-w:focus{border-color:var(--cyan)}
+.sv-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.sv-fb{min-height:24px;margin:12px 0;font-weight:600}.sv-fb.good{color:#6ee0a8}.sv-fb.bad{color:#ff8f9a}
+.sv-sol{background:rgba(110,224,168,.07);border-left:3px solid #6ee0a8;border-radius:0 8px 8px 0;padding:14px 16px;margin:16px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.sv-sol h3{margin:0 0 8px;font:700 16px var(--head)}
+.sv-ai{margin-top:26px;border-top:1px solid var(--line);padding-top:18px}.sv-ai h3{font:700 17px var(--head);margin:0 0 10px}
+.sv-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sv-chips button{background:none;border:1px solid var(--violet);color:var(--text);border-radius:99px;padding:6px 14px;cursor:pointer;font:inherit}.sv-chips button:hover{background:rgba(164,152,255,.12)}
+.sv-m{max-width:92%;border-radius:10px;padding:10px 14px;margin-bottom:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.sv-m.user{background:#1b2750;margin-left:auto}.sv-m.ai{background:var(--panel);border:1px solid var(--line)}.sv-m.err{border-color:#ff8f9a;color:#ffb3bb}
+.sv-ask{display:flex;gap:10px}.sv-ask input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:inherit;color:inherit;outline:0}.sv-ask input:focus{border-color:var(--cyan)}
+.sv-note{display:block;color:#7080aa;margin-top:8px;font-size:13px}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
 <nav><div class="wrap nav">
   <a class="logo" href="#top"><svg viewBox="0 0 28 28" fill="none" stroke="#6fd8f5" stroke-width="1.8"><circle cx="14" cy="14" r="7" fill="#a498ff" stroke="none"/><ellipse cx="14" cy="14" rx="13" ry="4.5" transform="rotate(-22 14 14)"/></svg>Lumen Library</a>
   <a class="link" id="n-browse" href="#browse">Browse PDFs</a>
+  <a class="link" id="n-practice" href="#practice">Practice</a>
   <a class="link" id="n-planner" href="#planner">Study planner</a>
   <a class="link" id="n-monitor" href="#monitor">Study monitor</a>
   <span class="sp"></span>
@@ -238,6 +266,27 @@ a.btn{display:inline-block;text-decoration:none}
   <section class="st-card"><h2>Recent sessions</h2><div id="mo-list"></div></section>
 </main>
 
+<main class="wrap st" id="v-practice" data-view="practice" hidden>
+  <div class="st-head"><h1>Practice questions</h1><p>Pick a question and solve it. Stuck? Ask the AI tutor for a hint or a step-by-step explanation.</p></div>
+  <div class="pr-filters">
+    <label>Subject<select id="pr-sub"><option value="">All subjects</option></select></label>
+    <label>Difficulty<select id="pr-dif"><option value="">Any</option><option>Easy</option><option>Medium</option><option>Hard</option></select></label>
+    <span class="pr-count" id="pr-count"></span>
+  </div>
+  <div id="pr-list"></div>
+  <div style="text-align:center;margin-top:18px"><button class="btn alt" id="pr-more" hidden>Show more questions</button></div>
+</main>
+
+<div class="reader" id="sv" role="dialog" aria-modal="true" aria-labelledby="sv-t" hidden>
+  <div class="rbar">
+    <div class="rtitle"><b id="sv-t"></b><small id="sv-s"></small></div>
+    <span class="rpage" id="sv-n"></span>
+    <button class="rx" id="sv-prev" aria-label="Previous question">‹</button><button class="rx" id="sv-next" aria-label="Next question">›</button>
+    <button class="rx" id="sv-x" aria-label="Close">✕</button>
+  </div>
+  <div class="rview"><div class="sv-in" id="sv-in"></div></div>
+</div>
+
 <div class="reader" id="rd" role="dialog" aria-modal="true" aria-labelledby="rt" hidden>
   <div class="rbar">
     <div class="rtitle"><b id="rt"></b><small id="rs"></small></div>
@@ -248,6 +297,8 @@ a.btn{display:inline-block;text-decoration:none}
   </div>
   <div class="rview" id="rv"><div class="rstat" id="rst"></div><div id="pages"></div></div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 /* SUPABASE SETTINGS: fill these in. Use the public "anon" key only, never the service-role key. */
@@ -476,12 +527,105 @@ function renderMonitor(){
   $('mo-list').innerHTML=rec.length?rec.map(x=>'<div class="st-s"><div><b>'+esc(x.subject)+'</b><br><small>'+parseD(x.date).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})+' · '+hm(x.minutes)+'</small></div><button data-sdel="'+x.id+'" aria-label="Delete session">Delete</button></div>').join(''):'<p class="st-empty">Saved sessions will show up here.</p>';
 }
 
+/* ===== Practice questions with an AI tutor ===== */
+const SOLVED=LS.get('lumen-solved',{});
+let QS=[],qState=(CFG.url&&CFG.key)?'idle':'unset',qLim=20,FL=[],SV=null;
+Object.entries(G).forEach(([g,v])=>{const og=document.createElement('optgroup');og.label=g;v[1].forEach(x=>{const n=x.split('|')[0];og.appendChild(new Option(n,n))});$('pr-sub').appendChild(og)});
+const mdLite=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+function math(el){if(window.renderMathInElement)try{renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false})}catch(e){}}
+async function loadQs(){
+  if(qState!=='idle'&&qState!=='error')return;
+  qState='loading';paintQs();
+  try{const r=await fetch(CFG.url+'/rest/v1/questions?select=*&published=eq.true&order=created_at.desc',{headers:{apikey:CFG.key,Authorization:'Bearer '+CFG.key}});if(!r.ok)throw new Error(r.status);QS=await r.json();qState='ready'}
+  catch(e){qState='error'}
+  paintQs();
+}
+function paintQs(){
+  const el=$('pr-list');
+  if(qState==='unset'){el.innerHTML='<p class="st-empty">Practice questions aren’t connected yet.</p>';return}
+  if(qState==='idle'||qState==='loading'){el.innerHTML='<p class="st-empty">Loading questions…</p>';return}
+  if(qState==='error'){el.innerHTML='<p class="st-empty">Couldn’t load the questions. Check your connection and reload the page.</p>';return}
+  const sub=$('pr-sub').value,dif=$('pr-dif').value;
+  FL=QS.filter(q=>(!sub||q.subject===sub)&&(!dif||q.difficulty===dif));
+  $('pr-count').textContent=FL.length?FL.filter(q=>SOLVED[q.id]==='correct').length+' of '+FL.length+' solved':'';
+  el.innerHTML=FL.length?FL.slice(0,qLim).map((q,i)=>'<button class="pq" data-i="'+i+'" style="--c:'+sc(q.subject)+'"><span class="pq-top"><span class="pq-sub">'+esc(q.subject)+(q.topic?' · '+esc(q.topic):'')+'</span><span class="pq-dif">'+esc(q.difficulty||'')+'</span>'+(SOLVED[q.id]==='correct'?'<span class="pq-ok">✓ Solved</span>':'')+'</span><span class="pq-text">'+esc(q.question.replace(/\s+/g,' ').slice(0,150))+(q.question.length>150?'…':'')+'</span></button>').join(''):'<p class="st-empty">'+(QS.length?'No questions match those filters.':'No practice questions have been added yet. Check back soon.')+'</p>';
+  $('pr-more').hidden=FL.length<=qLim;math(el);
+}
+$('pr-sub').onchange=$('pr-dif').onchange=()=>{qLim=20;paintQs()};
+$('pr-more').onclick=()=>{qLim+=20;paintQs()};
+$('pr-list').addEventListener('click',e=>{const b=e.target.closest('.pq');if(b)openSolver(+b.dataset.i)});
+
+function openSolver(i){
+  const q=FL[i];if(!q)return;
+  const keys=['a','b','c','d'].filter(k=>q['option_'+k]),mcq=keys.length>=2;
+  SV={i,q,mcq,chat:[],revealed:false,busy:false};
+  $('sv').hidden=false;document.body.style.overflow='hidden';
+  $('sv-t').textContent=q.subject+(q.topic?' · '+q.topic:'');$('sv-s').textContent=q.difficulty||'';$('sv-n').textContent='Question '+(i+1)+' of '+FL.length;
+  $('sv-prev').disabled=i===0;$('sv-next').disabled=i>=FL.length-1;
+  $('sv-in').innerHTML='<div class="sv-q">'+mdLite(q.question)+'</div>'+
+    (mcq?keys.map(k=>'<label class="sv-opt"><input type="radio" name="opt" value="'+k.toUpperCase()+'"><span><b>'+k.toUpperCase()+'.</b> '+esc(q['option_'+k])+'</span></label>').join(''):'<textarea class="sv-w" id="sv-w" maxlength="1500" placeholder="Type your answer or working here…"></textarea>')+
+    '<div class="sv-btns"><button class="btn" data-act="check">'+(mcq?'Check answer':'Check with AI')+'</button><button class="btn alt" data-act="sol">Show solution</button></div>'+
+    '<div class="sv-fb" id="sv-fb"></div><div class="sv-sol" id="sv-sol" hidden></div>'+
+    '<div class="sv-ai"><h3>Need help? Ask the AI tutor</h3><div class="sv-chips"><button data-ai="hint">Give me a hint</button><button data-ai="explain">Explain step by step</button></div><div id="sv-chat"></div><div class="sv-ask"><input id="sv-q2" maxlength="400" placeholder="Ask about this question…"><button class="btn" id="sv-send">Ask</button></div><small class="sv-note">The AI tutor can make mistakes. Check important answers against the solution or with your teacher.</small></div>';
+  math($('sv-in'));$('sv').querySelector('.rview').scrollTop=0;
+}
+function fb(t,c){const e=$('sv-fb');e.textContent=t;e.className='sv-fb'+(c?' '+c:'')}
+function showSol(){
+  const q=SV.q;SV.revealed=true;const e=$('sv-sol');
+  e.innerHTML='<h3>Solution</h3>'+(q.correct_answer?'<b>Answer: '+esc(q.correct_answer)+'</b>\n':'')+mdLite(q.solution||'No worked solution has been added for this question yet. Try the AI tutor.');
+  e.hidden=false;math(e);
+}
+function addMsg(role,text,cls){const d=document.createElement('div');d.className='sv-m '+role+(cls?' '+cls:'');d.innerHTML=mdLite(text);$('sv-chat').appendChild(d);math(d);d.scrollIntoView({block:'nearest'});return d}
+async function ai(mode,label){
+  const me=SV;if(!me||me.busy)return;
+  if(!(CFG.url&&CFG.key)){addMsg('ai','The AI tutor isn’t connected yet.','err');return}
+  me.busy=true;addMsg('user',label);const tmp=addMsg('ai','Thinking…');
+  try{
+    const r=await fetch(CFG.url+'/functions/v1/ai-tutor',{method:'POST',headers:{'Content-Type':'application/json',apikey:CFG.key,Authorization:'Bearer '+CFG.key},body:JSON.stringify({question_id:me.q.id,mode,message:label,history:me.chat.slice(-8),revealed:me.revealed})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.reply)throw new Error(j.error||'The AI tutor isn’t available right now. Please try again in a moment.');
+    me.chat.push({role:'user',content:label},{role:'assistant',content:j.reply});
+    if(mode==='explain')me.revealed=true;
+    if(SV===me){tmp.innerHTML=mdLite(j.reply);math(tmp)}
+  }catch(e){if(SV===me){tmp.className='sv-m ai err';tmp.textContent=e.message}}
+  me.busy=false;
+}
+$('sv').addEventListener('click',e=>{
+  if(!SV)return;
+  const a=e.target.closest('[data-act]'),h=e.target.closest('[data-ai]');
+  if(h)ai(h.dataset.ai,h.dataset.ai==='hint'?'Give me a hint.':'Please explain how to solve this step by step.');
+  if(e.target.id==='sv-send'){const i=$('sv-q2'),t=i.value.trim();if(t){i.value='';ai('chat',t)}}
+  if(!a)return;
+  if(a.dataset.act==='sol')showSol();
+  if(a.dataset.act==='check'){
+    const q=SV.q;
+    if(SV.mcq){
+      const c=document.querySelector('#sv-in input[name=opt]:checked');if(!c){fb('Choose an option first.','bad');return}
+      const right=(q.correct_answer||'').trim().charAt(0).toUpperCase();
+      if(!right){fb('This question has no answer key yet. Ask the AI tutor.','');return}
+      document.querySelectorAll('#sv-in .sv-opt').forEach(l=>l.classList.remove('good','bad'));
+      const ok=c.value===right;c.closest('.sv-opt').classList.add(ok?'good':'bad');
+      SOLVED[q.id]=ok?'correct':(SOLVED[q.id]==='correct'?'correct':'tried');LS.set('lumen-solved',SOLVED);
+      fb(ok?'✓ Correct! Well done.':'✗ Not quite. Try again, ask for a hint, or open the solution.',ok?'good':'bad');
+      if(ok)showSol();
+    }else{
+      const t=$('sv-w').value.trim();if(!t){fb('Type your answer first.','bad');return}
+      fb('');ai('check','My answer: '+t);
+    }
+  }
+});
+$('sv').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='sv-q2')$('sv-send').click()});
+function closeSolver(){$('sv').hidden=true;document.body.style.overflow='';SV=null;paintQs()}
+$('sv-x').onclick=closeSolver;
+$('sv-prev').onclick=()=>SV&&openSolver(SV.i-1);$('sv-next').onclick=()=>SV&&openSolver(SV.i+1);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('sv').hidden)closeSolver()});
+
 /* switching between the three views */
 function route(){
-  const h=location.hash.slice(1),v=h==='planner'||h==='monitor'?h:'browse';
+  const h=location.hash.slice(1),v=h==='planner'||h==='monitor'||h==='practice'?h:'browse';
   document.querySelectorAll('[data-view]').forEach(m=>m.hidden=m.dataset.view!==v);
-  ['browse','planner','monitor'].forEach(n=>$('n-'+n).classList.toggle('on',n===v));
-  if(v==='planner')renderPlanner();if(v==='monitor')renderMonitor();
+  ['browse','practice','planner','monitor'].forEach(n=>$('n-'+n).classList.toggle('on',n===v));
+  if(v==='practice'){loadQs();paintQs()}if(v==='planner')renderPlanner();if(v==='monitor')renderMonitor();
   if(v==='browse'&&h==='browse')$('browse').scrollIntoView();else scrollTo(0,0);
 }
 addEventListener('hashchange',route);route();
